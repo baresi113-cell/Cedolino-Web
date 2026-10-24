@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Cedolino">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="format-detection" content="telephone=no">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<title>Cedolino</title>
+<style>
+:root{--bg:#f2f2f7;--card:#fff;--tx:#000;--mu:#8a8a8e;--ac:#007aff;--ac2:#5e5ce6;--tint:rgba(0,122,255,.12);--ln:rgba(60,60,67,.16);--fill:rgba(118,118,128,.12);--nav:rgba(249,249,249,.88);--sh:none;--up:#34c759;--dn:#ff3b30;--or:#ff9500;--tl:#30b0c7;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#000;--card:#1c1c1e;--tx:#fff;--mu:#98989f;--ac:#0a84ff;--ac2:#5e5ce6;--tint:rgba(10,132,255,.2);--ln:rgba(84,84,88,.55);--fill:rgba(118,118,128,.24);--nav:rgba(30,30,30,.86);--up:#30d158;--dn:#ff453a;--or:#ff9f0a;--tl:#40c8e0}}
+:root[data-theme="dark"]{--bg:#000;--card:#1c1c1e;--tx:#fff;--mu:#98989f;--ac:#0a84ff;--ac2:#5e5ce6;--tint:rgba(10,132,255,.2);--ln:rgba(84,84,88,.55);--fill:rgba(118,118,128,.24);--nav:rgba(30,30,30,.86);--up:#30d158;--dn:#ff453a;--or:#ff9f0a;--tl:#40c8e0}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--tx);font:16px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display",system-ui,"Segoe UI",Roboto,sans-serif;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased}
+main{max-width:520px;margin:0 auto;padding:14px 16px 112px}
+.title{display:flex;align-items:center;gap:12px;margin:2px 2px 14px}.title span{font-size:34px;font-weight:700;letter-spacing:-.022em}
+h1{font-size:12.5px;font-weight:500;letter-spacing:.02em;text-transform:uppercase;color:var(--mu);margin:0 0 7px 8px}
+.ps{margin-top:26px}.ps:first-child{margin-top:4px}
+.card{background:var(--card);border-radius:20px;padding:16px 18px;margin-top:10px}
+.hero{margin-top:12px;border-radius:24px;padding:22px;color:#fff;background:linear-gradient(145deg,#0a84ff 0%,#5e5ce6 100%);box-shadow:0 14px 30px -18px rgba(10,132,255,.7)}
+.hero .k{color:rgba(255,255,255,.8)}.hero .hs{margin-top:8px;font-size:13px;color:rgba(255,255,255,.85)}
+.big{font-size:42px;font-weight:700;letter-spacing:-.03em;line-height:1.1}.big.sm{font-size:32px}
+.row{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:.5px solid var(--ln);font-size:15px}
+.row:last-child{border:0}.row span:first-child{color:var(--mu)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.k{font-size:13px;color:var(--mu);margin-bottom:2px}
+.v{font-size:24px;font-weight:600;letter-spacing:-.02em;margin-top:2px}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--nav);-webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);border-top:.5px solid var(--ln);padding:6px 12px calc(4px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;gap:4px;z-index:5}
+nav button{flex:1;max-width:140px;background:none;border:0;color:var(--mu);font:inherit;font-size:10px;font-weight:500;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 4px 2px}
+nav button.on{color:var(--ac)}nav svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+select,.btn{font:inherit;font-size:15px;border-radius:12px;border:0;background:var(--fill);color:var(--tx);padding:10px 14px}
+select{appearance:none;-webkit-appearance:none;font-weight:500;padding-right:34px;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%238a8a8e' stroke-width='2' stroke-linecap='round'><path d='M1 1l5 5 5-5'/></svg>");background-repeat:no-repeat;background-position:right 13px center}
+.btn{background:var(--ac);color:#fff;width:100%;padding:15px;font-weight:600;font-size:16px;border-radius:14px}
+.btn.s{background:var(--tint);color:var(--ac)}
+.drop{display:block;background:var(--card);border-radius:20px;padding:40px 16px;text-align:center;color:var(--ac);font-weight:600;margin-top:10px}
+.cw{position:relative}.tip{display:none;position:absolute;transform:translate(-50%,-100%);background:rgba(28,28,30,.92);color:#fff;font-size:12px;font-weight:500;padding:6px 10px;border-radius:10px;white-space:nowrap;pointer-events:none;z-index:3}
+.bars{display:flex;align-items:flex-end;gap:6px;height:130px;margin-top:12px}
+.bars div{flex:1;background:var(--ac);border-radius:6px 6px 3px 3px;min-height:4px;cursor:pointer}
+.stk{display:flex;align-items:flex-end;gap:5px;height:140px;margin-top:12px}
+.sc{flex:1;display:flex;flex-direction:column;border-radius:6px 6px 3px 3px;overflow:hidden;min-height:4px;cursor:pointer}.sc i{display:block;min-height:0}
+.lab{display:flex;gap:5px;font-size:10px;color:var(--mu);margin-top:6px}.lab span{flex:1;text-align:center;white-space:nowrap;overflow:hidden}
+.item{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:.5px solid var(--ln);cursor:pointer}.item:last-child{border:0}
+input.f{width:90px;text-align:right;font:inherit;background:none;border:0;color:var(--tx);-moz-appearance:textfield}input.f::-webkit-inner-spin-button{display:none}
+.mu{color:var(--mu);font-size:13px}.link{color:var(--dn);background:none;border:0;font:inherit;font-size:15px}
+button:active{opacity:.55}
+.pn{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.pt{font-weight:600;font-size:17px;display:flex;align-items:center;gap:6px;cursor:pointer;padding:8px 12px;border-radius:12px}
+.pn button{width:40px;height:40px;border-radius:50%;border:0;background:var(--card);color:var(--ac);display:flex;align-items:center;justify-content:center}.pn button:disabled{opacity:.3}
+@keyframes fr{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}@keyframes fl{from{opacity:0;transform:translateX(-26px)}to{opacity:1;transform:none}}.fr{animation:fr .28s ease}.fl{animation:fl .28s ease}
+.yr{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}.yr .chip{background:var(--fill)}.yr .chip.on{background:var(--ac)}
+.mg{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.mc{border:0;border-radius:12px;padding:12px 0;font:inherit;font-size:14px;font-weight:500;background:var(--fill);color:var(--tx)}.mc.on{background:var(--ac);color:#fff}.mc:disabled{opacity:.28}
+.chips{display:flex;gap:8px;overflow-x:auto;margin:0 -16px 2px;padding:0 16px 2px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+.chip{white-space:nowrap;border:0;background:var(--card);color:var(--tx);font:inherit;font-size:14px;font-weight:500;border-radius:99px;padding:8px 15px}.chip.on{background:var(--ac);color:#fff}
+.leg{display:flex;gap:16px;font-size:12px;color:var(--mu);margin-top:10px}.leg i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+.cr{display:grid;grid-template-columns:minmax(0,1fr) 64px 64px 58px;gap:6px;font-size:12.5px;padding:9px 0;border-bottom:.5px solid var(--ln);text-align:right}.cr .cl{text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--mu)}.cr.hd{color:var(--mu);font-size:11px;text-transform:capitalize}
+.sec{padding:0}.sec summary{display:flex;align-items:center;padding:16px 18px;cursor:pointer;list-style:none;font-weight:600}.sec summary::-webkit-details-marker{display:none}
+.sec summary::after{content:"";width:7px;height:7px;border-right:2px solid var(--mu);border-bottom:2px solid var(--mu);transform:rotate(-45deg);margin-left:12px;transition:transform .2s}.sec[open] summary::after{transform:rotate(45deg)}
+.sv{margin-left:auto;font-weight:400;color:var(--mu)}.sb{padding:0 18px 12px}
+.gh{display:flex;justify-content:space-between;font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.03em;color:var(--mu);padding:14px 0 2px}
+.sb .row span:first-child{color:var(--tx)}.sb .row span:last-child{color:var(--mu);text-align:right}.rl{display:flex;align-items:center;gap:8px}
+.gs{display:inline-flex;color:var(--mu);opacity:.65;padding:4px;margin:-4px}.gs svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round}
+.ham{width:40px;height:40px;border-radius:50%;border:0;background:var(--card);color:var(--ac);display:flex;align-items:center;justify-content:center;flex:none}
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:20;animation:fd .2s}
+.drawer{position:fixed;top:0;bottom:0;left:0;width:min(84vw,320px);background:var(--bg);z-index:21;padding:calc(26px + env(safe-area-inset-top,0px)) 16px 24px;box-shadow:12px 0 40px -12px rgba(0,0,0,.35);animation:sd .26s ease;overflow:auto}
+@keyframes sd{from{transform:translateX(-100%)}to{transform:none}}@keyframes fd{from{opacity:0}to{opacity:1}}@keyframes su{from{transform:translateY(100%)}to{transform:none}}
+.mi{display:flex;align-items:center;gap:14px;width:100%;border:0;background:var(--card);color:var(--tx);font:inherit;text-align:left;padding:12px 14px;border-radius:16px;margin-top:8px}
+.mi i{width:36px;height:36px;border-radius:10px;background:var(--ac);color:#fff;display:flex;align-items:center;justify-content:center;flex:none}.mi.d i{background:var(--dn)}
+.mi b{display:block;font-weight:500;font-size:15.5px}.mi small{display:block;color:var(--mu);font-size:12.5px;margin-top:1px}
+.mi svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.sheet{position:fixed;inset:0;z-index:22;background:var(--bg);display:flex;flex-direction:column;animation:su .28s ease;padding-top:env(safe-area-inset-top,0px)}
+.sh2{display:flex;align-items:center;justify-content:space-between;padding:18px 18px}.sh2 button{background:none;border:0;color:var(--ac);font:inherit;font-size:16px;min-width:78px}.sh2 button:last-child{text-align:right;font-weight:600}.sh2 button:first-child{text-align:left}.sh2 b{font-size:17px;font-weight:600}
+.sl{flex:1;overflow:auto;padding:0 16px}
+.di{display:flex;align-items:center;gap:14px;background:var(--card);padding:13px 16px;border-radius:16px;margin-bottom:8px;cursor:pointer}
+.ck{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--mu);flex:none;display:flex;align-items:center;justify-content:center}
+.di.on .ck{background:var(--ac);border-color:var(--ac)}.di.on .ck::after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 2.4px 2.4px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.dl{font-weight:500}.dv{margin-left:auto;color:var(--mu);font-size:14px}
+.er{cursor:default}.er.off .dl{opacity:.4}
+.ib{width:34px;height:34px;border-radius:50%;border:0;background:var(--fill);color:var(--ac);display:flex;align-items:center;justify-content:center;flex:none}.ib:disabled{opacity:.3}.ib svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.sf{padding:12px 16px calc(16px + env(safe-area-inset-bottom,0px));background:var(--bg)}
+.btn.r{background:var(--dn)}.btn:disabled{opacity:.35}
+.toast{position:fixed;left:50%;bottom:100px;transform:translateX(-50%);background:rgba(28,28,30,.94);color:#fff;font-size:14px;font-weight:500;padding:11px 18px;border-radius:16px;z-index:40;opacity:0;pointer-events:none;transition:opacity .2s;white-space:nowrap}.toast.on{opacity:1}
+.op{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:.5px solid var(--ln);cursor:pointer}.op:last-child{border:0}
+.op b{display:block;font-weight:500;font-size:15.5px}.op small{display:block;color:var(--mu);font-size:12.5px;margin-top:1px}.op svg{width:20px;height:20px;fill:none;stroke:var(--ac);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.sw{width:51px;height:31px;border-radius:16px;background:var(--fill);position:relative;flex:none;transition:background .2s}.sw::after{content:"";position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.25);transition:transform .2s}.sw.on{background:var(--up)}.sw.on::after{transform:translateX(20px)}
+.lock{position:fixed;inset:0;z-index:60;background:var(--bg);display:flex;flex-direction:column;align-items:center;padding:calc(14px + env(safe-area-inset-top,0px)) 24px calc(18px + env(safe-area-inset-bottom,0px));user-select:none;-webkit-user-select:none;--kb:min(78px,10.5vh)}
+.lt{align-self:stretch;height:40px;display:flex;align-items:center}.lt button{background:none;border:0;color:var(--ac);font:inherit;font-size:16px;padding:8px 0}
+.lav{width:68px;height:68px;border-radius:20px;background:linear-gradient(145deg,#0a84ff,#5e5ce6);display:flex;align-items:center;justify-content:center;margin-top:max(12px,5vh);box-shadow:0 14px 30px -14px rgba(10,132,255,.8);flex:none}
+.lav svg{width:34px;height:34px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.lh{font-size:22px;font-weight:600;margin-top:20px;letter-spacing:-.01em;text-align:center}
+.lm{font-size:14px;color:var(--mu);margin-top:6px;min-height:20px;text-align:center;max-width:300px}.lm.e{color:var(--dn)}
+.dots{display:flex;gap:18px;margin-top:26px}.dots i{width:13px;height:13px;border-radius:50%;background:var(--fill);transition:background .12s,transform .12s}.dots i.on{background:var(--tx);transform:scale(1.12)}
+.dots.ok i{background:var(--up)}.dots.bad i{background:var(--dn)}
+.shk{animation:shk .42s}@keyframes shk{20%,60%{transform:translateX(-10px)}40%,80%{transform:translateX(10px)}}
+.kp{display:grid;grid-template-columns:repeat(3,var(--kb));gap:min(14px,1.6vh) 30px;margin-top:auto}
+.kp button{width:var(--kb);height:var(--kb);border-radius:50%;border:0;background:none;color:var(--tx);font:inherit;font-size:32px;font-weight:400;display:flex;align-items:center;justify-content:center;transition:background .12s}
+.kp button:active{background:var(--fill);opacity:1}.kp button:disabled{opacity:.25}.kp .nb{pointer-events:none}
+.kp svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.lf{background:none;border:0;color:var(--ac);font:inherit;font-size:15px;margin-top:8px;padding:8px;min-height:40px}
+.op.na{opacity:.45}
+.chev{width:8px;height:8px;border-right:2px solid var(--mu);border-top:2px solid var(--mu);transform:rotate(45deg);flex:none;margin-right:4px}
+</style>
+</head>
+<body>
+<main id="m"></main>
+<nav id="n"></nav>
+<div id="o"></div><div id="lk"></div><div id="t" class="toast"></div><input type="file" id="imp" accept=".json,application/json" hidden onchange="doImport(this)">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
+<script>
+const MESI=["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
+const NUM=/-?\d{1,3}(?:\.\d{3})*,\d{2}(?!\d)|-?\d+,\d{2}(?!\d)/g;try{pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"}catch(e){}
+const P=s=>parseFloat(s.replace(/\./g,"").replace(",","."));
+const E=n=>n==null||isNaN(n)?"–":n.toLocaleString("it-IT",{style:"currency",currency:"EUR"});
+let slips=[],tab="ov",yr=null,sel=null,msg="";
+try{slips=JSON.parse(localStorage.getItem("slips")||"[]")}catch(e){}
+const save=()=>{try{localStorage.setItem("slips",JSON.stringify(slips))}catch(e){}};
+
+function mkRows(its){
+  its.sort((a,b)=>b.y-a.y||a.x-b.x);const R=[];let row=null;
+  its.forEach(i=>{if(!row||Math.abs(row.y-i.y)>2){row={y:i.y,it:[]};R.push(row)}row.it.push(i)});
+  R.forEach(r=>{r.it.sort((a,b)=>a.x-b.x);r.t=r.it.map(i=>i.s).join(" ").replace(/\s+/g," ").trim()});
+  return R;
+}
+async function readPdf(file){
+  const pdf=await pdfjsLib.getDocument({data:await file.arrayBuffer()}).promise;let R=[];
+  for(let p=1;p<=pdf.numPages;p++){
+    const tc=await (await pdf.getPage(p)).getTextContent();
+    R=R.concat(mkRows(tc.items.filter(i=>i.str.trim()).map(i=>({s:i.str,x:i.transform[4],r:i.transform[4]+i.width,y:i.transform[5]}))));
+  }
+  return R;
+}
+function findAmt(L,re){for(const l of L)if(re.test(l)){const a=l.match(NUM);if(a)return P(a[a.length-1])}return null}
+function balances(L,re){for(const l of L)if(re.test(l)){const x=l.replace(re,"");let m=x.match(/-?\d+,\d{3,}/g)||[];if(m.length<3)m=x.match(/-?\d+,\d+/g)||[];if(m.length>=3)return m.map(v=>parseFloat(v.replace(",","."))).slice(-4)}return[]}
+const CODE=/^(?:[A-Z]{1,2}\d{3,5}|\d{6}|ZP[A-Z0-9]{4})/;
+const isNum=s=>/^-?[\d.]+,\d+[)%]?$/.test(s.trim());
+function columns(R){
+  let t,c;R.forEach(r=>r.it.forEach(i=>{const s=i.s.trim();if(s=="TRATTENUTE"&&!t)t=i;if(s=="COMPETENZE"&&!c)c=i}));
+  const V=[],T=[];if(!t||!c)return{V,T};
+  const a=(t.x+t.r)/2,b=(c.x+c.r)/2,lo=a-(b-a)/2,mid=(a+b)/2;let on=false;
+  R.forEach(r=>{
+    if(r.it.some(i=>i.s.trim()=="TRATTENUTE")&&r.it.some(i=>i.s.trim()=="COMPETENZE")){on=true;return}
+    if(/^conguaglio/i.test(r.t)){on=false;return}
+    if(!on||/totale|netto/i.test(r.t))return;
+    let cv=null,tv=null;
+    r.it.forEach((i,n)=>{const m=i.s.match(NUM);if(!m||/[()]/.test(i.s)||/\($/.test(n?r.it[n-1].s.trim():""))return;
+      const v=P(m[m.length-1]);if(i.r>mid)cv=v;else if(i.r>lo)tv=v});
+    if(cv==null&&tv==null)return;
+    const f=r.it.findIndex(i=>isNum(i.s));
+    const k=Math.max(0,r.it.findIndex(i=>CODE.test(i.s.trim())));
+    const lb=r.it.slice(k,f<0?r.it.length:f).map(i=>i.s).join(" ").replace(CODE,"").replace(/\s*Residuo$/i,"").trim().slice(0,46);
+    const NB=/^-?[\d.]+,\d+/,nm=r.it.filter(i=>NB.test(i.s.trim())&&!/[()]/.test(i.s)&&i.r<=lo).map(i=>P(i.s.trim().match(NB)[0]));
+    if(cv!=null)V.push([lb,cv,nm[0]??null,nm[1]??null]);if(tv!=null)T.push([lb,tv,nm[0]??null,nm[1]??null]);
+  });
+  return{V,T};
+}
+const PERIOD=X=>{let y=null,m=null;const mm=X.match(new RegExp("("+MESI.join("|")+")\\s+(20\\d\\d)","i"));if(mm){m=MESI.indexOf(mm[1].toLowerCase())+1;y=+mm[2]}else{const d=X.match(/\b(0?[1-9]|1[0-2])\s*[\/\-]\s*(20\d\d)\b/);if(d){m=+d[1];y=+d[2]}}return[y,m]};
+const T13=(X,V)=>/tredicesima|13.{0,3}mensilit/i.test(X)&&!V.some(v=>/^retribuzione$/i.test(v[0]))?"13a":"";
+function tfrBlock(R){
+  const i=R.findIndex(r=>r.it.some(x=>/^F\.do/i.test(x.s.trim()))&&r.it.some(x=>/^Quota/i.test(x.s.trim())));
+  if(i<0||!R[i+1])return null;
+  const defs=[["fdo",/^F\.do/i],["riv",/^Rivalut/i],["imp",/^Imp\./i],["quota",/^Quota/i],["fondi",/^TFR/i],["ant",/^Anticip/i]],labs=[];
+  defs.forEach(([k,re])=>{const it=R[i].it.find(x=>re.test(x.s.trim()));if(it)labs.push([k,it.x])});
+  if(labs.length<4)return null;
+  const o={};
+  R[i+1].it.forEach(x=>{const m=x.s.trim().match(/^-?\d{1,3}(?:\.\d{3})*,\d{2}$/);if(!m)return;let k=null;labs.forEach(([n,lx])=>{if(lx<=x.x+2)k=n});if(k)o[k]=P(m[0])});
+  return o;
+}
+function parseZ(R,name){
+  const L=R.map(r=>r.t),X=L.join(" \n "),[y,m]=PERIOD(X);
+  const{V,T}=columns(R);let eur=null,ass=null,cm=null;
+  L.forEach(l=>{const e=l.match(/(-?\d{1,3}(?:\.\d{3})*,\d{2})\s*€/);if(e)eur=P(e[1]);
+    if(!ass){const d=l.match(/\b(\d{2})-(\d{2})-(\d{4})\s+(\d{2})-(\d{2})-(\d{4})\b/);if(d)ass=d[6]+"-"+d[5]+"-"+d[4]}
+    if(/t\.?f\.?r\.?\s+trasferit/i.test(l)){const a=l.match(NUM);if(a)cm=P(a[a.length-1])}});
+  const sum=a=>Math.round(a.reduce((t,x)=>t+x[1],0)*100)/100,tb=tfrBlock(R),qm=findAmt(L,/quota\s+t\.?f\.?r/i);
+  return{id:Date.now()+Math.random(),file:name,y,m,
+    lordo:findAmt(L,/totale.?competenze/i)??(V.length?sum(V):null),
+    netto:eur??findAmt(L,/netto.?del.?mese|netto.?in.?busta|netto.?a.?pagare/i),
+    voci:V,tratt:T,tipo:T13(X,V),
+    ferie:balances(L,/^\s*ferie\b/i),perm:balances(L,/^\s*perm\S*/i),rol:balances(L,/^\s*rol\b/i),
+    tfr:qm,ass,tf:(tb||qm!=null)?Object.assign({qm,cm},tb||{}):null};
+}
+function parseG(R,name){
+  const L=R.map(r=>r.t),X=L.join(" \n "),[y,m]=PERIOD(X);let lordo=null,netto=null,tr=null;
+  for(let i=0;i<L.length;i++){const l=L[i].toLowerCase();
+    const ks=[["lordo",l.search(/total\w*\s+(competenze|lordo|retribuzione)|competenze\s+totali/)],["tr",l.search(/total\w*\s+trattenute|trattenute\s+totali/)],["netto",l.search(/netto\s*(del\s*mese|in\s*busta|a\s*pagare|da\s*pagare|busta)|importo\s*netto|netto\s*€/)]].filter(k=>k[1]>=0).sort((a,b)=>a[1]-b[1]);
+    if(!ks.length)continue;
+    let v=(L[i].match(NUM)||[]).map(P);
+    if(v.length<ks.length){const nx=L[i+1]?(L[i+1].match(NUM)||[]).map(P):[];if(nx.length>=ks.length)v=nx}
+    if(!v.length)continue;
+    ks.forEach((k,j)=>{const x=ks.length>1?v[j]:v[v.length-1];if(x==null)return;if(k[0]=="lordo"&&lordo==null)lordo=x;if(k[0]=="tr"&&tr==null)tr=x;if(k[0]=="netto"&&netto==null)netto=x})}
+  if(netto==null)L.forEach(l=>{const e=l.match(/(-?\d{1,3}(?:\.\d{3})*,\d{2})\s*€/);if(e)netto=P(e[1])});
+  const V=[],T=[],cl=t=>t.replace(/^[*\s]*(?:[A-Z]{1,2}\d{3,5}|\d{5,6})\s+/,"").trim();
+  L.forEach(l=>{const a=l.match(NUM);if(!a||a.length>3)return;const p=l.search(NUM),lb=cl(l.slice(0,p<0?l.length:p)).replace(/[\d.,%\s]+$/,"").trim();
+    if(lb.length<4||/total|netto|imponibile|arrotond|lorda|detraz|residuo|saldo|maturat|goduto|f\.?do|iban|abi|c\/c/i.test(lb))return;
+    const v=P(a[a.length-1]);
+    if(/contribut|inps|ritenut|addizional|trattenut|cometa|sindac|iscrizion|inail|previd/i.test(lb))T.push([lb.slice(0,46),v,null,null]);
+    else if(/retribuz|paga|straordin|indennit|premio|mensilit|festivit|ferie|permess|malattia|scatt|contingenza|superminimo|edr|maggiorazion|lavoro|buono/i.test(lb))V.push([lb.slice(0,46),v,null,null])});
+  if(lordo==null&&netto!=null&&tr!=null)lordo=Math.round((netto+tr)*100)/100;
+  const qm=findAmt(L,/quota\s*t\.?f\.?r/i);
+  return{id:Date.now()+Math.random(),file:name,y,m,lordo,netto,voci:V.slice(0,14),tratt:T.slice(0,14),tipo:T13(X,V),
+    ferie:balances(L,/\bferie\b/i),perm:balances(L,/\b(par|permessi)\b/i),rol:balances(L,/\brol\b/i),tfr:qm,ass:null,tf:qm!=null?{qm,cm:null}:null};
+}
+const scoreS=s=>(s.lordo!=null)+(s.netto!=null)+(s.y&&s.m?1:0)+(s.ferie.length?1:0)+(s.voci.length>2?1:0);
+function parseModel(R,name,mod){
+  if(mod=="zucchetti")return[parseZ(R,name),"Zucchetti"];
+  if(mod=="generico")return[parseG(R,name),"Altri software"];
+  const z=parseZ(R,name);if(z.voci.length>=3)return[z,"Zucchetti"];
+  const g=parseG(R,name);return scoreS(g)>=scoreS(z)?[g,"Altri software"]:[z,"Zucchetti"];
+}
+async function upload(files){
+  msg="Lettura in corso…";draw();let ok=0,ko=[];const used={};
+  for(const f of files){try{
+    const[s,mn]=parseModel(await readPdf(f),f.name,model);
+    if(s.lordo==null&&s.netto==null){ko.push(f.name);continue}
+    if(!s.y){s.y=new Date().getFullYear();s.m=0}
+    slips=slips.filter(x=>!(x.y==s.y&&x.m==s.m&&(x.tipo||"")==(s.tipo||"")&&s.m));slips.push(s);ok++;used[mn]=(used[mn]||0)+1;
+  }catch(e){ko.push(f.name+" ("+(e.message||e)+")")}}
+  slips.sort((a,b)=>ord(b)-ord(a));save();
+  msg=ok+" buste lette"+(ok?" ("+Object.entries(used).map(([k,v])=>k+(v>1?" ×"+v:"")).join(", ")+")":"")+(ko.length?". Non riconosciute (forse scansioni o formato diverso): "+ko.join(", "):"");
+  if(ok){tab="ov";sel=slips[0].id;yr=slips[0].y}draw();
+}
+const ord=s=>s.y*14+(s.tipo=="13a"?13:s.m);
+const lab=s=>(s.tipo=="13a"?"Tredicesima ":s.m?MESI[s.m-1][0].toUpperCase()+MESI[s.m-1].slice(1)+" ":"")+s.y;
+const lbl=a=>a.length==4?["Residuo AP","Maturate","Godute","Saldo"]:a.length==3?["Maturate","Godute","Saldo"]:a.map((_,i)=>"Valore "+(i+1));
+function bal(t,a){return a.length?`<div class="card"><div class="k">${t}</div>${a.map((x,i)=>`<div class="row"><span>${lbl(a)[i]}</span><span>${fmt(x)}</span></div>`).join("")}</div>`:""}
+function list(t,a){return a&&a.length?`<div class="card"><div class="k">${t}</div>${a.map(x=>`<div class="row"><span>${x[0]}</span><span>${E(x[1])}</span></div>`).join("")}</div>`:""}
+const last=a=>a&&a.length?a[a.length-1]:null;
+const fmt=n=>n==null?"–":n.toLocaleString("it-IT",{maximumFractionDigits:2});
+const gg=n=>n==null?"":" · ≈ "+fmt(n/8)+" giorni";
+const gd=a=>a&&a.length>=3?a[a.length-2]:null;
+const MET={netto:["Netto",s=>s.netto],lordo:["Lordo",s=>s.lordo],tratt:["Trattenute",s=>s.lordo!=null&&s.netto!=null?s.lordo-s.netto:null],fg:["Ferie godute",s=>gd(s.ferie)],pg:["PAR godute",s=>gd(s.perm)]};
+const COL=["#007aff","#ff9500","#34c759","#af52de","#ff2d55"];
+const MN=MESI.map(m=>m[0].toUpperCase()+m.slice(1));
+let met="netto",cA=null,cB=null,cmpOn=false;
+const n2=v=>v==null?"–":v.toLocaleString("it-IT",{minimumFractionDigits:2,maximumFractionDigits:2});
+const sh=s=>(s.tipo=="13a"?"13ª":(MESI[s.m-1]||"").slice(0,3))+" "+String(s.y).slice(2);
+function chart(ys){
+  const f=MET[met][1],W=340,H=180,l=8,b=22,t=10,r=34,pw=W-l-r,ph=H-t-b;
+  const pts=ys.map(y=>slips.filter(s=>s.y==y&&s.m&&f(s)!=null).map(s=>[s.tipo=="13a"?12:s.m-1,f(s)]).sort((a,b)=>a[0]-b[0]));
+  const all=pts.flat().map(p=>p[1]);
+  if(!all.length)return`<div class="mu" style="padding:40px 0;text-align:center">Nessun dato per questa voce</div>`;
+  const hrs=/^(fg|pg)$/.test(met),fv=v=>hrs?fmt(v)+" ore":E(v);
+  const mx=Math.max(...all,1),mn=Math.min(0,...all),X=i=>l+pw*i/12,Y=v=>t+ph*(1-(v-mn)/((mx-mn)||1));
+  const sm=p=>p.map((q,i)=>{if(!i)return`M${q[0]},${q[1]}`;const a=p[i-2]||p[i-1],b=p[i-1],d=p[i+1]||q,k=.18;return`C${b[0]+(q[0]-a[0])*k},${b[1]+(q[1]-a[1])*k} ${q[0]-(d[0]-b[0])*k},${q[1]-(d[1]-b[1])*k} ${q[0]},${q[1]}`}).join("");
+  let g="";
+  [0,.5,1].forEach(k=>{const v=mn+(mx-mn)*k;g+=`<line x1="${l}" x2="${W-r+6}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--ln)" stroke-width=".6"/><text x="${W-r+10}" y="${Y(v)+3}" font-size="9" fill="var(--mu)">${fmt(Math.round(v))}</text>`});
+  g+=["G","F","M","A","M","G","L","A","S","O","N","D","13ª"].map((m,i)=>`<text x="${X(i)}" y="${H-6}" text-anchor="middle" font-size="9" fill="var(--mu)">${m}</text>`).join("");
+  ys.forEach((y,k)=>{const c=COL[k%COL.length],p=pts[k],xy=p.map(q=>[X(q[0]),Y(q[1])]),ln=xy.filter((q,i)=>p[i][0]<12);
+    g+=`<defs><linearGradient id="g${k}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:${c};stop-opacity:.2"/><stop offset="1" style="stop-color:${c};stop-opacity:0"/></linearGradient></defs>`;
+    if(ln.length>1)g+=`<path d="${sm(ln)}L${ln[ln.length-1][0]},${Y(mn)}L${ln[0][0]},${Y(mn)}Z" fill="url(#g${k})"/><path d="${sm(ln)}" fill="none" stroke="${c}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>`;
+    g+=xy.map((q,i)=>`<circle cx="${q[0]}" cy="${q[1]}" r="3.8" fill="${c}" stroke="var(--card)" stroke-width="1.6"/><circle cx="${q[0]}" cy="${q[1]}" r="15" fill="transparent" style="cursor:pointer" data-t="${y} · ${p[i][0]==12?"13ª":MN[p[i][0]]} · ${fv(p[i][1])}" onclick="tip(event)"/>`).join("")});
+  return`<svg viewBox="0 0 ${W} ${H}" style="width:100%;display:block">${g}</svg>`;
+}
+function cmp(){
+  if(slips.length<2)return`<div class="card mu">Carica almeno due buste per confrontarle.</div>`;
+  if(!slips.find(x=>x.id==cA))cA=slips[1].id;if(!slips.find(x=>x.id==cB))cB=slips[0].id;
+  const A=slips.find(x=>x.id==cA),B=slips.find(x=>x.id==cB),key=l=>l.replace(/\b20\d\d\b/g,"").replace(/\s+/g," ").trim();
+  const pick=(v,k)=>`<select onchange="${k}=this.value;draw()" style="flex:1;min-width:0">${slips.map(x=>`<option value="${x.id}" ${x.id==v?"selected":""}>${lab(x)}</option>`).join("")}</select>`;
+  const R=(l,a,b,up)=>{const d=(b||0)-(a||0),z=Math.abs(d)<.005,c=z?"var(--mu)":(d>0)==up?"var(--up)":"var(--dn)";return`<div class="cr"><span class="cl">${l}</span><span>${n2(a)}</span><span>${n2(b)}</span><span style="color:${c}">${z?"–":(d>0?"+":"")+n2(d)}</span></div>`};
+  const S=(t,fa,fb,up)=>{const m={},add=(w,k,x)=>{const e=m[k]=m[k]||{a:null,b:null};e[w]=(e[w]||0)+x};(fa||[]).forEach(x=>add("a",key(x[0]),x[1]));(fb||[]).forEach(x=>add("b",key(x[0]),x[1]));const ks=Object.keys(m);return ks.length?`<div class="k" style="margin:18px 0 2px">${t}</div>`+ks.map(k=>R(k,m[k].a,m[k].b,up)).join(""):""};
+  const tt=s=>s.lordo!=null&&s.netto!=null?s.lordo-s.netto:null;
+  return`<div class="card"><div style="display:flex;gap:8px">${pick(cA,"cA")}${pick(cB,"cB")}</div>
+  <div class="cr hd" style="margin-top:10px"><span></span><span>${sh(A)}</span><span>${sh(B)}</span><span>Δ</span></div>
+  ${R("Lordo",A.lordo,B.lordo,true)}${R("Trattenute",tt(A),tt(B),false)}${R("Netto",A.netto,B.netto,true)}
+  ${S("Competenze",A.voci,B.voci,true)}${S("Trattenute",A.tratt,B.tratt,false)}</div>`;
+}
+const hero=(k,v,sub)=>`<div class="hero"><div class="k">${k}</div><div class="big">${v}</div>${sub?`<div class="hs">${sub}</div>`:""}</div>`;
+const SECS=[["hero","Ultimo netto"],["anni","Confronto anni"],["disp","Ferie e permessi"],["media","Media dall'assunzione"],["crescita","Crescita stipendio"],["tfr","TFR accumulato"],["ot","Calcolo straordinario"],["cmp","Confronto buste"]];
+let pan=[];try{pan=JSON.parse(localStorage.getItem("pan")||"[]")}catch(e){}
+if(!Array.isArray(pan))pan=[];pan=pan.filter(p=>p&&SECS.some(x=>x[0]==p.id));SECS.forEach(x=>{if(!pan.some(p=>p.id==x[0]))pan.push({id:x[0],on:true})});
+const savePan=()=>{try{localStorage.setItem("pan",JSON.stringify(pan))}catch(e){}};
+const ps=(t,b)=>`<div class="ps"><h1>${t}</h1>${b}</div>`;
+const monthly=()=>slips.filter(s=>s.tipo!="13a"&&s.m).slice().reverse();
+const smooth=p=>p.map((q,i)=>{if(!i)return`M${q[0]},${q[1]}`;const a=p[i-2]||p[i-1],b=p[i-1],d=p[i+1]||q,k=.18;return`C${b[0]+(q[0]-a[0])*k},${b[1]+(q[1]-a[1])*k} ${q[0]-(d[0]-b[0])*k},${q[1]-(d[1]-b[1])*k} ${q[0]},${q[1]}`}).join("");
+function hireInfo(){const d=slips.map(s=>s.ass).filter(Boolean).sort()[0];if(d){const p=d.split("-");return{t:MN[+p[1]-1].toLowerCase()+" "+p[0]}}const f=monthly()[0]||slips[slips.length-1];return f?{t:(f.m?MN[f.m-1].toLowerCase()+" ":"")+f.y,est:1}:null}
+function sHero(){const l=slips[0],p=slips[1],d=p&&l.netto!=null&&p.netto!=null?l.netto-p.netto:null;
+  return hero("Ultimo netto",E(l.netto),lab(l)+(d!=null?` · ${d>=0?"+":""}${n2(d)} € rispetto a ${sh(p)}`:""))}
+function sAnni(){const ys=[...new Set(slips.map(x=>x.y))].sort();
+  return ps("Confronto anni",`<div class="chips">${Object.entries(MET).map(([k,v])=>`<button class="chip ${k==met?"on":""}" onclick="met='${k}';draw()">${v[0]}</button>`).join("")}</div>
+  <div class="card"><div class="cw">${chart(ys)}<div class="tip"></div></div><div class="leg">${ys.map((y,k)=>`<span><i style="background:${COL[k%COL.length]}"></i>${y}</span>`).join("")}</div></div>`)}
+function sDisp(){const s=slips.find(x=>x.ferie.length||x.perm.length)||slips[0];
+  return ps("Disponibili al "+lab(s),`<div class="grid"><div class="card"><div class="k">Ferie</div><div class="v">${fmt(last(s.ferie))}</div><div class="mu">ore${gg(last(s.ferie))}</div></div>
+  <div class="card"><div class="k">Permessi PAR</div><div class="v">${fmt(last(s.perm))}</div><div class="mu">ore</div></div></div>`)}
+function sMedia(){
+  const M=monthly().filter(s=>s.netto!=null),T="Media dall'assunzione";
+  if(!M.length)return ps(T,`<div class="card mu">Servono buste mensili.</div>`);
+  const av=f=>{const a=M.map(f).filter(v=>v!=null);return a.length?a.reduce((t,x)=>t+x,0)/a.length:null},h=hireInfo(),tn=slips.reduce((t,s)=>t+(s.netto||0),0);
+  return ps(T,`<div class="card"><div class="k">Netto medio mensile</div><div class="big sm">${E(av(s=>s.netto))}</div><div class="mu">${M.length} buste mensili${h?" · dal "+h.t+(h.est?" (prima busta caricata)":""):""}</div>
+  <div style="margin-top:8px"><div class="row"><span>Lordo medio mensile</span><span>${E(av(s=>s.lordo))}</span></div>
+  <div class="row"><span>Trattenute medie</span><span>${E(av(s=>s.lordo!=null?s.lordo-s.netto:null))}</span></div>
+  <div class="row"><span>Totale netto percepito</span><span>${E(tn)}</span></div></div></div>`)}
+const GM={netto:["Netto",s=>s.netto],lordo:["Lordo",s=>s.lordo],base:["Base",s=>{const r=(s.voci||[]).find(v=>/^retribuzione$/i.test(v[0]));return r?r[1]:null}]};let gm="netto";
+function lineSvg(pts){
+  const W=340,H=170,l=6,r=38,t=10,b=22,pw=W-l-r,ph=H-t-b,vs=pts.map(p=>p.v),lo=Math.min(...vs),hi=Math.max(...vs),pad=(hi-lo)*.15||hi*.05||1,mn=lo-pad,mx=hi+pad,n=pts.length,X=i=>l+(n>1?pw*i/(n-1):pw/2),Y=v=>t+ph*(1-(v-mn)/(mx-mn)),xy=pts.map((p,i)=>[X(i),Y(p.v)]);
+  let g="";[0,.5,1].forEach(k=>{const v=mn+(mx-mn)*k;g+=`<line x1="${l}" x2="${W-r+6}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--ln)" stroke-width=".6"/><text x="${W-r+10}" y="${Y(v)+3}" font-size="9" fill="var(--mu)">${fmt(Math.round(v))}</text>`});
+  [...new Set([0,Math.round((n-1)/3),Math.round(2*(n-1)/3),n-1])].forEach(i=>{g+=`<text x="${X(i)}" y="${H-6}" text-anchor="${i==0?"start":i==n-1?"end":"middle"}" font-size="9" fill="var(--mu)">${pts[i].l}</text>`});
+  g+=`<defs><linearGradient id="gl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--ac);stop-opacity:.22"/><stop offset="1" style="stop-color:var(--ac);stop-opacity:0"/></linearGradient></defs>`;
+  if(n>1)g+=`<path d="${smooth(xy)}L${xy[n-1][0]},${t+ph}L${xy[0][0]},${t+ph}Z" fill="url(#gl)"/><path d="${smooth(xy)}" fill="none" stroke="var(--ac)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>`;
+  const hr=Math.max(5,Math.min(14,pw/n/2));
+  g+=xy.map((q,i)=>`${n<=18||i==n-1?`<circle cx="${q[0]}" cy="${q[1]}" r="3.6" fill="var(--ac)" stroke="var(--card)" stroke-width="1.6"/>`:""}<circle cx="${q[0]}" cy="${q[1]}" r="${hr}" fill="transparent" style="cursor:pointer" data-t="${pts[i].t}" onclick="tip(event)"/>`).join("");
+  return`<svg viewBox="0 0 ${W} ${H}" style="width:100%;display:block">${g}</svg>`}
+function sCrescita(){
+  const T="Crescita stipendio",ch=`<div class="chips">${Object.entries(GM).map(([k,v])=>`<button class="chip ${k==gm?"on":""}" onclick="gm='${k}';draw()">${v[0]}</button>`).join("")}</div>`;
+  const M=monthly().map(s=>({s,v:GM[gm][1](s)})).filter(o=>o.v!=null);
+  if(M.length<2)return ps(T,ch+`<div class="card mu">Servono almeno due buste mensili${gm=="base"?" con la voce Retribuzione (ricarica le buste se mancano)":""}.</div>`);
+  const a=M[0],b=M[M.length-1],d=b.v-a.v,pc=a.v?d/a.v*100:0,sg=d>=0?"+":"";
+  return ps(T,ch+`<div class="card"><div class="k">Da ${lab(a.s)} a ${lab(b.s)}</div><div class="big sm" style="color:${d>=0?"var(--up)":"var(--dn)"}">${sg}${n2(d)} €</div><div class="mu">${sg}${n2(pc)}% · da ${E(a.v)} a ${E(b.v)}</div>
+  <div class="cw" style="margin-top:12px">${lineSvg(M.map(o=>({t:lab(o.s)+" · "+E(o.v),v:o.v,l:sh(o.s)})))}<div class="tip"></div></div>
+  <div class="mu" style="margin-top:8px">Il netto cambia anche con straordinari, assenze e premi: la voce Base è la misura più stabile.</div></div>`)}
+function tfrData(){
+  const S=slips.filter(s=>s.tf&&(s.tf.fondi!=null||s.tf.qm!=null)).slice().reverse(),ye={},cy={};
+  S.forEach(s=>{ye[s.y]=s});
+  Object.keys(ye).forEach(y=>{const t=ye[y].tf;cy[y]=t.fondi!=null?t.fondi:S.filter(s=>s.y==y).reduce((a,s)=>a+(s.tf.cm||0),0)});
+  return S.map(s=>{const t=s.tf;let prev=0;Object.keys(cy).forEach(y=>{if(+y<s.y)prev+=cy[y]});
+    const cur=t.fondi!=null?t.fondi:S.filter(x=>x.y==s.y&&ord(x)<=ord(s)).reduce((a,x)=>a+(x.tf.cm||0),0);
+    return{s,az:t.fdo!=null?t.fdo+(t.riv||0)-(t.imp||0)+((t.quota||0)-(t.fondi||0)):null,co:prev+cur}}).filter(o=>o.az!=null||o.co)}
+function sTfr(){
+  const T="TFR accumulato",D=tfrData();
+  if(!D.length)return ps(T,`<div class="card mu">Nessun dato TFR. Ricarica le buste dalla scheda Carica: il TFR si legge dal riquadro T.F.R. della busta.</div>`);
+  const L=D.slice().reverse().find(o=>o.az!=null)||D[D.length-1],az=L.az||0,co=L.co,mx=Math.max(...D.map(o=>(o.az||0)+o.co),1),st=Math.ceil(D.length/7);
+  return ps(T,`<div class="card"><div class="k">TFR totale accumulato</div><div class="big sm">${E(az+co)}</div><div class="mu">al ${lab(L.s)}</div>
+  <div class="grid" style="margin-top:14px"><div><div class="k"><i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--or);margin-right:6px"></i>In azienda</div><div class="v" style="font-size:20px">${E(az)}</div></div>
+  <div><div class="k"><i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--tl);margin-right:6px"></i>Fondo Cometa</div><div class="v" style="font-size:20px">${E(co)}</div></div></div>
+  <div class="cw"><div class="stk">${D.map(o=>`<div class="sc" style="height:${Math.max(3,((o.az||0)+o.co)/mx*100)}%" data-t="${lab(o.s)} · Azienda ${E(o.az||0)} · Cometa ${E(o.co)}" onclick="tip(event)"><i style="flex:${o.co} 1 0;background:var(--tl)"></i><i style="flex:${o.az||0} 1 0;background:var(--or)"></i></div>`).join("")}</div><div class="tip"></div></div>
+  <div class="lab">${D.map((o,i)=>`<span>${i%st==0?sh(o.s):""}</span>`).join("")}</div>
+  <div class="mu" style="margin-top:10px">Calcolato dalle buste caricate: carica tutti gli anni per avere il totale completo. In azienda = fondo al 31/12 + rivalutazione netta + quota dell'anno non versata al fondo.</div></div>`)}
+function sOt(){const os=slips.find(x=>(x.voci||[]).some(r=>/straordin/i.test(r[0])))||slips.find(x=>(x.voci||[]).some(r=>r[2]))||slips[0];return ps("Calcolo straordinario",osec(os))}
+function sCmp(){return ps("Confronto buste",cmpOn?cmp()+`<button class="btn s" style="margin-top:12px" onclick="cmpOn=false;draw()">Chiudi confronto</button>`:`<button class="btn s" onclick="cmpOn=true;draw()">Confronta buste</button>`)}
+const SF={hero:sHero,anni:sAnni,disp:sDisp,media:sMedia,crescita:sCrescita,tfr:sTfr,ot:sOt,cmp:sCmp};
+function overview(){
+  const up=`<button class="btn" style="margin-top:30px" onclick="tab='up';draw()">Carica buste paga</button>`;
+  if(!slips.length)return`<div class="card mu">Nessuna busta caricata.</div>`+up;
+  const on=pan.filter(p=>p.on);
+  return(on.length?on.map(p=>SF[p.id]()).join(""):`<div class="card mu">Tutti i riquadri sono nascosti. Apri il menu e scegli Modifica panoramica.</div>`)+up;
+}
+function editSheet(){
+  const eye=o=>`<svg viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>${o?"":'<path d="M4 4l16 16"/>'}</svg>`,ch=d=>`<svg viewBox="0 0 24 24"><path d="${d}"/></svg>`;
+  return`<div class="sheet"><div class="sh2"><button onclick="panReset()">Ripristina</button><b>Modifica</b><button onclick="closeUI()">Fine</button></div>
+  <div class="sl"><div class="mu" style="margin:0 6px 12px">Tocca l'occhio per mostrare o nascondere un riquadro e le frecce per cambiarne l'ordine.</div>
+  ${pan.map((p,i)=>`<div class="di er ${p.on?"":"off"}"><button class="ib" onclick="panTog('${p.id}')" aria-label="Mostra o nascondi">${eye(p.on)}</button><span class="dl">${SECS.find(x=>x[0]==p.id)[1]}</span><span style="margin-left:auto;display:flex;gap:6px"><button class="ib" ${i?"":"disabled"} onclick="panMove('${p.id}',-1)" aria-label="Sposta su">${ch("M6 15l6-6 6 6")}</button><button class="ib" ${i<pan.length-1?"":"disabled"} onclick="panMove('${p.id}',1)" aria-label="Sposta giù">${ch("M6 9l6 6 6-6")}</button></span></div>`).join("")}</div></div>`}
+function panTog(id){const p=pan.find(x=>x.id==id);p.on=!p.on;savePan();draw()}
+function panMove(id,d){const i=pan.findIndex(x=>x.id==id),j=i+d;if(j<0||j>=pan.length)return;[pan[i],pan[j]]=[pan[j],pan[i]];savePan();draw()}
+function panReset(){pan=SECS.map(x=>({id:x[0],on:true}));savePan();draw()}
+function editOpen(){mo=false;em=true;drawO()}
+const GC=[["Retribuzione",/retribuzione|paga base|minimo|contingenza|scatt|superminimo|edr/i],["Straordinari",/straordin|maggiorazion|notturn/i],["Assenze retribuite",/permess|ferie|malattia|infortun|maternit|congedo|festivit/i],["Premi e indennità",/./]];
+const GT=[["Contributi e previdenza",/contribut|inps|ivs|previd|cometa|fondo|e\.?b\.?m/i],["Imposte",/irpef|addizional|imposta|ritenut|detraz/i],["Assenze e ritardi",/non lavorat|ritard|assenz|permess/i],["Altre trattenute",/./]];
+const tot=a=>(a||[]).reduce((t,x)=>t+x[1],0);
+const gs=l=>`<a class="gs" href="https://www.google.com/search?q=${encodeURIComponent(l+" busta paga voce")}" target="_blank" rel="noopener" aria-label="Cerca su Google"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></a>`;
+function groups(rows,G){const o=G.map(g=>[g[0],[]]);(rows||[]).forEach(r=>{const i=G.findIndex(g=>g[1].test(r[0]));o[i<0?G.length-1:i][1].push(r)});return o.filter(g=>g[1].length)}
+function sect(t,rows,G){
+  const body=groups(rows,G).map(([n,rs])=>`<div class="gh"><span>${n}</span><span>${E(tot(rs))}</span></div>`+rs.map(r=>`<div class="row"><span class="rl">${r[0]} ${gs(r[0])}</span><span>${E(r[1])}</span></div>`).join("")).join("");
+  return`<details class="card sec" ${oS[t]?"open":""} ontoggle="oS['${t}']=this.open"><summary><span>${t}</span><span class="sv">${E(tot(rows))}</span></summary><div class="sb">${body||'<div class="mu" style="padding:8px 0">Nessuna voce</div>'}</div></details>`;
+}
+function bsec(t,a){if(!a||!a.length)return"";const L=lbl(a);
+  return`<details class="card sec" ${oS[t]?"open":""} ontoggle="oS['${t}']=this.open"><summary><span>${t}</span><span class="sv">${fmt(last(a))} ore</span></summary><div class="sb">${a.map((x,i)=>`<div class="row"><span>${L[i]}</span><span>${fmt(x)} ore</span></div>`).join("")}</div></details>`}
+let ot=null,otId=null;
+function otInit(s){
+  const V=s.voci||[],so=V.filter(r=>/straordin/i.test(r[0])),rb=V.find(r=>/^retribuzione$/i.test(r[0]));
+  let base=rb&&rb[2]?rb[2]:null;
+  if(!base){const r=so.find(r=>r[2]&&/\d+%/.test(r[0]));if(r)base=r[2]/(1+parseInt(r[0].match(/(\d+)%/)[1])/100)}
+  const h=p=>{const r=so.find(r=>new RegExp("\\b"+p+"%").test(r[0]));return r&&r[3]?r[3]:0};
+  const iv=(s.tratt||[]).find(r=>/ivs|contributo inps/i.test(r[0])&&r[2]&&r[1]);
+  const ip=iv?iv[1]/iv[2]*100:9.19,ad=s.lordo?tot((s.tratt||[]).filter(r=>/addizional/i.test(r[0])))/s.lordo*100:2;
+  ot={base:base?+base.toFixed(4):"",h25:h(25),h50:h(50),h100:h(100),pct:+(ip+23+ad).toFixed(1)};otId=s.id;
+}
+const otRes=o=>{const l=(+o.base||0)*((+o.h25||0)*1.25+(+o.h50||0)*1.5+(+o.h100||0)*2),n=l*(1-(+o.pct||0)/100);return[l,n,n*12]};
+function otCalc(){const g=k=>document.getElementById("ot-"+k).value;ot={base:g("base"),h25:g("h25"),h50:g("h50"),h100:g("h100"),pct:g("pct")};const r=otRes(ot);["l","n","y"].forEach((k,i)=>document.getElementById("ot-"+k).textContent=E(r[i]))}
+function osec(s){
+  if(otId!=s.id)otInit(s);
+  const so=(s.voci||[]).filter(r=>/straordin/i.test(r[0])),r0=otRes(ot);
+  const inp=([l,k])=>`<div class="row"><span>${l}</span><input class="f" id="ot-${k}" type="number" inputmode="decimal" step="any" value="${ot[k]}" oninput="otCalc()"></div>`;
+  return`<details class="card sec"><summary><span>Straordinari</span><span class="sv">${so.length?E(tot(so)):"Simulatore"}</span></summary><div class="sb">
+  ${so.length?`<div class="gh"><span>In ${lab(s)}</span><span>${E(tot(so))}</span></div>`+so.map(r=>`<div class="row"><span class="rl">${r[0]} ${gs(r[0])}</span><span>${r[3]?fmt(r[3])+" h · ":""}${E(r[1])}</span></div>`).join(""):""}
+  <div class="gh"><span>Simulatore</span><span></span></div>
+  ${[["Tariffa oraria base (€)","base"],["Ore al +25%","h25"],["Ore al +50%","h50"],["Ore al +100%","h100"],["Trattenute stimate (%)","pct"]].map(inp).join("")}
+  <div class="row"><span>Lordo extra</span><b id="ot-l" style="font-weight:600">${E(r0[0])}</b></div>
+  <div class="row"><span>Netto stimato</span><b id="ot-n" style="font-weight:600">${E(r0[1])}</b></div>
+  <div class="row"><span>Netto annuo a questo ritmo</span><b id="ot-y" style="font-weight:600">${E(r0[2])}</b></div>
+  <div class="mu" style="padding-top:8px">Stima: contributi + IRPEF 23% + addizionali. Il netto reale dipende dal tuo scaglione, modifica la percentuale se serve.</div></div></details>`;
+}
+const oS={};let an="";
+const cur=()=>slips.find(x=>x.id==sel)||slips[0];
+function setSel(id){const t=slips.find(x=>x.id==id);an=ord(t)>ord(cur())?"fr":"fl";sel=id;draw()}
+let pk=false,pkY=null,hT=null,hI=null;
+function go(d,q){const a=slips.slice().reverse(),i=a.findIndex(x=>x.id==cur().id)+d;if(!a[i])return false;if(q){sel=a[i].id;draw()}else setSel(a[i].id);return true}
+function rel(){clearTimeout(hT);clearInterval(hI)}
+function hold(d){rel();if(!go(d))return;hT=setTimeout(()=>{hI=setInterval(()=>{if(!go(d,1))rel()},110)},380)}
+function picker(s){
+  const ys=[...new Set(slips.map(x=>x.y))].sort(),py=pkY||s.y,f=(m,t)=>slips.find(x=>x.y==py&&x.m==m&&(t?x.tipo=="13a":x.tipo!="13a"));
+  const cell=(l,x)=>x?`<button class="mc ${x.id==s.id?"on":""}" onclick="pk=false;setSel('${x.id}')">${l}</button>`:`<button class="mc" disabled>${l}</button>`;
+  return`<div class="card" style="margin:0 0 12px"><div class="yr">${ys.map(y=>`<button class="chip ${y==py?"on":""}" onclick="pkY=${y};draw()">${y}</button>`).join("")}</div><div class="mg">${MESI.map((m,k)=>cell(m[0].toUpperCase()+m.slice(1,3),f(k+1,0))).join("")}${cell("13ª",f(12,1))}</div></div>`}
+function pager(s){
+  const a=slips.slice().reverse(),i=a.findIndex(x=>x.id==s.id),c=d=>`<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="${d}"/></svg>`;
+  return`<div class="pn"><button ${i>0?"":"disabled"} onpointerdown="hold(-1)" aria-label="Busta precedente">${c("M15 5l-7 7 7 7")}</button><div class="pt" onclick="pk=!pk;pkY=null;draw()">${lab(s)}<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--mu)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(${pk?180:0}deg);transition:transform .2s"><path d="M6 9l6 6 6-6"/></svg></div><button ${i<a.length-1?"":"disabled"} onpointerdown="hold(1)" aria-label="Busta successiva">${c("M9 5l7 7-7 7")}</button></div>
+  ${pk?picker(s):""}`}
+function home(){
+  if(!slips.length)return`<div class="card mu">Nessuna busta caricata. Vai su Carica per iniziare.</div>`;
+  const s=slips.find(x=>x.id==sel)||slips[0];
+  return`${pager(s)}
+  ${hero("Netto del mese",E(s.netto),lab(s))}
+  <div class="grid"><div class="card"><div class="k">Lordo</div><div class="v">${E(s.lordo)}</div></div>
+  <div class="card"><div class="k">Trattenute</div><div class="v">${s.lordo!=null&&s.netto!=null?E(s.lordo-s.netto):"–"}</div></div></div>
+  ${sect("Competenze",s.voci,GC)}${sect("Trattenute",s.tratt,GT)}${bsec("Ferie",s.ferie)}${bsec("Permessi PAR",s.perm)}${bsec("ROL",s.rol)}
+  ${s.tfr!=null?`<div class="card"><div class="row"><span>TFR del mese</span><span>${E(s.tfr)}</span></div></div>`:""}
+  <div class="card"><div class="k">Correggi dati</div>
+  <div class="row"><span>Lordo</span><input class="f" value="${s.lordo??""}" onchange="ed('${s.id}','lordo',this.value)"></div>
+  <div class="row"><span>Netto</span><input class="f" value="${s.netto??""}" onchange="ed('${s.id}','netto',this.value)"></div>
+  <div class="row"><span>Tipo busta</span><select onchange="setTipo('${s.id}',this.value)"><option value="" ${s.tipo?"":"selected"}>Mensile</option><option value="13a" ${s.tipo?"selected":""}>Tredicesima</option></select></div></div>
+  <button class="link" style="margin-top:16px" onclick="del('${s.id}')">Elimina questa busta</button>`;
+}
+function ed(id,k,v){const s=slips.find(x=>x.id==id);s[k]=parseFloat(v.replace(",","."))||null;save();draw()}
+function setTipo(id,v){const s=slips.find(x=>x.id==id);s.tipo=v;slips.sort((a,b)=>ord(b)-ord(a));save();draw()}
+function del(id){slips=slips.filter(x=>x.id!=id);sel=null;save();draw()}
+const stats=(l,t)=>`<div class="grid"><div class="card"><div class="k">Lordo</div><div class="v">${E(l)}</div></div><div class="card"><div class="k">Trattenute</div><div class="v">${E(t)}</div></div></div>`;
+const barsC=(t,items)=>{const mx=Math.max(...items.map(i=>i[2]||0),1);return`<div class="card"><div class="k">${t}</div><div class="cw"><div class="bars">${items.map(i=>`<div data-t="${i[3]} · ${E(i[2])}" onclick="tip(event)" style="height:${(i[2]||0)/mx*100}%"></div>`).join("")}</div><div class="tip"></div></div><div class="lab">${items.map(i=>`<span>${i[0]}</span>`).join("")}</div></div>`};
+function annual(){
+  const ys=[...new Set(slips.map(s=>s.y))].sort((a,b)=>b-a);
+  if(!ys.length)return`<div class="card mu">Carica almeno una busta.</div>`;
+  if(yr!="all"&&!ys.includes(yr))yr=ys[0];
+  const pick=`<select onchange="yr=this.value=='all'?'all':+this.value;draw()"><option value="all" ${yr=="all"?"selected":""}>Tutti gli anni</option>${ys.map(y=>`<option ${y==yr?"selected":""}>${y}</option>`).join("")}</select>`;
+  const sum=(S,k)=>S.reduce((t,s)=>t+(s[k]||0),0);
+  if(yr=="all"){
+    const Y=ys.slice().sort((a,b)=>a-b).map(y=>{const S=slips.filter(s=>s.y==y);return{y,n:S.length,l:sum(S,"lordo"),net:sum(S,"netto")}});
+    return pick+hero("Netto totale",E(sum(slips,"netto")),`${slips.length} buste · ${ys.length} ${ys.length>1?"anni":"anno"}`)+stats(sum(slips,"lordo"),sum(slips,"lordo")-sum(slips,"netto"))
+    +barsC("Netto per anno",Y.map(o=>[o.y,0,o.net,o.y]))
+    +`<div class="card">${Y.slice().reverse().map(o=>`<div class="item" onclick="yr=${o.y};draw()"><span style="font-weight:600">${o.y}</span><span style="text-align:right">${E(o.net)}<br><span class="mu">lordo ${E(o.l)} · ${o.n} buste</span></span></div>`).join("")}</div>`;
+  }
+  const S=slips.filter(s=>s.y==yr).sort((a,b)=>ord(a)-ord(b));
+  return pick+hero("Netto "+yr,E(sum(S,"netto")),`${S.length} buste su 13 (12 mensili + tredicesima)`)+stats(sum(S,"lordo"),sum(S,"lordo")-sum(S,"netto"))
+  +barsC("Netto per mese",S.map(s=>[s.tipo=="13a"?"13ª":s.m?MESI[s.m-1].slice(0,3):"–",0,s.netto,lab(s)]))
+  +`<div class="card">${S.map(s=>`<div class="item" onclick="sel='${s.id}';tab='home';draw()"><span>${lab(s)}</span><span style="text-align:right">${E(s.netto)} <span class="mu">/ ${E(s.lordo)}</span></span></div>`).join("")}</div>`;
+}
+const MODELS=[["auto","Auto-riconoscimento","Riconosce da sola il formato"],["zucchetti","Zucchetti","Testato su cedolini reali"],["generico","Altri software paghe","Sperimentale: lettura generica"]];
+let defM="auto";try{defM=localStorage.getItem("defModel")||"auto"}catch(e){}if(!MODELS.some(m=>m[0]==defM))defM="auto";let model=defM;
+function setModel(k){model=k;draw()}
+function setDef(){defM=defM==model?"auto":model;try{localStorage.setItem("defModel",defM)}catch(e){}draw()}
+function load(){
+  const ck='<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+  return`<div class="ps"><h1>Tipo di busta</h1><div class="card" style="padding:4px 18px">${MODELS.map(m=>`<div class="op" onclick="setModel('${m[0]}')"><span><b>${m[1]}</b><small>${m[2]}${defM==m[0]?" · Predefinito":""}</small></span>${model==m[0]?ck:""}</div>`).join("")}
+  <div class="op" onclick="setDef()"><span><b>Usa come predefinito</b><small>Selezionato ogni volta che apri Carica</small></span><span class="sw ${defM==model?"on":""}"></span></div></div></div>
+  <div class="ps"><h1>Carica</h1><label class="drop">Tocca per scegliere uno o più PDF<br><span class="mu">I dati restano solo su questo telefono</span>
+  <input type="file" accept="application/pdf" multiple hidden onchange="upload(this.files)"></label>
+  <div class="mu" style="margin-top:14px">${msg}</div>
+  <div class="mu" style="margin-top:14px">Funziona con PDF digitali, non con scansioni o foto. Se un campo non viene riconosciuto puoi correggerlo a mano nel Dettaglio. Con "Auto-riconoscimento" l'app prova i formati e sceglie il migliore.</div></div>`}
+const IC={ov:'<path d="M5 20V11M12 20V4M19 20v-6"/>',home:'<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/>',year:'<rect x="4" y="5" width="16" height="16" rx="3.5"/><path d="M4 10h16M9 3v4M15 3v4"/>'};
+const NAV=[["home","Dettaglio"],["ov","Panoramica"],["year","Annuale"]],TT={ov:"Panoramica",home:"Dettaglio",year:"Annuale",up:"Carica"};let lt=null;
+let mo=false,dm=false,em=false,bm=false,ss=false,dsel=new Set(),dc=false,tmT=null;
+const MI=(k,t,sb,svg,c)=>`<button class="mi ${c||""}" onclick="${k}"><i><svg viewBox="0 0 24 24">${svg}</svg></i><span><b>${t}</b><small>${sb}</small></span></button>`;
+function toast(t){const e=document.getElementById("t");if(!e)return;e.textContent=t;e.className="toast on";clearTimeout(tmT);tmT=setTimeout(()=>{e.className="toast"},2800)}
+function drawO(){
+  const el=document.getElementById("o");if(!el)return;let h="";
+  if(mo){const n=slips.length,ys=new Set(slips.map(x=>x.y)).size;
+    h+=`<div class="scrim" onclick="closeUI()"></div><aside class="drawer"><div style="font-size:26px;font-weight:700;letter-spacing:-.03em;margin:0 4px">Cedolino</div><div class="mu" style="margin:2px 4px 14px">${n?`${n} ${n==1?"busta":"buste"} · ${ys} ${ys>1?"anni":"anno"}`:"Nessuna busta salvata"}</div>`
+    +MI("editOpen()","Modifica panoramica","Mostra, nascondi e riordina",'<rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/>')
+    +MI("bkOpen()","Backup","Salva o ripristina i dati",'<path d="M7 18a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 9a4 4 0 0 1-.5 9"/><path d="M12 12v8M9 17l3 3 3-3"/>')
+    +MI("secOpen()","Sicurezza","PIN e accesso biometrico",'<rect x="5" y="10.5" width="14" height="9.5" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/>')
+    +MI("delOpen()","Elimina buste","Seleziona e cancella",'<path d="M5 7h14M10 7V5h4v2M7 7l1 12h8l1-12M10 11v5M14 11v5"/>',"d")+`</aside>`}
+  if(dm)h+=delSheet();if(em)h+=editSheet();if(bm)h+=bkSheet();if(ss)h+=secSheet();
+  el.innerHTML=h;
+  try{document.body.style.overflow=mo||dm||em||bm||ss||lk?"hidden":""}catch(e){}
+}
+function menu(){mo=true;try{history.pushState({o:1},"")}catch(e){}drawO()}
+function closeUI(){const h=typeof history!="undefined"?history:null;if(h&&h.state&&h.state.o)h.back();else{mo=false;dm=false;em=false;bm=false;ss=false;drawO()}}
+function delOpen(){mo=false;dm=true;dsel=new Set();dc=false;drawO()}
+function delSheet(){
+  return`<div class="sheet"><div class="sh2"><button onclick="closeUI()">Annulla</button><b>Elimina buste</b><button id="dall" onclick="delAll()">Tutte</button></div>
+  <div class="sl">${slips.length?slips.map((x,i)=>`<div class="di" id="di-${i}" onclick="delTog(${i})"><span class="ck"></span><span class="dl">${lab(x)}</span><span class="dv">${E(x.netto)}</span></div>`).join(""):'<div class="card mu">Nessuna busta.</div>'}</div>
+  <div class="sf"><div id="d1"><button class="btn r" id="dbtn" disabled onclick="delAsk()">Elimina</button></div>
+  <div id="d2" style="display:none"><div id="dq" style="text-align:center;margin-bottom:12px;font-weight:600"></div><div class="grid"><button class="btn s" onclick="dc=false;delUI()">Annulla</button><button class="btn r" onclick="delGo()">Elimina</button></div></div></div></div>`}
+function delUI(){
+  const n=dsel.size,b=document.getElementById("dbtn");if(!b)return;b.disabled=!n;b.textContent=n?`Elimina (${n})`:"Elimina";
+  document.getElementById("d1").style.display=dc?"none":"block";document.getElementById("d2").style.display=dc?"block":"none";
+  document.getElementById("dq").textContent=`Eliminare ${n} ${n==1?"busta":"buste"}? Non si può annullare.`;
+  const a=document.getElementById("dall");if(a)a.textContent=n&&n==slips.length?"Nessuna":"Tutte"}
+function delTog(i){dsel.has(i)?dsel.delete(i):dsel.add(i);dc=false;document.getElementById("di-"+i).classList.toggle("on",dsel.has(i));delUI()}
+function delAll(){const all=dsel.size==slips.length;dsel=new Set(all?[]:slips.map((_,i)=>i));dc=false;slips.forEach((_,i)=>document.getElementById("di-"+i).classList.toggle("on",dsel.has(i)));delUI()}
+function delAsk(){if(dsel.size){dc=true;delUI()}}
+function delGo(){const ids=[...dsel].map(i=>slips[i].id),n=ids.length;slips=slips.filter(x=>!ids.includes(x.id));save();dsel=new Set();dc=false;sel=null;mo=false;dm=false;draw();toast(`${n} ${n==1?"busta eliminata":"buste eliminate"}`)}
+function bkOpen(){mo=false;bm=true;drawO()}
+function bkSheet(){
+  let lb=null;try{lb=localStorage.getItem("lastBk")}catch(e){}
+  const n=slips.length,d=lb?new Date(lb):null,ok=d&&!isNaN(d);
+  const ico=p=>`<i style="width:36px;height:36px;border-radius:10px;background:var(--ac);color:#fff;display:flex;align-items:center;justify-content:center;flex:none"><svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round">${p}</svg></i>`;
+  return`<div class="sheet"><div class="sh2"><button onclick="closeUI()">Chiudi</button><b>Backup</b><span style="min-width:78px"></span></div>
+  <div class="sl">
+  <div class="card" style="text-align:center;padding:22px 18px"><div class="big sm">${n}</div><div class="mu">${n==1?"busta salvata":"buste salvate"} su questo telefono</div>
+  <div class="mu" style="margin-top:8px">${ok?"Ultimo backup: "+d.toLocaleDateString("it-IT",{day:"numeric",month:"long",year:"numeric"}):"Nessun backup fatto finora"}</div></div>
+  <div class="ps"><h1>Azioni</h1><div class="card" style="padding:4px 18px">
+  <div class="op" onclick="doBackup()"><span style="display:flex;align-items:center;gap:14px">${ico('<path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19h14"/>')}<span><b>Salva backup</b><small>Crea un file con tutte le buste</small></span></span></div>
+  <div class="op" onclick="pickImport()"><span style="display:flex;align-items:center;gap:14px">${ico('<path d="M12 15V4M7.5 8.5 12 4l4.5 4.5M5 19h14"/>')}<span><b>Ripristina backup</b><small>Carica le buste da un file salvato</small></span></span></div>
+  </div></div>
+  <div class="mu" style="margin:14px 8px">Il ripristino aggiunge le buste del file e aggiorna quelle dello stesso mese: le altre buste già presenti restano. Salva il file in un posto sicuro, per esempio Google Drive, così puoi recuperare i dati se cambi telefono.</div>
+  </div></div>`}
+function pickImport(){document.getElementById("imp").click();bm=false;mo=false;drawO()}
+async function doBackup(){
+  mo=false;bm=false;drawO();const mk=()=>{try{localStorage.setItem("lastBk",new Date().toISOString())}catch(e){}};
+  if(!slips.length){toast("Nessuna busta da salvare");return}
+  const d=new Date(),p=n=>String(n).padStart(2,"0"),name=`cedolino-backup-${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}.json`,txt=JSON.stringify({app:"cedolino",v:1,date:d.toISOString(),slips},null,1);
+  const C=window.Capacitor,P=C&&C.Plugins,nat=!!(C&&C.isNativePlatform&&C.isNativePlatform()&&P&&P.Filesystem&&P.Share);
+  const dl=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([txt],{type:"application/json"}));a.download=name;document.body.appendChild(a);a.click();a.remove();mk();toast("Backup scaricato")};
+  try{
+    if(nat){const r=await P.Filesystem.writeFile({path:name,data:txt,directory:"CACHE",encoding:"utf8"});await P.Share.share({title:"Backup Cedolino",url:r.uri,dialogTitle:"Salva il backup"});mk();return}
+    const f=new File([txt],name,{type:"application/json"});
+    if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:"Backup Cedolino"});mk();toast("Backup pronto")}else dl();
+  }catch(e){
+    if(/abort|cancel/i.test(String(e&&(e.name+" "+e.message))))return;
+    if(nat){toast("Backup non riuscito");return}
+    try{dl()}catch(x){toast("Backup non riuscito")}
+  }
+}
+async function doImport(inp){
+  const f=inp.files&&inp.files[0];if(!f)return;
+  try{
+    const j=JSON.parse(await f.text()),a=Array.isArray(j)?j:j.slips;
+    if(!Array.isArray(a))throw 0;
+    const ok=a.filter(x=>x&&Number.isFinite(+x.y)&&+x.y>1990&&(x.lordo!=null||x.netto!=null));
+    if(!ok.length)throw 0;
+    let ag=0,su=0;
+    ok.forEach(x=>{
+      const n={id:Date.now()+Math.random(),file:x.file||"",y:+x.y,m:+x.m||0,lordo:x.lordo??null,netto:x.netto??null,voci:x.voci||[],tratt:x.tratt||[],tipo:x.tipo=="13a"?"13a":"",ferie:x.ferie||[],perm:x.perm||[],rol:x.rol||[],tfr:x.tfr??null,ass:x.ass||null,tf:x.tf||null};
+      const k=n.m?slips.findIndex(s=>s.y==n.y&&s.m==n.m&&(s.tipo||"")==n.tipo):-1;
+      if(k>=0){slips[k]=n;su++}else{slips.push(n);ag++}});
+    slips.sort((a,b)=>ord(b)-ord(a));save();sel=null;draw();
+    toast(`Importate ${ag} ${ag==1?"busta":"buste"}`+(su?`, aggiornate ${su}`:""));
+  }catch(e){toast("File non valido")}
+  inp.value="";
+}
+/* ---------- Sicurezza: PIN + biometria ---------- */
+let sec=null;try{sec=JSON.parse(localStorage.getItem("sec")||"null")}catch(e){}
+if(sec&&!(sec.h&&sec.salt))sec=null;
+const saveSec=()=>{try{sec?localStorage.setItem("sec",JSON.stringify(sec)):localStorage.removeItem("sec")}catch(e){}};
+let lk=null,lkT=null,bioA=null,fail={n:0,until:0};
+try{const f=JSON.parse(localStorage.getItem("secFail")||"null");if(f&&typeof f.n=="number")fail=f}catch(e){}
+const saveFail=()=>{try{localStorage.setItem("secFail",JSON.stringify(fail))}catch(e){}};
+const rnd=n=>{const a=new Uint8Array(n);try{crypto.getRandomValues(a)}catch(e){for(let i=0;i<n;i++)a[i]=Math.random()*256|0}return a};
+const hex=a=>[...a].map(x=>x.toString(16).padStart(2,"0")).join("");
+const b64=b=>btoa(String.fromCharCode(...new Uint8Array(b)));
+const ub64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function hashPin(p,salt,fb){
+  const t=salt+":"+p;
+  if(!fb){try{const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));return hex(new Uint8Array(b))}catch(e){}}
+  let h1=5381,h2=52711;for(let k=0;k<2000;k++)for(const c of t){h1=(h1*33^c.charCodeAt(0))>>>0;h2=(h2*31+c.charCodeAt(0)+h1)>>>0}
+  return"f"+h1.toString(16)+h2.toString(16)}
+const nbio=()=>{const C=window.Capacitor;return C&&C.isNativePlatform&&C.isNativePlatform()&&C.Plugins&&C.Plugins.NativeBiometric||null};
+async function bioAvail(){
+  const n=nbio();if(n){try{const r=await n.isAvailable();return r&&r.isAvailable?"n":null}catch(e){return null}}
+  try{if(window.PublicKeyCredential&&PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable&&await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable())return"w"}catch(e){}
+  return null}
+async function bioEnroll(){
+  const t=await bioAvail();if(!t)throw new Error("na");
+  if(t=="n"){await nbio().verifyIdentity({reason:"Attiva l'accesso biometrico",title:"Cedolino",subtitle:"Conferma con impronta o volto",negativeButtonText:"Annulla"});return{t}}
+  const c=await navigator.credentials.create({publicKey:{challenge:rnd(32),rp:{name:"Cedolino"},user:{id:rnd(16),name:"cedolino",displayName:"Cedolino"},pubKeyCredParams:[{type:"public-key",alg:-7},{type:"public-key",alg:-257}],authenticatorSelection:{authenticatorAttachment:"platform",userVerification:"required",residentKey:"discouraged"},timeout:60000}});
+  return{t,id:b64(c.rawId)}}
+async function bioCheck(){
+  if(!sec||!sec.bio)return false;
+  if(sec.bio.t=="n"){const n=nbio();if(!n)return false;await n.verifyIdentity({reason:"Sblocca Cedolino",title:"Cedolino",subtitle:"Accedi con impronta o volto",negativeButtonText:"Usa il PIN"});return true}
+  await navigator.credentials.get({publicKey:{challenge:rnd(32),allowCredentials:[{type:"public-key",id:ub64(sec.bio.id)}],userVerification:"required",timeout:60000}});return true}
+const LKT={unlock:["Inserisci il PIN",""],set1:["Crea un PIN","Scegli 6 cifre per proteggere l'app"],set2:["Conferma il PIN","Inserisci di nuovo le 6 cifre"],verify:["Inserisci il PIN attuale",""]};
+function startLock(mode,next,o){lk=Object.assign({mode,v:"",msg:"",err:false,next:next||null,st:""},o||{});drawL();drawO();if(mode=="unlock")setTimeout(tryBio,350)}
+function lockNow(){if(sec&&!lk){mo=false;dm=false;em=false;bm=false;ss=false;drawO();startLock("unlock")}}
+const locked=()=>Date.now()<fail.until;
+function drawL(){
+  const el=document.getElementById("lk");if(!el)return;
+  clearTimeout(lkT);
+  if(!lk){el.innerHTML="";try{document.body.style.overflow=mo||dm||em||bm||ss?"hidden":""}catch(e){}return}
+  try{document.body.style.overflow="hidden"}catch(e){}
+  if(lk.mode=="forgot"){
+    el.innerHTML=`<div class="lock"><div class="lt"></div><div class="lav"><svg viewBox="0 0 24 24"><path d="M12 8v5M12 16.5v.5"/><circle cx="12" cy="12" r="9"/></svg></div>
+    <div class="lh">PIN dimenticato?</div><div class="lm" style="margin-top:10px">Il PIN non si può recuperare. Per reimpostarlo devi cancellare tutti i dati dell'app da questo telefono. Se hai un file di backup potrai ripristinarlo subito dopo.</div>
+    <div style="margin-top:auto;width:100%;max-width:340px"><button class="btn r" onclick="forgotGo()">Cancella dati e reimposta</button><button class="btn s" style="margin-top:10px" onclick="lk.mode='unlock';lk.v='';drawL()">Annulla</button></div></div>`;return}
+  const[tt,sub]=LKT[lk.mode],lo=locked(),can=lk.mode!="unlock",bio=lk.mode=="unlock"&&sec&&sec.bio;
+  let msg=lk.msg||sub;if(lo){msg=`Troppi tentativi. Riprova tra ${Math.ceil((fail.until-Date.now())/1000)} s`;lkT=setTimeout(drawL,1000)}
+  const key=d=>`<button ${lo?"disabled":""} onclick="lkKey('${d}')">${d}</button>`;
+  const bioIco='<svg viewBox="0 0 24 24"><path d="M5 9V7a2 2 0 0 1 2-2h2M15 5h2a2 2 0 0 1 2 2v2M19 15v2a2 2 0 0 1-2 2h-2M9 19H7a2 2 0 0 1-2-2v-2"/><path d="M9 10v1M15 10v1M12 10v3.5h-1M9.5 16a3.5 3.5 0 0 0 5 0"/></svg>';
+  el.innerHTML=`<div class="lock"><div class="lt">${can?`<button onclick="lkCancel()">Annulla</button>`:""}</div>
+  <div class="lav"><svg viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="9.5" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg></div>
+  <div class="lh">${tt}</div><div class="lm ${lk.err||lo?"e":""}">${msg}</div>
+  <div class="dots ${lk.st}">${[0,1,2,3,4,5].map(i=>`<i class="${i<lk.v.length?"on":""}"></i>`).join("")}</div>
+  <div class="kp">${["1","2","3","4","5","6","7","8","9"].map(key).join("")}
+  ${bio?`<button ${lo?"disabled":""} onclick="tryBio()" aria-label="Accesso biometrico">${bioIco}</button>`:`<button class="nb" tabindex="-1"></button>`}${key("0")}
+  <button onclick="lkDel()" aria-label="Cancella"><svg viewBox="0 0 24 24"><path d="M9 6h10a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H9l-6-6z"/><path d="M12.5 9.5l5 5M17.5 9.5l-5 5"/></svg></button></div>
+  ${lk.mode=="unlock"?`<button class="lf" onclick="lk.mode='forgot';drawL()">PIN dimenticato?</button>`:`<div class="lf"></div>`}</div>`}
+function lkDel(){if(!lk||lk.busy)return;lk.v=lk.v.slice(0,-1);lk.st="";drawL()}
+function lkKey(d){if(!lk||lk.busy||locked()||lk.v.length>=6)return;lk.v+=d;lk.st="";if(lk.v.length<6){drawL();return}lk.busy=true;drawL();setTimeout(lkDone,140)}
+function lkBad(m){lk.st="bad shk";lk.err=true;lk.msg=m;drawL();setTimeout(()=>{if(!lk)return;lk.v="";lk.st="";lk.busy=false;drawL()},480)}
+async function lkDone(){
+  const v=lk.v;
+  if(lk.mode=="set1"){lk.tmp=v;lk.mode="set2";lk.v="";lk.msg="";lk.err=false;lk.busy=false;drawL();return}
+  if(lk.mode=="set2"){
+    if(v!=lk.tmp){lk.mode="set1";lk.tmp=null;lkBad("I PIN non coincidono. Riprova");return}
+    const salt=hex(rnd(16)),h=await hashPin(v,salt),was=!!sec;
+    sec={h,salt,bio:was&&sec.bio?sec.bio:null};saveSec();fail={n:0,until:0};saveFail();
+    lk.st="ok";drawL();setTimeout(()=>{lk=null;drawL();drawO();toast(was?"PIN aggiornato":"PIN attivato")},300);return}
+  const h=await hashPin(v,sec.salt,sec.h[0]=="f"&&sec.h.length<40);
+  if(h==sec.h){fail={n:0,until:0};saveFail();lk.st="ok";drawL();const nx=lk.next;setTimeout(()=>{lk=null;drawL();drawO();if(nx)nx()},260);return}
+  fail.n++;const left=5-fail.n%5;
+  if(fail.n%5==0){fail.until=Date.now()+30000*Math.min(8,fail.n/5)}
+  saveFail();lkBad(fail.n%5==0?"PIN errato":`PIN errato. ${left} ${left==1?"tentativo rimasto":"tentativi rimasti"}`);
+}
+function lkCancel(){lk=null;drawL();drawO()}
+async function tryBio(){
+  if(!lk||lk.mode!="unlock"||!sec||!sec.bio||locked()||lk.bb)return;lk.bb=true;
+  try{if(await bioCheck()&&lk){fail={n:0,until:0};saveFail();lk.v="••••••";lk.st="ok";drawL();setTimeout(()=>{lk=null;drawL();drawO()},260)}}
+  catch(e){if(lk){lk.msg="Tocca l'icona in basso a sinistra per riprovare, o usa il PIN";lk.err=false;drawL()}}
+  finally{if(lk)lk.bb=false}
+}
+function forgotGo(){slips=[];save();sec=null;saveSec();fail={n:0,until:0};saveFail();lk=null;sel=null;tab="ov";drawL();draw();toast("Dati cancellati. Crea un nuovo PIN da Sicurezza")}
+function secOpen(){mo=false;ss=true;bioA=null;drawO();bioAvail().then(t=>{bioA=t||"no";if(ss)drawO()})}
+function secSheet(){
+  const on=!!sec,bo=!!(sec&&sec.bio),bn=bioA=="no",chev='<span class="chev"></span>';
+  const bsub=!on?"Attiva prima il PIN":bioA==null?"Controllo del dispositivo…":bn&&!bo?"Non disponibile su questo dispositivo":"Sblocca con impronta o riconoscimento del volto";
+  return`<div class="sheet"><div class="sh2"><button onclick="closeUI()">Chiudi</button><b>Sicurezza</b><span style="min-width:78px"></span></div>
+  <div class="sl">
+  <div class="ps"><h1>Accesso</h1><div class="card" style="padding:4px 18px">
+  <div class="op" onclick="secPin()"><span><b>Blocco con PIN</b><small>${on?"Attivo · PIN di 6 cifre":"Richiede un PIN all'apertura"}</small></span><span class="sw ${on?"on":""}"></span></div>
+  ${on?`<div class="op" onclick="secChange()"><span><b>Cambia PIN</b><small>Serve il PIN attuale</small></span>${chev}</div>`:""}
+  <div class="op ${on&&!(bn&&!bo)?"":"na"}" onclick="secBio()"><span><b>Accesso biometrico</b><small>${bsub}</small></span><span class="sw ${bo?"on":""}"></span></div>
+  ${on?`<div class="op" onclick="closeUI();setTimeout(lockNow,250)"><span><b>Blocca ora</b><small>L'app si blocca anche dopo 1 minuto in background</small></span>${chev}</div>`:""}
+  </div></div>
+  <div class="mu" style="margin:14px 8px">Il PIN impedisce di aprire l'app su questo telefono. I dati delle buste non vengono cifrati: tieni attivo anche il blocco schermo del telefono. Se dimentichi il PIN, l'unico modo per reimpostarlo è cancellare i dati dell'app, quindi fai un backup.</div>
+  </div></div>`}
+function secPin(){if(!sec)startLock("set1");else startLock("verify",()=>{sec=null;saveSec();drawO();toast("PIN disattivato")})}
+function secChange(){if(sec)startLock("verify",()=>startLock("set1"))}
+async function secBio(){
+  if(!sec){toast("Attiva prima il PIN");return}
+  if(sec.bio){sec.bio=null;saveSec();drawO();toast("Accesso biometrico disattivato");return}
+  if(bioA=="no"){toast("Biometria non disponibile su questo dispositivo");return}
+  try{const b=await bioEnroll();sec.bio=b;saveSec();drawO();toast("Accesso biometrico attivato")}
+  catch(e){const n=String(e&&(e.name+" "+e.message));toast(/na\b|NotSupported|Security/i.test(n)?"Biometria non disponibile qui":"Attivazione annullata")}
+}
+let hidAt=0;
+if(document.addEventListener){
+  document.addEventListener("visibilitychange",()=>{if(document.hidden)hidAt=Date.now();else{if(sec&&!lk&&hidAt&&Date.now()-hidAt>60000)lockNow();hidAt=0}});
+  document.addEventListener("keydown",e=>{if(!lk||lk.mode=="forgot")return;if(/^[0-9]$/.test(e.key))lkKey(e.key);else if(e.key=="Backspace")lkDel();else if(e.key=="Escape"&&lk.mode!="unlock")lkCancel()});
+}
+function tip(e){e.stopPropagation();const el=e.currentTarget,w=el.closest(".cw"),d=w.querySelector(".tip"),b=el.getBoundingClientRect(),r=w.getBoundingClientRect();
+  document.querySelectorAll(".tip").forEach(x=>x.style.display="none");d.textContent=el.dataset.t;d.style.display="block";
+  d.style.left=Math.max(60,Math.min(r.width-60,b.left+b.width/2-r.left))+"px";d.style.top=(b.top-r.top-6)+"px"}
+if(document.addEventListener)document.addEventListener("click",()=>document.querySelectorAll(".tip").forEach(d=>d.style.display="none"));
+let tx=0,ty=0;
+if(window.addEventListener)window.addEventListener("popstate",()=>{mo=false;dm=false;em=false;bm=false;ss=false;drawO()});
+if(document.addEventListener){document.addEventListener("pointerup",rel);document.addEventListener("pointercancel",rel)}
+if(document.addEventListener){document.addEventListener("touchstart",e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});document.addEventListener("touchend",e=>{const t=e.changedTouches[0],dx=t.clientX-tx,dy=t.clientY-ty;if(tab=="home"&&Math.abs(dx)>70&&Math.abs(dy)<45&&!(e.target.closest&&e.target.closest(".chips,input")))go(dx<0?1:-1)},{passive:true})}
+function draw(){
+  document.getElementById("m").innerHTML=`<div class="title"><button class="ham" onclick="menu()" aria-label="Menu"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><span>${TT[tab]}</span></div><div class="${an}">`+(tab=="ov"?overview():tab=="home"?home():tab=="year"?annual():load())+"</div>";an="";
+  document.getElementById("n").innerHTML=NAV.map(([k,t])=>`<button class="${tab==k?"on":""}" onclick="tab='${k}';draw()"><svg viewBox="0 0 24 24">${IC[k]}</svg>${t}</button>`).join("");
+  drawO();
+  if(lt!=tab){try{scrollTo(0,0)}catch(e){}lt=tab}
+  try{const st=document.getElementById("strip"),on=st&&st.querySelector(".on");if(on)st.scrollLeft=on.offsetLeft-st.clientWidth/2+on.offsetWidth/2}catch(e){}
+}
+draw();
+try{if("serviceWorker" in navigator&&location.protocol=="https:")navigator.serviceWorker.register("sw.js")}catch(e){}
+if(sec)startLock("unlock");
+</script>
+</body>
+</html>
