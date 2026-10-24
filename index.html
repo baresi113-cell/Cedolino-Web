@@ -2,17 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Cedolino">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
-<meta name="format-detection" content="telephone=no">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" href="icon-180.png">
-<link rel="icon" type="image/png" href="icon-192.png">
+<meta name="theme-color" content="#007aff"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Cedolino</title>
 <style>
 :root{--bg:#f2f2f7;--card:#fff;--tx:#000;--mu:#8a8a8e;--ac:#007aff;--ac2:#5e5ce6;--tint:rgba(0,122,255,.12);--ln:rgba(60,60,67,.16);--fill:rgba(118,118,128,.12);--nav:rgba(249,249,249,.88);--sh:none;--up:#34c759;--dn:#ff3b30;--or:#ff9500;--tl:#30b0c7;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -105,17 +95,24 @@ button:active{opacity:.55}
 .lf{background:none;border:0;color:var(--ac);font:inherit;font-size:15px;margin-top:8px;padding:8px;min-height:40px}
 .op.na{opacity:.45}
 .chev{width:8px;height:8px;border-right:2px solid var(--mu);border-top:2px solid var(--mu);transform:rotate(45deg);flex:none;margin-right:4px}
+.addb{margin-left:auto;display:flex;align-items:center;gap:5px;border:0;background:var(--tint);color:var(--ac);font:inherit;font-size:15px;font-weight:600;padding:9px 14px 9px 11px;border-radius:99px;flex:none}.addb svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round}
+.title span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.alrt{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;padding:24px;animation:fd .18s}
+.alrt>div{width:min(290px,100%);background:var(--card);border-radius:16px;overflow:hidden;text-align:center;animation:pop .2s ease}
+@keyframes pop{from{transform:scale(1.08);opacity:0}to{transform:none;opacity:1}}
+.alrt b{display:block;font-size:17px;font-weight:600;padding:20px 18px 4px}.alrt p{font-size:13.5px;color:var(--mu);padding:0 18px 18px}
+.alrt .ab{display:grid;grid-template-columns:1fr 1fr;border-top:.5px solid var(--ln)}.alrt .ab button{border:0;background:none;font:inherit;font-size:17px;padding:13px;color:var(--ac)}.alrt .ab button+button{border-left:.5px solid var(--ln);color:var(--dn);font-weight:600}
 </style>
 </head>
 <body>
 <main id="m"></main>
 <nav id="n"></nav>
-<div id="o"></div><div id="lk"></div><div id="t" class="toast"></div><input type="file" id="imp" accept=".json,application/json" hidden onchange="doImport(this)">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
+<div id="o"></div><div id="lk"></div><div id="ex"></div><div id="t" class="toast"></div><input type="file" id="imp" accept=".json,application/json" hidden onchange="doImport(this)">
+<script src="lib/pdf.min.js"></script>
+<script src="lib/pdf.worker.min.js"></script>
 <script>
 const MESI=["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
-const NUM=/-?\d{1,3}(?:\.\d{3})*,\d{2}(?!\d)|-?\d+,\d{2}(?!\d)/g;try{pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"}catch(e){}
+const NUM=/-?\d{1,3}(?:\.\d{3})*,\d{2}(?!\d)|-?\d+,\d{2}(?!\d)/g;try{pdfjsLib.GlobalWorkerOptions.workerSrc="lib/pdf.worker.min.js"}catch(e){}
 const P=s=>parseFloat(s.replace(/\./g,"").replace(",","."));
 const E=n=>n==null||isNaN(n)?"–":n.toLocaleString("it-IT",{style:"currency",currency:"EUR"});
 let slips=[],tab="ov",yr=null,sel=null,msg="";
@@ -335,10 +332,9 @@ function sOt(){const os=slips.find(x=>(x.voci||[]).some(r=>/straordin/i.test(r[0
 function sCmp(){return ps("Confronto buste",cmpOn?cmp()+`<button class="btn s" style="margin-top:12px" onclick="cmpOn=false;draw()">Chiudi confronto</button>`:`<button class="btn s" onclick="cmpOn=true;draw()">Confronta buste</button>`)}
 const SF={hero:sHero,anni:sAnni,disp:sDisp,media:sMedia,crescita:sCrescita,tfr:sTfr,ot:sOt,cmp:sCmp};
 function overview(){
-  const up=`<button class="btn" style="margin-top:30px" onclick="tab='up';draw()">Carica buste paga</button>`;
-  if(!slips.length)return`<div class="card mu">Nessuna busta caricata.</div>`+up;
+  if(!slips.length)return`<div class="card" style="text-align:center;padding:28px 20px"><div style="font-weight:600;font-size:17px">Nessuna busta caricata</div><div class="mu" style="margin-top:6px">Tocca <b style="color:var(--ac)">＋ Carica</b> in alto a destra per aggiungere le tue buste paga.</div></div>`;
   const on=pan.filter(p=>p.on);
-  return(on.length?on.map(p=>SF[p.id]()).join(""):`<div class="card mu">Tutti i riquadri sono nascosti. Apri il menu e scegli Modifica panoramica.</div>`)+up;
+  return(on.length?on.map(p=>SF[p.id]()).join(""):`<div class="card mu">Tutti i riquadri sono nascosti. Apri il menu e scegli Modifica panoramica.</div>`);
 }
 function editSheet(){
   const eye=o=>`<svg viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>${o?"":'<path d="M4 4l16 16"/>'}</svg>`,ch=d=>`<svg viewBox="0 0 24 24"><path d="${d}"/></svg>`;
@@ -449,8 +445,8 @@ function load(){
   <input type="file" accept="application/pdf" multiple hidden onchange="upload(this.files)"></label>
   <div class="mu" style="margin-top:14px">${msg}</div>
   <div class="mu" style="margin-top:14px">Funziona con PDF digitali, non con scansioni o foto. Se un campo non viene riconosciuto puoi correggerlo a mano nel Dettaglio. Con "Auto-riconoscimento" l'app prova i formati e sceglie il migliore.</div></div>`}
-const IC={ov:'<path d="M5 20V11M12 20V4M19 20v-6"/>',home:'<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/>',year:'<rect x="4" y="5" width="16" height="16" rx="3.5"/><path d="M4 10h16M9 3v4M15 3v4"/>'};
-const NAV=[["home","Dettaglio"],["ov","Panoramica"],["year","Annuale"]],TT={ov:"Panoramica",home:"Dettaglio",year:"Annuale",up:"Carica"};let lt=null;
+const IC={ov:'<path d="M4 10.5 12 4l8 6.5V19a1.5 1.5 0 0 1-1.5 1.5H15v-6h-6v6H5.5A1.5 1.5 0 0 1 4 19z"/>',home:'<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/>',year:'<rect x="4" y="5" width="16" height="16" rx="3.5"/><path d="M4 10h16M9 3v4M15 3v4"/>'};
+const NAV=[["ov","Home"],["home","Dettaglio"],["year","Annuale"]],TT={ov:"Panoramica",home:"Dettaglio",year:"Annuale",up:"Carica"};let lt=null;
 let mo=false,dm=false,em=false,bm=false,ss=false,dsel=new Set(),dc=false,tmT=null;
 const MI=(k,t,sb,svg,c)=>`<button class="mi ${c||""}" onclick="${k}"><i><svg viewBox="0 0 24 24">${svg}</svg></i><span><b>${t}</b><small>${sb}</small></span></button>`;
 function toast(t){const e=document.getElementById("t");if(!e)return;e.textContent=t;e.className="toast on";clearTimeout(tmT);tmT=setTimeout(()=>{e.className="toast"},2800)}
@@ -466,8 +462,8 @@ function drawO(){
   el.innerHTML=h;
   try{document.body.style.overflow=mo||dm||em||bm||ss||lk?"hidden":""}catch(e){}
 }
-function menu(){mo=true;try{history.pushState({o:1},"")}catch(e){}drawO()}
-function closeUI(){const h=typeof history!="undefined"?history:null;if(h&&h.state&&h.state.o)h.back();else{mo=false;dm=false;em=false;bm=false;ss=false;drawO()}}
+function menu(){mo=true;drawO()}
+function closeUI(){mo=false;dm=false;em=false;bm=false;ss=false;drawO()}
 function delOpen(){mo=false;dm=true;dsel=new Set();dc=false;drawO()}
 function delSheet(){
   return`<div class="sheet"><div class="sh2"><button onclick="closeUI()">Annulla</button><b>Elimina buste</b><button id="dall" onclick="delAll()">Tutte</button></div>
@@ -645,18 +641,39 @@ function tip(e){e.stopPropagation();const el=e.currentTarget,w=el.closest(".cw")
   d.style.left=Math.max(60,Math.min(r.width-60,b.left+b.width/2-r.left))+"px";d.style.top=(b.top-r.top-6)+"px"}
 if(document.addEventListener)document.addEventListener("click",()=>document.querySelectorAll(".tip").forEach(d=>d.style.display="none"));
 let tx=0,ty=0;
-if(window.addEventListener)window.addEventListener("popstate",()=>{mo=false;dm=false;em=false;bm=false;ss=false;drawO()});
+/* ---------- Tasto indietro ---------- */
+let ex=false,guard=false;
+const NAPP=()=>{const C=window.Capacitor;return C&&C.isNativePlatform&&C.isNativePlatform()&&C.Plugins&&C.Plugins.App||null};
+function drawX(){const el=document.getElementById("ex");if(!el)return;
+  el.innerHTML=ex?`<div class="alrt" onclick="if(event.target==this){ex=false;drawX()}"><div><b>Uscire da Cedolino?</b><p>I tuoi dati restano salvati su questo telefono.</p><div class="ab"><button onclick="ex=false;drawX()">Annulla</button><button onclick="exitGo()">Esci</button></div></div></div>`:""}
+function goBack(){
+  if(ex){ex=false;drawX();return}
+  if(lk){if(lk.mode=="forgot"){lk.mode="unlock";lk.v="";drawL();return}if(lk.mode!="unlock"){lkCancel();return}ex=true;drawX();return}
+  if(dm||em||bm||ss){dm=false;em=false;bm=false;ss=false;drawO();return}
+  if(mo){mo=false;drawO();return}
+  if(pk){pk=false;draw();return}
+  if(tab!="ov"){tab="ov";draw();return}
+  ex=true;drawX();
+}
+function exitGo(){ex=false;drawX();const A=NAPP();if(A&&A.exitApp){A.exitApp();return}
+  try{if(guard){guard=false;history.go(-2)}}catch(e){}setTimeout(()=>{try{window.close()}catch(e){}},300)}
+(function(){
+  const A=NAPP();
+  if(A&&A.addListener){try{A.addListener("backButton",()=>goBack());return}catch(e){}}
+  try{if(window.self===window.top&&history.pushState&&window.addEventListener){
+    history.replaceState({g:0},"");history.pushState({g:1},"");guard=true;
+    window.addEventListener("popstate",()=>{if(!guard)return;goBack();if(guard)try{history.pushState({g:1},"")}catch(e){}})}}catch(e){}
+})();
 if(document.addEventListener){document.addEventListener("pointerup",rel);document.addEventListener("pointercancel",rel)}
 if(document.addEventListener){document.addEventListener("touchstart",e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});document.addEventListener("touchend",e=>{const t=e.changedTouches[0],dx=t.clientX-tx,dy=t.clientY-ty;if(tab=="home"&&Math.abs(dx)>70&&Math.abs(dy)<45&&!(e.target.closest&&e.target.closest(".chips,input")))go(dx<0?1:-1)},{passive:true})}
 function draw(){
-  document.getElementById("m").innerHTML=`<div class="title"><button class="ham" onclick="menu()" aria-label="Menu"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><span>${TT[tab]}</span></div><div class="${an}">`+(tab=="ov"?overview():tab=="home"?home():tab=="year"?annual():load())+"</div>";an="";
+  document.getElementById("m").innerHTML=`<div class="title"><button class="ham" onclick="menu()" aria-label="Menu"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><span>${TT[tab]}</span>${tab!="up"?`<button class="addb" onclick="tab='up';draw()" aria-label="Carica buste paga"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Carica</button>`:""}</div><div class="${an}">`+(tab=="ov"?overview():tab=="home"?home():tab=="year"?annual():load())+"</div>";an="";
   document.getElementById("n").innerHTML=NAV.map(([k,t])=>`<button class="${tab==k?"on":""}" onclick="tab='${k}';draw()"><svg viewBox="0 0 24 24">${IC[k]}</svg>${t}</button>`).join("");
   drawO();
   if(lt!=tab){try{scrollTo(0,0)}catch(e){}lt=tab}
   try{const st=document.getElementById("strip"),on=st&&st.querySelector(".on");if(on)st.scrollLeft=on.offsetLeft-st.clientWidth/2+on.offsetWidth/2}catch(e){}
 }
 draw();
-try{if("serviceWorker" in navigator&&location.protocol=="https:")navigator.serviceWorker.register("sw.js")}catch(e){}
 if(sec)startLock("unlock");
 </script>
 </body>
