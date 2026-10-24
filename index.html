@@ -2,7 +2,17 @@
 <html lang="it">
 <head>
 <meta charset="utf-8">
-<meta name="theme-color" content="#007aff"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Cedolino">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="format-detection" content="telephone=no">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-192.png">
 <title>Cedolino</title>
 <style>
 :root{--bg:#f2f2f7;--card:#fff;--tx:#000;--mu:#8a8a8e;--ac:#007aff;--ac2:#5e5ce6;--tint:rgba(0,122,255,.12);--ln:rgba(60,60,67,.16);--fill:rgba(118,118,128,.12);--nav:rgba(249,249,249,.88);--sh:none;--up:#34c759;--dn:#ff3b30;--or:#ff9500;--tl:#30b0c7;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -108,11 +118,11 @@ button:active{opacity:.55}
 <main id="m"></main>
 <nav id="n"></nav>
 <div id="o"></div><div id="lk"></div><div id="ex"></div><div id="t" class="toast"></div><input type="file" id="imp" accept=".json,application/json" hidden onchange="doImport(this)">
-<script src="lib/pdf.min.js"></script>
-<script src="lib/pdf.worker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
 <script>
 const MESI=["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
-const NUM=/-?\d{1,3}(?:\.\d{3})*,\d{2}(?!\d)|-?\d+,\d{2}(?!\d)/g;try{pdfjsLib.GlobalWorkerOptions.workerSrc="lib/pdf.worker.min.js"}catch(e){}
+const NUM=/-?\d{1,3}(?:\.\d{3})*,\d{2}(?!\d)|-?\d+,\d{2}(?!\d)/g;try{pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"}catch(e){}
 const P=s=>parseFloat(s.replace(/\./g,"").replace(",","."));
 const E=n=>n==null||isNaN(n)?"–":n.toLocaleString("it-IT",{style:"currency",currency:"EUR"});
 let slips=[],tab="ov",yr=null,sel=null,msg="";
@@ -125,11 +135,13 @@ function mkRows(its){
   R.forEach(r=>{r.it.sort((a,b)=>a.x-b.x);r.t=r.it.map(i=>i.s).join(" ").replace(/\s+/g," ").trim()});
   return R;
 }
+function splitW(its){const o=[];its.forEach(i=>{const s=i.s;if(!/\s/.test(s.trim())){o.push(Object.assign({},i,{s:s.trim()}));return}
+  const cw=(i.r-i.x)/Math.max(1,s.length),re=/\S+/g;let m;while((m=re.exec(s)))o.push({s:m[0],x:i.x+m.index*cw,r:i.x+(m.index+m[0].length)*cw,y:i.y})});return o}
 async function readPdf(file){
   const pdf=await pdfjsLib.getDocument({data:await file.arrayBuffer()}).promise;let R=[];
   for(let p=1;p<=pdf.numPages;p++){
     const tc=await (await pdf.getPage(p)).getTextContent();
-    R=R.concat(mkRows(tc.items.filter(i=>i.str.trim()).map(i=>({s:i.str,x:i.transform[4],r:i.transform[4]+i.width,y:i.transform[5]}))));
+    R=R.concat(mkRows(splitW(tc.items.filter(i=>i.str.trim()).map(i=>({s:i.str,x:i.transform[4],r:i.transform[4]+i.width,y:i.transform[5]})))));
   }
   return R;
 }
@@ -158,7 +170,7 @@ function columns(R){
   return{V,T};
 }
 const PERIOD=X=>{let y=null,m=null;const mm=X.match(new RegExp("("+MESI.join("|")+")\\s+(20\\d\\d)","i"));if(mm){m=MESI.indexOf(mm[1].toLowerCase())+1;y=+mm[2]}else{const d=X.match(/\b(0?[1-9]|1[0-2])\s*[\/\-]\s*(20\d\d)\b/);if(d){m=+d[1];y=+d[2]}}return[y,m]};
-const T13=(X,V)=>/tredicesima|13.{0,3}mensilit/i.test(X)&&!V.some(v=>/^retribuzione$/i.test(v[0]))?"13a":"";
+const T13=(X,V)=>/tredicesima|13.{0,3}mensilit/i.test(X)&&!V.some(v=>/^retribuzione$|stipendio base|paga base/i.test(v[0]))?"13a":"";
 function tfrBlock(R){
   const i=R.findIndex(r=>r.it.some(x=>/^F\.do/i.test(x.s.trim()))&&r.it.some(x=>/^Quota/i.test(x.s.trim())));
   if(i<0||!R[i+1])return null;
@@ -205,9 +217,71 @@ function parseG(R,name){
     ferie:balances(L,/\bferie\b/i),perm:balances(L,/\b(par|permessi)\b/i),rol:balances(L,/\brol\b/i),tfr:qm,ass:null,tf:qm!=null?{qm,cm:null}:null};
 }
 const scoreS=s=>(s.lordo!=null)+(s.netto!=null)+(s.y&&s.m?1:0)+(s.ferie.length?1:0)+(s.voci.length>2?1:0);
+/* ---------- Formato "Foglio retribuzione" (colonne Competenze | Trattenute, totali in riga) ---------- */
+const isF=R=>{const X=R.map(r=>r.t).join(" ");return /COMPETENZE\s+LORDE/i.test(X)&&/NETTO\s+A\s+PAGARE/i.test(X)&&/TRATT\.?\s*PREVIDENZIALI/i.test(X)};
+const ACC={a:"à",e:"è",i:"ì",o:"ò",u:"ù"};
+const niceF=t=>{t=t.replace(/^[*\s]+/,"").replace(/^[A-Z]?\d{2,3}\s*(?=[A-Z])/,"").replace(/([AEIOUaeiou])[`'´](?=\s|[A-Za-z]|$)/g,(m,v)=>(ACC[v.toLowerCase()]||v)+" ").replace(/\s+/g," ").trim().toLowerCase();
+  t=t.replace(/\b(ccnl|cisl|cgil|uil|uneba|inps|inail|irpef|tfr|edr|rol|par|ac|ap)\b/g,m=>m.toUpperCase());return t.charAt(0).toUpperCase()+t.slice(1)};
+const tk=(r,re)=>r.it.find(i=>re.test(i.s.trim()));
+const nums=r=>r.it.filter(i=>/^-?\d{1,3}(?:\.\d{3})*,\d+$/.test(i.s.trim())).map(i=>({v:P(i.s.trim()),x:i.x,r:i.r}));
+function parseF(R,name){
+  const L=R.map(r=>r.t),X=L.join(" \n "),[y,m]=PERIOD(X),V=[],T=[];
+  // tabella voci
+  const hi=R.findIndex(r=>tk(r,/^COMPETENZE$/)&&tk(r,/^TRATTENUTE$/)&&tk(r,/^DESCRIZIONE/));
+  if(hi>=0){
+    const H=R[hi],hc=tk(H,/^COMPETENZE$/),ht=tk(H,/^TRATTENUTE$/),hb=tk(H,/^DATO$/),ho=tk(H,/^ORE$/),hp=tk(H,/^PERIODO$/);
+    const bS=hb?hb.x:hc.x-110,oS=ho?ho.x:hc.x-50,cS=Math.min(hc.x,ht.x),tS=Math.max(hc.x,ht.x),compLeft=hc.x<ht.x,lbE=hp?hp.x+4:bS;
+    for(let k=hi+1;k<R.length;k++){const r=R[k];
+      if(/TFR\s*AP|PREVIDENZA|PROGRESSIVI|MENSILI|COMPETENZE\s+LORDE/i.test(r.t))break;
+      let base=null,ore=null,c1=null,c2=null;
+      nums(r).forEach(n=>{if(n.r<=bS)return;if(n.r<=oS+3)base=n.v;else if(n.r<=cS+3)ore=n.v;else if(n.r<=tS+3)c1=n.v;else c2=n.v});
+      const cv=compLeft?c1:c2,tv=compLeft?c2:c1;if(cv==null&&tv==null)continue;
+      const lb=niceF(r.it.filter(i=>i.r<=lbE&&!/^\*+$/.test(i.s.trim())).map(i=>i.s).join(" ")).slice(0,46);if(!lb)continue;
+      if(cv!=null)V.push([lb,cv,base,ore]);if(tv!=null)T.push([lb,tv,base,ore]);
+    }
+  }
+  // totali in riga: COMPETENZE LORDE | TRATT. PREVIDENZIALI | TRATT. FISCALI NETTE | TRATT. VARIE | CONGUAGLIO | ARROTOND. | NETTO A PAGARE
+  const tot={},ti=R.findIndex(r=>tk(r,/^LORDE$/)&&tk(r,/^PAGARE$/));
+  if(ti>=0&&R[ti+1]){
+    const A=[["lordo",/^LORDE$/],["prev",/^PREVIDENZIALI$/],["fisc",/^NETTE$/],["varie",/^VARIE$/],["cong",/^\+\/-$/],["arr",/^ARROTOND/],["netto",/^PAGARE$/]].map(([k,re])=>{const i=tk(R[ti],re);return i?[k,i.r]:null}).filter(Boolean);
+    nums(R[ti+1]).forEach(n=>{let b=null,d=1e9;A.forEach(([k,ax])=>{const dd=Math.abs(n.r-ax);if(dd<d){d=dd;b=k}});if(b&&d<40)tot[b]=n.v});
+  }
+  const lordo=tot.lordo??(V.length?Math.round(V.reduce((t,x)=>t+x[1],0)*100)/100:null),netto=tot.netto??null;
+  // contributi e IRPEF (non sono tra le voci di questo formato)
+  const inps=R.find(r=>r.it[0]&&/^INPS$/.test(r.it[0].s.trim())),ni=inps?nums(inps):[];
+  if(tot.prev)T.push(["Contributi INPS",tot.prev,ni[0]?ni[0].v:null,ni[1]?ni[1].v:null]);
+  if(tot.fisc)T.push(["IRPEF netta",tot.fisc,null,null]);
+  if(lordo!=null&&netto!=null){const rest=Math.round((lordo-netto-T.reduce((t,x)=>t+x[1],0))*100)/100;if(Math.abs(rest)>=0.01)T.push(["Conguagli e arrotondamenti",rest,null,null])}
+  // ferie e ROL: ARRETRATI A.P. | COMP.AC TEORICA | COMP.AC REALE | TOTALE GODUTE | SALDO TEORICO | SALDO REALE | BANCA ORE
+  let ferie=[],rol=[];const fh=R.findIndex(r=>tk(r,/^ARRETRATI$/)&&tk(r,/^GODUTE$/));
+  if(fh>=0){
+    const H=R[fh],re=H.it.filter(i=>/^REALE$/.test(i.s.trim())),an=[["ap",tk(H,/^A\.P\.?$/)||tk(H,/^ARRETRATI$/)],["teo",tk(H,/^TEORICA$/)],["mat",re[0]],["god",tk(H,/^GODUTE$/)],["steo",tk(H,/^TEORICO$/)],["saldo",re[1]],["banca",tk(H,/^ORE$/)]].filter(a=>a[1]).map(([k,i])=>[k,i.r]);
+    const labs=R.slice(fh+1,fh+12).map(r=>[r,r.t.replace(/\s/g,"").toUpperCase()]).filter(([r,t])=>/^(FERIE|R\.?O\.?L\.?|EXFESTIVIT)/.test(t));
+    R.slice(fh+1,fh+12).forEach(r=>{
+      const o={};nums(r).forEach(n=>{let b=null,d=1e9;an.forEach(([k,ax])=>{const dd=Math.abs(n.r-ax);if(dd<d){d=dd;b=k}});if(b&&d<25)o[b]=n.v});
+      if(o.god==null||o.saldo==null)return;
+      let lb=null,d=1e9;labs.forEach(([lr,t])=>{const dd=Math.abs(lr.y-r.y);if(dd<d&&dd<=9){d=dd;lb=t}});
+      const arr=[o.ap??0,o.mat??o.teo??0,o.god,o.saldo];
+      if(lb&&lb.startsWith("FERIE")&&!ferie.length)ferie=arr;else if(lb&&/^R\.?O\.?L/.test(lb)&&!rol.length)rol=arr;
+    });
+  }
+  // data di assunzione
+  let ass=null;const ah=R.findIndex(r=>tk(r,/^ASSUNZIONE$/));
+  if(ah>=0){const a=tk(R[ah],/^ASSUNZIONE$/),cx=(a.x-14+a.r)/2;
+    for(let k=ah+1;k<Math.min(R.length,ah+4)&&!ass;k++)R[k].it.forEach(i=>{const d=i.s.trim().match(/^(\d{2})\/(\d{2})\/(\d{4})$/);if(d&&Math.abs((i.x+i.r)/2-cx)<40)ass=d[3]+"-"+d[2]+"-"+d[1]})}
+  if(!ass){const d=X.match(/Dal\s+(\d{2})\/(\d{2})\/(\d{4})\s+TFR/i);if(d)ass=d[3]+"-"+d[2]+"-"+d[1]}
+  // TFR: TFR AP | Ant. | Inc. AC | Liq. | TFR (totale in azienda)
+  let tf=null;const tl=L.find(l=>/TFR\s*AP/i.test(l));
+  if(tl){const g=re=>{const m=tl.match(re);return m?P(m[1]):null};
+    tf={qm:null,cm:null,fondi:0,fdo:g(/TFR\s*AP\s*(-?[\d.]+,\d+)/i),ant:g(/Ant\.?\s*(-?[\d.]+,\d+)/i),quota:g(/Inc\.?\s*AC\s*(-?[\d.]+,\d+)/i),liq:g(/Liq\.?\s*(-?[\d.]+,\d+)/i),tot:g(/TFR\s+(-?[\d.]+,\d+)\s*$/i)};
+    if(tf.fdo==null&&tf.tot==null)tf=null}
+  return{id:Date.now()+Math.random(),file:name,y,m,lordo,netto,voci:V,tratt:T,tipo:T13(X,V),ferie,perm:[],rol,tfr:null,ass,tf};
+}
 function parseModel(R,name,mod){
-  if(mod=="zucchetti")return[parseZ(R,name),"Zucchetti"];
-  if(mod=="generico")return[parseG(R,name),"Altri software"];
+  const fz=isF(R);
+  if(mod=="zucchetti")return fz?[parseF(R,name),"Foglio retribuzione"]:[parseZ(R,name),"Zucchetti"];
+  if(mod=="generico")return fz?[parseF(R,name),"Foglio retribuzione"]:[parseG(R,name),"Altri software"];
+  if(fz)return[parseF(R,name),"Foglio retribuzione"];
   const z=parseZ(R,name);if(z.voci.length>=3)return[z,"Zucchetti"];
   const g=parseG(R,name);return scoreS(g)>=scoreS(z)?[g,"Altri software"]:[z,"Zucchetti"];
 }
@@ -232,7 +306,7 @@ const last=a=>a&&a.length?a[a.length-1]:null;
 const fmt=n=>n==null?"–":n.toLocaleString("it-IT",{maximumFractionDigits:2});
 const gg=n=>n==null?"":" · ≈ "+fmt(n/8)+" giorni";
 const gd=a=>a&&a.length>=3?a[a.length-2]:null;
-const MET={netto:["Netto",s=>s.netto],lordo:["Lordo",s=>s.lordo],tratt:["Trattenute",s=>s.lordo!=null&&s.netto!=null?s.lordo-s.netto:null],fg:["Ferie godute",s=>gd(s.ferie)],pg:["PAR godute",s=>gd(s.perm)]};
+const MET={netto:["Netto",s=>s.netto],lordo:["Lordo",s=>s.lordo],tratt:["Trattenute",s=>s.lordo!=null&&s.netto!=null?s.lordo-s.netto:null],fg:["Ferie godute",s=>gd(s.ferie)],pg:["Permessi goduti",s=>gd(permA(s))]};
 const COL=["#007aff","#ff9500","#34c759","#af52de","#ff2d55"];
 const MN=MESI.map(m=>m[0].toUpperCase()+m.slice(1));
 let met="netto",cA=null,cB=null,cmpOn=false;
@@ -282,9 +356,11 @@ function sHero(){const l=slips[0],p=slips[1],d=p&&l.netto!=null&&p.netto!=null?l
 function sAnni(){const ys=[...new Set(slips.map(x=>x.y))].sort();
   return ps("Confronto anni",`<div class="chips">${Object.entries(MET).map(([k,v])=>`<button class="chip ${k==met?"on":""}" onclick="met='${k}';draw()">${v[0]}</button>`).join("")}</div>
   <div class="card"><div class="cw">${chart(ys)}<div class="tip"></div></div><div class="leg">${ys.map((y,k)=>`<span><i style="background:${COL[k%COL.length]}"></i>${y}</span>`).join("")}</div></div>`)}
-function sDisp(){const s=slips.find(x=>x.ferie.length||x.perm.length)||slips[0];
+const permA=s=>s.perm&&s.perm.length?s.perm:s.rol||[];
+const permL=s=>s.perm&&s.perm.length?"Permessi PAR":s.rol&&s.rol.length?"Permessi ROL":"Permessi";
+function sDisp(){const s=slips.find(x=>x.ferie.length||x.perm.length||(x.rol||[]).length)||slips[0];
   return ps("Disponibili al "+lab(s),`<div class="grid"><div class="card"><div class="k">Ferie</div><div class="v">${fmt(last(s.ferie))}</div><div class="mu">ore${gg(last(s.ferie))}</div></div>
-  <div class="card"><div class="k">Permessi PAR</div><div class="v">${fmt(last(s.perm))}</div><div class="mu">ore</div></div></div>`)}
+  <div class="card"><div class="k">${permL(s)}</div><div class="v">${fmt(last(permA(s)))}</div><div class="mu">ore</div></div></div>`)}
 function sMedia(){
   const M=monthly().filter(s=>s.netto!=null),T="Media dall'assunzione";
   if(!M.length)return ps(T,`<div class="card mu">Servono buste mensili.</div>`);
@@ -293,7 +369,7 @@ function sMedia(){
   <div style="margin-top:8px"><div class="row"><span>Lordo medio mensile</span><span>${E(av(s=>s.lordo))}</span></div>
   <div class="row"><span>Trattenute medie</span><span>${E(av(s=>s.lordo!=null?s.lordo-s.netto:null))}</span></div>
   <div class="row"><span>Totale netto percepito</span><span>${E(tn)}</span></div></div></div>`)}
-const GM={netto:["Netto",s=>s.netto],lordo:["Lordo",s=>s.lordo],base:["Base",s=>{const r=(s.voci||[]).find(v=>/^retribuzione$/i.test(v[0]));return r?r[1]:null}]};let gm="netto";
+const GM={netto:["Netto",s=>s.netto],lordo:["Lordo",s=>s.lordo],base:["Base",s=>{const r=(s.voci||[]).find(v=>/^retribuzione$|^stipendio base$|^paga base$/i.test(v[0]));return r?r[1]:null}]};let gm="netto";
 function lineSvg(pts){
   const W=340,H=170,l=6,r=38,t=10,b=22,pw=W-l-r,ph=H-t-b,vs=pts.map(p=>p.v),lo=Math.min(...vs),hi=Math.max(...vs),pad=(hi-lo)*.15||hi*.05||1,mn=lo-pad,mx=hi+pad,n=pts.length,X=i=>l+(n>1?pw*i/(n-1):pw/2),Y=v=>t+ph*(1-(v-mn)/(mx-mn)),xy=pts.map((p,i)=>[X(i),Y(p.v)]);
   let g="";[0,.5,1].forEach(k=>{const v=mn+(mx-mn)*k;g+=`<line x1="${l}" x2="${W-r+6}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--ln)" stroke-width=".6"/><text x="${W-r+10}" y="${Y(v)+3}" font-size="9" fill="var(--mu)">${fmt(Math.round(v))}</text>`});
@@ -312,12 +388,12 @@ function sCrescita(){
   <div class="cw" style="margin-top:12px">${lineSvg(M.map(o=>({t:lab(o.s)+" · "+E(o.v),v:o.v,l:sh(o.s)})))}<div class="tip"></div></div>
   <div class="mu" style="margin-top:8px">Il netto cambia anche con straordinari, assenze e premi: la voce Base è la misura più stabile.</div></div>`)}
 function tfrData(){
-  const S=slips.filter(s=>s.tf&&(s.tf.fondi!=null||s.tf.qm!=null)).slice().reverse(),ye={},cy={};
+  const S=slips.filter(s=>s.tf&&(s.tf.fondi!=null||s.tf.qm!=null||s.tf.tot!=null)).slice().reverse(),ye={},cy={};
   S.forEach(s=>{ye[s.y]=s});
   Object.keys(ye).forEach(y=>{const t=ye[y].tf;cy[y]=t.fondi!=null?t.fondi:S.filter(s=>s.y==y).reduce((a,s)=>a+(s.tf.cm||0),0)});
   return S.map(s=>{const t=s.tf;let prev=0;Object.keys(cy).forEach(y=>{if(+y<s.y)prev+=cy[y]});
     const cur=t.fondi!=null?t.fondi:S.filter(x=>x.y==s.y&&ord(x)<=ord(s)).reduce((a,x)=>a+(x.tf.cm||0),0);
-    return{s,az:t.fdo!=null?t.fdo+(t.riv||0)-(t.imp||0)+((t.quota||0)-(t.fondi||0)):null,co:prev+cur}}).filter(o=>o.az!=null||o.co)}
+    return{s,az:t.tot!=null?t.tot:t.fdo!=null?t.fdo+(t.riv||0)-(t.imp||0)+((t.quota||0)-(t.fondi||0))-(t.ant||0)-(t.liq||0):null,co:prev+cur}}).filter(o=>o.az!=null||o.co)}
 function sTfr(){
   const T="TFR accumulato",D=tfrData();
   if(!D.length)return ps(T,`<div class="card mu">Nessun dato TFR. Ricarica le buste dalla scheda Carica: il TFR si legge dal riquadro T.F.R. della busta.</div>`);
@@ -345,8 +421,8 @@ function panTog(id){const p=pan.find(x=>x.id==id);p.on=!p.on;savePan();draw()}
 function panMove(id,d){const i=pan.findIndex(x=>x.id==id),j=i+d;if(j<0||j>=pan.length)return;[pan[i],pan[j]]=[pan[j],pan[i]];savePan();draw()}
 function panReset(){pan=SECS.map(x=>({id:x[0],on:true}));savePan();draw()}
 function editOpen(){mo=false;em=true;drawO()}
-const GC=[["Retribuzione",/retribuzione|paga base|minimo|contingenza|scatt|superminimo|edr/i],["Straordinari",/straordin|maggiorazion|notturn/i],["Assenze retribuite",/permess|ferie|malattia|infortun|maternit|congedo|festivit/i],["Premi e indennità",/./]];
-const GT=[["Contributi e previdenza",/contribut|inps|ivs|previd|cometa|fondo|e\.?b\.?m/i],["Imposte",/irpef|addizional|imposta|ritenut|detraz/i],["Assenze e ritardi",/non lavorat|ritard|assenz|permess/i],["Altre trattenute",/./]];
+const GC=[["Retribuzione",/retribuzione|stipendio|paga base|minimo|contingenza|scatt|superminimo|edr|aumento ccnl/i],["Straordinari",/straordin|maggiorazion|notturn/i],["Assenze retribuite",/permess|ferie|malattia|infortun|maternit|congedo|festivit/i],["Premi e indennità",/./]];
+const GT=[["Contributi e previdenza",/contribut|inps|ivs|previd|cometa|fondo|e\.?b\.?m/i],["Imposte",/irpef|addiz|imposta|ritenut|detraz/i],["Assenze e ritardi",/non lavorat|ritard|assenz|permess/i],["Altre trattenute",/./]];
 const tot=a=>(a||[]).reduce((t,x)=>t+x[1],0);
 const gs=l=>`<a class="gs" href="https://www.google.com/search?q=${encodeURIComponent(l+" busta paga voce")}" target="_blank" rel="noopener" aria-label="Cerca su Google"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></a>`;
 function groups(rows,G){const o=G.map(g=>[g[0],[]]);(rows||[]).forEach(r=>{const i=G.findIndex(g=>g[1].test(r[0]));o[i<0?G.length-1:i][1].push(r)});return o.filter(g=>g[1].length)}
@@ -361,9 +437,10 @@ function otInit(s){
   const V=s.voci||[],so=V.filter(r=>/straordin/i.test(r[0])),rb=V.find(r=>/^retribuzione$/i.test(r[0]));
   let base=rb&&rb[2]?rb[2]:null;
   if(!base){const r=so.find(r=>r[2]&&/\d+%/.test(r[0]));if(r)base=r[2]/(1+parseInt(r[0].match(/(\d+)%/)[1])/100)}
+  if(!base){const r=V.find(r=>r[2]&&/turno|notturn|festiv/i.test(r[0])&&/\d+%/.test(r[0]));if(r)base=r[2]/(parseInt(r[0].match(/(\d+)%/)[1])/100)}
   const h=p=>{const r=so.find(r=>new RegExp("\\b"+p+"%").test(r[0]));return r&&r[3]?r[3]:0};
-  const iv=(s.tratt||[]).find(r=>/ivs|contributo inps/i.test(r[0])&&r[2]&&r[1]);
-  const ip=iv?iv[1]/iv[2]*100:9.19,ad=s.lordo?tot((s.tratt||[]).filter(r=>/addizional/i.test(r[0])))/s.lordo*100:2;
+  const iv=(s.tratt||[]).find(r=>/ivs|contribut\w*\s+inps/i.test(r[0])&&r[2]&&r[1]);
+  const ip=iv?iv[1]/iv[2]*100:9.19,ad=s.lordo?tot((s.tratt||[]).filter(r=>/addiz/i.test(r[0])))/s.lordo*100:2;
   ot={base:base?+base.toFixed(4):"",h25:h(25),h50:h(50),h100:h(100),pct:+(ip+23+ad).toFixed(1)};otId=s.id;
 }
 const otRes=o=>{const l=(+o.base||0)*((+o.h25||0)*1.25+(+o.h50||0)*1.5+(+o.h100||0)*2),n=l*(1-(+o.pct||0)/100);return[l,n,n*12]};
@@ -433,7 +510,7 @@ function annual(){
   +barsC("Netto per mese",S.map(s=>[s.tipo=="13a"?"13ª":s.m?MESI[s.m-1].slice(0,3):"–",0,s.netto,lab(s)]))
   +`<div class="card">${S.map(s=>`<div class="item" onclick="sel='${s.id}';tab='home';draw()"><span>${lab(s)}</span><span style="text-align:right">${E(s.netto)} <span class="mu">/ ${E(s.lordo)}</span></span></div>`).join("")}</div>`;
 }
-const MODELS=[["auto","Auto-riconoscimento","Riconosce da sola il formato"],["zucchetti","Zucchetti","Testato su cedolini reali"],["generico","Altri software paghe","Sperimentale: lettura generica"]];
+const MODELS=[["auto","Auto-riconoscimento","Riconosce da sola il formato"],["zucchetti","Zucchetti","Testato su cedolini reali"],["generico","Altri software paghe","Formato «Foglio retribuzione» e lettura generica"]];
 let defM="auto";try{defM=localStorage.getItem("defModel")||"auto"}catch(e){}if(!MODELS.some(m=>m[0]==defM))defM="auto";let model=defM;
 function setModel(k){model=k;draw()}
 function setDef(){defM=defM==model?"auto":model;try{localStorage.setItem("defModel",defM)}catch(e){}draw()}
@@ -674,6 +751,7 @@ function draw(){
   try{const st=document.getElementById("strip"),on=st&&st.querySelector(".on");if(on)st.scrollLeft=on.offsetLeft-st.clientWidth/2+on.offsetWidth/2}catch(e){}
 }
 draw();
+try{if("serviceWorker" in navigator&&location.protocol=="https:")navigator.serviceWorker.register("sw.js")}catch(e){}
 if(sec)startLock("unlock");
 </script>
 </body>
