@@ -159,6 +159,31 @@ nav.nop .pill{opacity:0}
 .title span{transition:opacity .2s}
 .spin{display:inline-block;width:18px;height:18px;border-radius:50%;border:2.5px solid var(--fill);border-top-color:var(--ac);animation:sp .7s linear infinite;vertical-align:-4px;margin-right:8px}@keyframes sp{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important;transition-delay:0s!important}.hero::before{animation:none}}
+
+/* ===== Visualizzazioni ===== */
+:root{--tipbg:#fff;--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--s5:#e87ba4;--s7:#6250d6;--ok:#1d8a3f;--ko:#c9302c}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--tipbg:#2c2c2e;--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s7:#9085e9;--ok:#30d158;--ko:#ff6961}}
+:root[data-theme="dark"]{--tipbg:#2c2c2e;--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s7:#9085e9;--ok:#30d158;--ko:#ff6961}
+.ps{margin-top:32px}.ps>h1{font-size:21px;font-weight:700;letter-spacing:-.022em;text-transform:none;color:var(--tx);margin:0 0 10px 4px}
+.card{border-radius:22px}
+.lc{touch-action:pan-y;-webkit-user-select:none;user-select:none;overflow:visible}
+.xh{stroke:var(--mu);stroke-width:1;opacity:0;pointer-events:none}.hd{opacity:0;pointer-events:none}
+.tip{background:var(--tipbg);color:var(--tx);box-shadow:0 8px 28px -8px rgba(0,0,0,.4),0 0 0 .5px var(--ln);font-weight:600;padding:7px 11px}
+.tip.rich{padding:9px 12px;border-radius:14px;min-width:132px;font-weight:400}
+.tip.rich .tt{font-size:11.5px;color:var(--mu);margin-bottom:4px}
+.tip.rich .tr{display:flex;align-items:center;gap:7px;font-size:13px;padding:2px 0}.tip.rich .tr i{width:9px;height:9px;border-radius:50%;flex:none}.tip.rich .tr span{color:var(--mu);flex:1}.tip.rich .tr b{font-weight:600;font-variant-numeric:tabular-nums}
+.leg{gap:14px;font-size:12.5px;margin-top:12px;flex-wrap:wrap}.leg i{width:9px;height:9px}
+.bars{position:relative;gap:5px;height:140px}.bars div{border-radius:5px 5px 0 0;background:var(--s1);transition:opacity .2s}.bars.has div:not(.sel):not(.avg){opacity:.32}
+.bars .avg{position:absolute;left:0;right:0;height:0;flex:none;min-height:0;border-radius:0;background:none;border-top:1.5px dashed var(--mu);pointer-events:none;transform:none!important;animation:none!important;opacity:.9}
+.bars .avg span{position:absolute;right:0;bottom:3px;font-size:10.5px;color:var(--mu);background:var(--card);padding:1px 5px;border-radius:6px}
+.stk{gap:4px}.sc{gap:2px;border-radius:0;overflow:visible;transition:opacity .2s}.sc i{border-radius:3px}.stk.has .sc:not(.sel){opacity:.32}
+.sgb{display:flex;gap:2px;height:16px;margin:14px 0 8px}.sgb i{display:block;border-radius:4px;min-width:4px;transform-origin:0 50%}
+.rv.in .sgb i,.re .sgb i{animation:gx .8s var(--sp) both;animation-delay:calc(.15s + var(--i,0) * 90ms)}@keyframes gx{from{transform:scaleX(0);opacity:0}}
+.lg{display:flex;align-items:center;gap:9px;padding:10px 0;border-bottom:.5px solid var(--ln);font-size:14.5px}.lg:last-child{border:0;padding-bottom:2px}
+.lg i{width:10px;height:10px;border-radius:3px;flex:none}.lg span{flex:1}.lg b{font-weight:600}.lg em{font-style:normal;color:var(--mu);width:48px;text-align:right;font-size:13px}
+.bdg{display:inline-flex;align-items:center;gap:4px;font-weight:600;font-size:12.5px;padding:3px 9px;border-radius:99px;margin-right:6px}.bdg.up{background:rgba(48,180,90,.16);color:var(--ok)}.bdg.dn{background:rgba(255,69,58,.14);color:var(--ko)}
+.mdots{display:flex;gap:6px;margin-top:14px}.mdots i{flex:1;max-width:18px;height:6px;border-radius:4px;background:rgba(255,255,255,.28)}.mdots i.on{background:#fff}
+.rv.in .mdots i,.re .mdots i{animation:pp .45s var(--sp) both;animation-delay:calc(.2s + var(--i,0) * 35ms)}
 </style>
 </head>
 <body>
@@ -360,28 +385,55 @@ const fmt=n=>n==null?"–":n.toLocaleString("it-IT",{maximumFractionDigits:2});
 const gg=n=>n==null?"":" · ≈ "+fmt(n/8)+" giorni";
 const gd=a=>a&&a.length>=3?a[a.length-2]:null;
 const MET={netto:["Netto",s=>s.netto],lordo:["Lordo",s=>s.lordo],tratt:["Trattenute",s=>s.lordo!=null&&s.netto!=null?s.lordo-s.netto:null],fg:["Ferie godute",s=>gd(s.ferie)],pg:["Permessi goduti",s=>gd(permA(s))]};
-const COL=["#007aff","#ff9500","#34c759","#af52de","#ff2d55"];
+const COL=["var(--s1)","var(--s2)","var(--s3)","var(--s4)","var(--s5)"];
 const MN=MESI.map(m=>m[0].toUpperCase()+m.slice(1));
 let met="netto",cA=null,cB=null,cmpOn=false;
 const N2=v=>v.toLocaleString("it-IT",{minimumFractionDigits:2,maximumFractionDigits:2});
 const n2=v=>v==null?"–":priv?"••••":N2(v);
 const sh=s=>(s.tipo=="13a"?"13ª":(MESI[s.m-1]||"").slice(0,3))+" "+String(s.y).slice(2);
-function chart(ys){
-  const f=MET[met][1],W=340,H=180,l=8,b=22,t=10,r=34,pw=W-l-r,ph=H-t-b;
-  const pts=ys.map(y=>slips.filter(s=>s.y==y&&s.m&&f(s)!=null).map(s=>[s.tipo=="13a"?12:s.m-1,f(s)]).sort((a,b)=>a[0]-b[0]));
-  const all=pts.flat().map(p=>p[1]);
+const SC={};
+const kf=v=>Math.abs(v)>=10000?fmt(Math.round(v/100)/10)+"k":Math.abs(v)>=1000?fmt(Math.round(v/10)/100)+"k":fmt(Math.round(v*10)/10);
+function lineChart(id,S,o){
+  const W=340,H=192,l=6,r=42,t=14,b=24,pw=W-l-r,ph=H-t-b,all=S.flatMap(x=>x.p.map(q=>q[1]));
   if(!all.length)return`<div class="mu" style="padding:40px 0;text-align:center">Nessun dato per questa voce</div>`;
-  const hrs=/^(fg|pg)$/.test(met),fv=v=>hrs?fmt(v)+" ore":E(v);
-  const mx=Math.max(...all,1),mn=Math.min(0,...all),X=i=>l+pw*i/12,Y=v=>t+ph*(1-(v-mn)/((mx-mn)||1));
-  const sm=p=>p.map((q,i)=>{if(!i)return`M${q[0]},${q[1]}`;const a=p[i-2]||p[i-1],b=p[i-1],d=p[i+1]||q,k=.18;return`C${b[0]+(q[0]-a[0])*k},${b[1]+(q[1]-a[1])*k} ${q[0]-(d[0]-b[0])*k},${q[1]-(d[1]-b[1])*k} ${q[0]},${q[1]}`}).join("");
-  let g="";
-  [0,.5,1].forEach(k=>{const v=mn+(mx-mn)*k;g+=`<line x1="${l}" x2="${W-r+6}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--ln)" stroke-width=".6"/><text x="${W-r+10}" y="${Y(v)+3}" font-size="9" fill="var(--mu)">${priv&&!hrs?"•••":fmt(Math.round(v))}</text>`});
-  g+=["G","F","M","A","M","G","L","A","S","O","N","D","13ª"].map((m,i)=>`<text x="${X(i)}" y="${H-6}" text-anchor="middle" font-size="9" fill="var(--mu)">${m}</text>`).join("");
-  ys.forEach((y,k)=>{const c=COL[k%COL.length],p=pts[k],xy=p.map(q=>[X(q[0]),Y(q[1])]),ln=xy.filter((q,i)=>p[i][0]<12);
-    g+=`<defs><linearGradient id="g${k}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:${c};stop-opacity:.14"/><stop offset="1" style="stop-color:${c};stop-opacity:0"/></linearGradient></defs>`;
-    if(ln.length>1)g+=`<path class="ar" d="${sm(ln)}L${ln[ln.length-1][0]},${Y(mn)}L${ln[0][0]},${Y(mn)}Z" fill="url(#g${k})"/><path class="ln" pathLength="1" style="--k:${k}" d="${sm(ln)}" fill="none" stroke="${c}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>`;
-    g+=xy.map((q,i)=>`<circle class="dt" style="--i:${i+k*2}" cx="${q[0]}" cy="${q[1]}" r="3.8" fill="${c}" stroke="var(--card)" stroke-width="1.6"/><circle cx="${q[0]}" cy="${q[1]}" r="15" fill="transparent" style="cursor:pointer" data-t="${y} · ${p[i][0]==12?"13ª":MN[p[i][0]]} · ${fv(p[i][1])}" onclick="tip(event)"/>`).join("")});
-  return`<svg viewBox="0 0 ${W} ${H}" style="width:100%;display:block">${g}</svg>`;
+  const mnv=Math.min(...all),mxv=Math.max(...all),pad=(mxv-mnv)*.2||Math.abs(mxv)*.08||1;let lo=mnv-pad,hi=mxv+pad;if(lo<0&&mnv>=0)lo=0;
+  const X=i=>l+(o.n>1?pw*i/(o.n-1):pw/2),Y=v=>t+ph*(1-(v-lo)/(hi-lo));let g="";
+  [0,.5,1].forEach(k=>{const v=lo+(hi-lo)*k,y=Y(v);g+=`<line x1="${l}" x2="${W-r+4}" y1="${y}" y2="${y}" stroke="var(--ln)" stroke-width=".8"${k?' stroke-dasharray="2 4"':""}/><text x="${W-r+9}" y="${y+3.5}" font-size="9.5" fill="var(--mu)">${o.hide?"•••":kf(v)}</text>`});
+  o.xl.forEach(x=>{g+=`<text x="${X(x[0])}" y="${H-6}" text-anchor="${x[2]||"middle"}" font-size="9.5" fill="var(--mu)">${x[1]}</text>`});
+  S.forEach((x,k)=>{const xy=x.p.map(q=>[X(q[0]),Y(q[1]),q[0]]),ln=o.gap!=null?xy.filter(q=>q[2]<o.gap):xy,ex=o.gap!=null?xy.filter(q=>q[2]>=o.gap):[];
+    if(x.area&&ln.length>1)g+=`<defs><linearGradient id="${id}g${k}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:${x.c};stop-opacity:.22"/><stop offset="1" style="stop-color:${x.c};stop-opacity:0"/></linearGradient></defs><path class="ar" d="${smooth(ln)}L${ln[ln.length-1][0]},${t+ph}L${ln[0][0]},${t+ph}Z" fill="url(#${id}g${k})"/>`;
+    if(ln.length>1)g+=`<path class="ln" pathLength="1" style="--k:${k}" d="${smooth(ln)}" fill="none" stroke="${x.c}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>`;
+    (ln.length?[ln[ln.length-1]]:[]).concat(ex).forEach((q,i)=>{g+=`<circle class="dt" style="--i:${6+k*2+i}" cx="${q[0]}" cy="${q[1]}" r="4.2" fill="${x.c}" stroke="var(--card)" stroke-width="2"/>`})});
+  g+=`<line class="xh" y1="${t-4}" y2="${t+ph}"/>`+S.map(x=>`<circle class="hd" r="5.2" fill="${x.c}" stroke="var(--card)" stroke-width="2"/>`).join("")
+    +`<rect x="0" y="0" width="${W}" height="${H}" fill="transparent" style="cursor:crosshair" onpointerdown="scrub(event,'${id}')" onpointermove="scrub(event,'${id}')" onclick="event.stopPropagation()"/>`;
+  SC[id]={W,X:Array.from({length:o.n},(_,i)=>X(i)),S:S.map(x=>({n:x.n,c:x.c,m:Object.fromEntries(x.p.map(q=>[q[0],[q[1],Y(q[1])]]))})),fv:o.fv,tt:o.tt};
+  return`<svg class="lc" viewBox="0 0 ${W} ${H}" style="width:100%;display:block">${g}</svg>`;
+}
+function scrub(e,id){
+  const d=SC[id];if(!d||(e.type=="pointermove"&&e.pointerType=="mouse"&&!e.buttons&&false))return;
+  const svg=e.currentTarget.ownerSVGElement,bb=svg.getBoundingClientRect(),x=(e.clientX-bb.left)/bb.width*d.W;
+  let bi=-1,bd=1e9;d.X.forEach((xx,i)=>{if(!d.S.some(q=>q.m[i]))return;const dd=Math.abs(xx-x);if(dd<bd){bd=dd;bi=i}});if(bi<0)return;
+  const xh=svg.querySelector(".xh");xh.setAttribute("x1",d.X[bi]);xh.setAttribute("x2",d.X[bi]);xh.style.opacity=.55;
+  svg.querySelectorAll(".hd").forEach((c,k)=>{const m=d.S[k].m[bi];if(m){c.setAttribute("cx",d.X[bi]);c.setAttribute("cy",m[1]);c.style.opacity=1}else c.style.opacity=0});
+  const w=svg.closest(".cw"),tp=w.querySelector(".tip");
+  document.querySelectorAll(".tip").forEach(q=>{if(q!==tp)q.style.display="none"});
+  tp.textContent="";tp.className="tip rich";
+  const tt=document.createElement("div");tt.className="tt";tt.textContent=d.tt(bi);tp.appendChild(tt);
+  d.S.forEach(q=>{const m=q.m[bi];if(!m)return;const r=document.createElement("div");r.className="tr";const i=document.createElement("i");i.style.background=q.c;const n=document.createElement("span");n.textContent=q.n;const v=document.createElement("b");v.textContent=d.fv(m[0]);r.append(i,n,v);tp.appendChild(r)});
+  tp.style.display="block";const px=d.X[bi]/d.W*bb.width,hw=tp.offsetWidth/2+2;
+  tp.style.left=Math.max(hw,Math.min(bb.width-hw,px))+"px";tp.style.top="2px";
+}
+function chart(ys){
+  ys=ys.slice(-5);const f=MET[met][1],hrs=/^(fg|pg)$/.test(met);
+  return lineChart("anni",ys.map((y,k)=>({n:String(y),c:COL[k],area:k==ys.length-1,p:slips.filter(s=>s.y==y&&s.m&&f(s)!=null).map(s=>[s.tipo=="13a"?12:s.m-1,f(s)]).sort((a,b)=>a[0]-b[0])})),
+    {n:13,gap:12,hide:priv&&!hrs,xl:["G","F","M","A","M","G","L","A","S","O","N","D","13ª"].map((m,i)=>[i,m]),fv:v=>hrs?fmt(v)+" ore":E(v),tt:i=>i==12?"Tredicesima":MN[i]});
+}
+function split(lordo,netto,tr){
+  if(!lordo||netto==null||lordo<=0)return"";
+  const g={c:0,i:0};(tr||[]).forEach(r=>{if(GT[0][1].test(r[0]))g.c+=r[1];else if(GT[1][1].test(r[0]))g.i+=r[1]});
+  const tt=Math.max(0,lordo-netto),known=g.c+g.i>0;if(g.c+g.i>tt){const k=tt/(g.c+g.i);g.c*=k;g.i*=k}
+  const sg=[["Netto in busta",netto,"var(--s1)"],["Contributi",g.c,"var(--s2)"],["Imposte",g.i,"var(--s7)"],[known?"Altre trattenute":"Trattenute",tt-g.c-g.i,"var(--mu)"]].filter(x=>x[1]>.005);
+  return`<div class="card"><div class="k">Dove va il lordo</div><div class="sgb">${sg.map((x,n)=>`<i style="--i:${n};flex:${x[1].toFixed(2)} 1 0;background:${x[2]}"></i>`).join("")}</div>${sg.map(x=>`<div class="lg"><i style="background:${x[2]}"></i><span>${x[0]}</span><b>${E(x[1])}</b><em>${fmt(Math.round(x[1]/lordo*1000)/10)}%</em></div>`).join("")}</div>`;
 }
 function cmp(){
   if(slips.length<2)return`<div class="card mu">Carica almeno due buste per confrontarle.</div>`;
@@ -415,7 +467,7 @@ function sHero(){const l=slips[0],p=slips[1],d=p&&l.netto!=null&&p.netto!=null?l
   return hero("Ultimo netto",l.netto,lab(l)+(d!=null?`<br>${d>=0?"+":""}${n2(d)} € rispetto a ${sh(p)}`:""),spark(monthly().slice(-12).map(x=>x.netto)))}
 function sAnni(){const ys=[...new Set(slips.map(x=>x.y))].sort();
   return ps("Confronto anni",`<div class="chips">${Object.entries(MET).map(([k,v])=>`<button class="chip ${k==met?"on":""}" onclick="met='${k}';ak='anni';draw()">${v[0]}</button>`).join("")}</div>
-  <div class="card${rc("anni")}"><div class="cw">${chart(ys)}<div class="tip"></div></div><div class="leg">${ys.map((y,k)=>`<span><i style="background:${COL[k%COL.length]}"></i>${y}</span>`).join("")}</div></div>`)}
+  <div class="card${rc("anni")}"><div class="cw">${chart(ys)}<div class="tip"></div></div><div class="leg">${ys.slice(-5).map((y,k)=>`<span><i style="background:${COL[k]}"></i>${y}</span>`).join("")}</div></div>`)}
 const permA=s=>s.perm&&s.perm.length?s.perm:s.rol||[];
 const permL=s=>s.perm&&s.perm.length?"Permessi PAR":s.rol&&s.rol.length?"Permessi ROL":"Permessi";
 function sDisp(){const s=slips.find(x=>x.ferie.length||x.perm.length||(x.rol||[]).length)||slips[0];
@@ -444,8 +496,8 @@ function sCrescita(){
   const M=monthly().map(s=>({s,v:GM[gm][1](s)})).filter(o=>o.v!=null);
   if(M.length<2)return ps(T,ch+`<div class="card mu">Servono almeno due buste mensili${gm=="base"?" con la voce Retribuzione (ricarica le buste se mancano)":""}.</div>`);
   const a=M[0],b=M[M.length-1],d=b.v-a.v,pc=a.v?d/a.v*100:0,sg=d>=0?"+":"";
-  return ps(T,ch+`<div class="card${rc("cres")}"><div class="k">Da ${lab(a.s)} a ${lab(b.s)}</div><div class="big sm" style="color:${d>=0?"var(--up)":"var(--dn)"}"${cu(d,"s")}>${sg}${n2(d)} €</div><div class="mu">${sg}${n2(pc)}% · da ${E(a.v)} a ${E(b.v)}</div>
-  <div class="cw" style="margin-top:12px">${lineSvg(M.map(o=>({t:lab(o.s)+" · "+E(o.v),v:o.v,l:sh(o.s)})))}<div class="tip"></div></div>
+  return ps(T,ch+`<div class="card${rc("cres")}"><div class="k">Da ${lab(a.s)} a ${lab(b.s)}</div><div class="big sm"${cu(d,"s")}>${sg}${n2(d)} €</div><div class="mu" style="margin-top:6px"><span class="bdg ${d>=0?"up":"dn"}">${d>=0?"▲":"▼"} ${sg}${N2(pc)}%</span>da ${E(a.v)} a ${E(b.v)}</div>
+  <div class="cw" style="margin-top:12px">${lineChart("cres",[{n:GM[gm][0],c:"var(--s1)",area:true,p:M.map((o,i)=>[i,o.v])}],{n:M.length,hide:priv,fv:E,tt:i=>lab(M[i].s),xl:[...new Set([0,Math.round((M.length-1)/3),Math.round(2*(M.length-1)/3),M.length-1])].map(i=>[i,sh(M[i].s),i==0?"start":i==M.length-1?"end":"middle"])})}<div class="tip"></div></div>
   <div class="mu" style="margin-top:8px">Il netto cambia anche con straordinari, assenze e premi: la voce Base è la misura più stabile.</div></div>`)}
 function tfrData(){
   const S=slips.filter(s=>s.tf&&(s.tf.fondi!=null||s.tf.qm!=null||s.tf.tot!=null)).slice().reverse(),ye={},cy={};
@@ -459,9 +511,9 @@ function sTfr(){
   if(!D.length)return ps(T,`<div class="card mu">Nessun dato TFR. Ricarica le buste dalla scheda Carica: il TFR si legge dal riquadro T.F.R. della busta.</div>`);
   const L=D.slice().reverse().find(o=>o.az!=null)||D[D.length-1],az=L.az||0,co=L.co,mx=Math.max(...D.map(o=>(o.az||0)+o.co),1),st=Math.ceil(D.length/7);
   return ps(T,`<div class="card"><div class="k">TFR totale accumulato</div><div class="big sm"${cu(az+co)}>${E(az+co)}</div><div class="mu">al ${lab(L.s)}</div>
-  <div class="grid" style="margin-top:14px"><div><div class="k"><i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--or);margin-right:6px"></i>In azienda</div><div class="v" style="font-size:20px">${E(az)}</div></div>
-  <div><div class="k"><i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--tl);margin-right:6px"></i>Fondo Cometa</div><div class="v" style="font-size:20px">${E(co)}</div></div></div>
-  <div class="cw"><div class="stk">${D.map((o,n)=>`<div class="sc" style="--i:${n};height:${Math.max(3,((o.az||0)+o.co)/mx*100)}%" data-t="${lab(o.s)} · Azienda ${E(o.az||0)} · Cometa ${E(o.co)}" onclick="tip(event)"><i style="flex:${o.co} 1 0;background:var(--tl)"></i><i style="flex:${o.az||0} 1 0;background:var(--or)"></i></div>`).join("")}</div><div class="tip"></div></div>
+  <div class="grid" style="margin-top:14px"><div><div class="k"><i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--s1);margin-right:6px"></i>In azienda</div><div class="v" style="font-size:20px">${E(az)}</div></div>
+  <div><div class="k"><i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--s3);margin-right:6px"></i>Fondo pensione</div><div class="v" style="font-size:20px">${E(co)}</div></div></div>
+  <div class="cw"><div class="stk">${D.map((o,n)=>`<div class="sc" style="--i:${n};height:${Math.max(3,((o.az||0)+o.co)/mx*100)}%" data-t="${lab(o.s)} · Azienda ${E(o.az||0)} · Fondo ${E(o.co)}" onclick="tip(event)">${o.co>0?`<i style="flex:${o.co} 1 0;background:var(--s3)"></i>`:""}${(o.az||0)>0?`<i style="flex:${o.az} 1 0;background:var(--s1)"></i>`:""}</div>`).join("")}</div><div class="tip"></div></div>
   <div class="lab">${D.map((o,i)=>`<span>${i%st==0?sh(o.s):""}</span>`).join("")}</div>
   <div class="mu" style="margin-top:10px">Calcolato dalle buste caricate: carica tutti gli anni per avere il totale completo. In azienda = fondo al 31/12 + rivalutazione netta + quota dell'anno non versata al fondo.</div></div>`)}
 function sOt(){const os=slips.find(x=>(x.voci||[]).some(r=>/straordin/i.test(r[0])))||slips.find(x=>(x.voci||[]).some(r=>r[2]))||slips[0];return ps("Calcolo straordinario",osec(os))}
@@ -537,9 +589,10 @@ function home(){
   if(!slips.length)return`<div class="card mu">Nessuna busta caricata. Vai su Carica per iniziare.</div>`;
   const s=slips.find(x=>x.id==sel)||slips[0];
   return`${pager(s)}
-  ${hero("Netto del mese",s.netto,lab(s),s.lordo&&s.netto!=null&&s.lordo>0?`<div class="hb"><i style="width:${Math.max(0,Math.min(100,s.netto/s.lordo*100)).toFixed(1)}%"></i></div><div class="hs">${fmt(Math.round(s.netto/s.lordo*100))}% del lordo resta in busta</div>`:"")}
+  ${hero("Netto del mese",s.netto,lab(s))}
   <div class="grid"><div class="card"><div class="k">Lordo</div><div class="v"${cu(s.lordo)}>${E(s.lordo)}</div></div>
   <div class="card"><div class="k">Trattenute</div><div class="v">${s.lordo!=null&&s.netto!=null?E(s.lordo-s.netto):"–"}</div></div></div>
+  ${split(s.lordo,s.netto,s.tratt)}
   ${sect("Competenze",s.voci,GC)}${sect("Trattenute",s.tratt,GT)}${bsec("Ferie",s.ferie)}${bsec("Permessi PAR",s.perm)}${bsec("ROL",s.rol)}
   ${s.tfr!=null?`<div class="card"><div class="row"><span>TFR del mese</span><span>${E(s.tfr)}</span></div></div>`:""}
   <div class="card"><div class="k">Correggi dati</div>
@@ -552,7 +605,7 @@ function ed(id,k,v){const s=slips.find(x=>x.id==id);s[k]=parseFloat(v.replace(",
 function setTipo(id,v){const s=slips.find(x=>x.id==id);s.tipo=v;slips.sort((a,b)=>ord(b)-ord(a));save();draw()}
 function del(id){slips=slips.filter(x=>x.id!=id);sel=null;save();draw()}
 const stats=(l,t)=>`<div class="grid"><div class="card"><div class="k">Lordo</div><div class="v"${cu(l)}>${E(l)}</div></div><div class="card"><div class="k">Trattenute</div><div class="v"${cu(t)}>${E(t)}</div></div></div>`;
-const barsC=(t,items)=>{const mx=Math.max(...items.map(i=>i[2]||0),1);return`<div class="card"><div class="k">${t}</div><div class="cw"><div class="bars">${items.map((i,n)=>`<div data-t="${i[3]} · ${E(i[2])}" onclick="tip(event)" style="--i:${n};height:${(i[2]||0)/mx*100}%"></div>`).join("")}</div><div class="tip"></div></div><div class="lab">${items.map(i=>`<span>${i[0]}</span>`).join("")}</div></div>`};
+const barsC=(t,items)=>{const mx=Math.max(...items.map(i=>i[2]||0),1),nz=items.filter(i=>i[2]>0),av=nz.length>2?nz.reduce((a,i)=>a+i[2],0)/nz.length:null;return`<div class="card"><div class="k">${t}</div><div class="cw"><div class="bars">${av!=null?`<div class="avg" style="bottom:${av/mx*100}%"><span>media ${E(av)}</span></div>`:""}${items.map((i,n)=>`<div data-t="${i[3]} · ${E(i[2])}" onclick="tip(event)" style="--i:${n};height:${(i[2]||0)/mx*100}%"></div>`).join("")}</div><div class="tip"></div></div><div class="lab">${items.map(i=>`<span>${i[0]}</span>`).join("")}</div></div>`};
 function annual(){
   const ys=[...new Set(slips.map(s=>s.y))].sort((a,b)=>b-a);
   if(!ys.length)return`<div class="card mu">Carica almeno una busta.</div>`;
@@ -562,11 +615,14 @@ function annual(){
   if(yr=="all"){
     const Y=ys.slice().sort((a,b)=>a-b).map(y=>{const S=slips.filter(s=>s.y==y);return{y,n:S.length,l:sum(S,"lordo"),net:sum(S,"netto")}});
     return pick+hero("Netto totale",sum(slips,"netto"),`${slips.length} buste · ${ys.length} ${ys.length>1?"anni":"anno"}`)+stats(sum(slips,"lordo"),sum(slips,"lordo")-sum(slips,"netto"))
+    +split(sum(slips,"lordo"),sum(slips,"netto"),slips.flatMap(x=>x.tratt||[]))
     +barsC("Netto per anno",Y.map(o=>[o.y,0,o.net,o.y]))
     +`<div class="card">${Y.slice().reverse().map(o=>`<div class="item" onclick="yr=${o.y};draw()"><span style="font-weight:600">${o.y}</span><span style="text-align:right">${E(o.net)}<br><span class="mu">lordo ${E(o.l)} · ${o.n} buste</span></span></div>`).join("")}</div>`;
   }
   const S=slips.filter(s=>s.y==yr).sort((a,b)=>ord(a)-ord(b));
-  return pick+hero("Netto "+yr,sum(S,"netto"),`${S.length} buste su 13 (12 mensili + tredicesima)`)+stats(sum(S,"lordo"),sum(S,"lordo")-sum(S,"netto"))
+  const has=k=>S.some(x=>k==13?x.tipo=="13a":x.tipo!="13a"&&x.m==k);
+  return pick+hero("Netto "+yr,sum(S,"netto"),`${S.length} di 13 buste caricate`,`<div class="mdots">${[1,2,3,4,5,6,7,8,9,10,11,12,13].map((k,i)=>`<i class="${has(k)?"on":""}" style="--i:${i}"></i>`).join("")}</div>`)+stats(sum(S,"lordo"),sum(S,"lordo")-sum(S,"netto"))
+  +split(sum(S,"lordo"),sum(S,"netto"),S.flatMap(x=>x.tratt||[]))
   +barsC("Netto per mese",S.map(s=>[s.tipo=="13a"?"13ª":s.m?MESI[s.m-1].slice(0,3):"–",0,s.netto,lab(s)]))
   +`<div class="card">${S.map(s=>`<div class="item" onclick="sel='${s.id}';tab='home';draw()"><span>${lab(s)}</span><span style="text-align:right">${E(s.netto)} <span class="mu">/ ${E(s.lordo)}</span></span></div>`).join("")}</div>`;
 }
@@ -775,8 +831,10 @@ if(document.addEventListener){
 }
 function tip(e){e.stopPropagation();const el=e.currentTarget,w=el.closest(".cw"),d=w.querySelector(".tip"),b=el.getBoundingClientRect(),r=w.getBoundingClientRect();
   document.querySelectorAll(".tip").forEach(x=>x.style.display="none");d.textContent=el.dataset.t;d.style.display="block";
-  d.style.left=Math.max(60,Math.min(r.width-60,b.left+b.width/2-r.left))+"px";d.style.top=(b.top-r.top-6)+"px"}
-if(document.addEventListener)document.addEventListener("click",()=>document.querySelectorAll(".tip").forEach(d=>d.style.display="none"));
+  d.className="tip";d.style.left=Math.max(60,Math.min(r.width-60,b.left+b.width/2-r.left))+"px";d.style.top=(b.top-r.top-6)+"px";
+  const pa=el.parentNode;if(pa&&pa.classList&&(pa.classList.contains("bars")||pa.classList.contains("stk"))){pa.querySelectorAll(".sel").forEach(x=>x.classList.remove("sel"));el.classList.add("sel");pa.classList.add("has")}}
+function clrViz(){document.querySelectorAll(".tip").forEach(d=>d.style.display="none");document.querySelectorAll(".xh,.hd").forEach(x=>x.style.opacity=0);document.querySelectorAll(".has").forEach(x=>x.classList.remove("has"))}
+if(document.addEventListener)document.addEventListener("click",clrViz);
 let tx=0,ty=0;
 /* ---------- Tasto indietro ---------- */
 let ex=false,guard=false;
