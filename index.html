@@ -112,6 +112,53 @@ button:active{opacity:.55}
 @keyframes pop{from{transform:scale(1.08);opacity:0}to{transform:none;opacity:1}}
 .alrt b{display:block;font-size:17px;font-weight:600;padding:20px 18px 4px}.alrt p{font-size:13.5px;color:var(--mu);padding:0 18px 18px}
 .alrt .ab{display:grid;grid-template-columns:1fr 1fr;border-top:.5px solid var(--ln)}.alrt .ab button{border:0;background:none;font:inherit;font-size:17px;padding:13px;color:var(--ac)}.alrt .ab button+button{border-left:.5px solid var(--ln);color:var(--dn);font-weight:600}
+
+/* ===== Movimento e grafica ===== */
+:root{--sp:cubic-bezier(.2,.9,.25,1);--sh:0 1px 2px rgba(0,0,0,.04),0 10px 26px -14px rgba(0,0,0,.12)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--sh:0 0 0 .5px rgba(255,255,255,.06)}}
+:root[data-theme="dark"]{--sh:0 0 0 .5px rgba(255,255,255,.06)}
+body::before{content:"";position:fixed;inset:0 0 auto 0;height:300px;background:radial-gradient(120% 100% at 50% -30%,var(--tint),transparent 70%);pointer-events:none;z-index:0}
+main{position:relative;z-index:1;padding-bottom:124px}
+.card{box-shadow:var(--sh)}
+.rv{opacity:0;transform:translate3d(var(--dx,0px),18px,0)}
+.rv.in{opacity:1;transform:none;transition:opacity .55s var(--sp),transform .65s var(--sp);transition-delay:var(--d,0ms)}
+button,.chip,.item,.di,.op,.mi,.pt{transition:transform .18s var(--sp),opacity .18s,background .2s,color .2s}
+button:active{opacity:.75;transform:scale(.96)}
+.item:active,.di:active,.op:active,.mi:active{transform:scale(.985);opacity:.8}
+.kp button:active{transform:scale(.9)}
+/* hero */
+.hero{position:relative;overflow:hidden;isolation:isolate;background:linear-gradient(145deg,#0a84ff 0%,#5e5ce6 60%,#7d4be8 100%)}
+.hero::before{content:"";position:absolute;inset:-60%;z-index:-1;background:radial-gradient(closest-side at 32% 34%,rgba(255,255,255,.3),transparent 62%),radial-gradient(closest-side at 72% 66%,rgba(255,55,160,.38),transparent 60%),radial-gradient(closest-side at 62% 24%,rgba(60,220,255,.32),transparent 58%);animation:blob 16s ease-in-out infinite alternate;will-change:transform}
+@keyframes blob{0%{transform:translate3d(-6%,-4%,0) rotate(0deg) scale(1)}50%{transform:translate3d(5%,6%,0) rotate(40deg) scale(1.12)}100%{transform:translate3d(-3%,8%,0) rotate(80deg) scale(1)}}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(255,255,255,.16),transparent 38%);border-radius:inherit}
+.eye{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.2);color:#fff;display:flex;align-items:center;justify-content:center;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.eye svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.spk{position:absolute;left:0;right:0;bottom:0;width:100%;height:62px;opacity:.55;pointer-events:none;z-index:-1}
+.hb{height:7px;border-radius:9px;background:rgba(255,255,255,.26);margin-top:14px;overflow:hidden}.hb i{display:block;height:100%;border-radius:9px;background:#fff}
+.rv.in .hb i,.re .hb i{animation:wd .9s var(--sp) both;animation-delay:.15s}@keyframes wd{from{width:0}}
+/* grafici */
+.ln{stroke-dasharray:1;stroke-dashoffset:0}.rv:not(.in) .ln{stroke-dashoffset:1}
+.rv.in .ln,.re .ln{animation:dr 1.1s var(--sp) both;animation-delay:calc(var(--d,0ms) + var(--k,0) * 120ms)}@keyframes dr{from{stroke-dashoffset:1}}
+.rv.in .ar,.re .ar{animation:fi .9s ease both;animation-delay:.45s}@keyframes fi{from{opacity:0}}
+.dt{transform-box:fill-box;transform-origin:center}
+.rv.in .dt,.re .dt{animation:pp .5s var(--sp) both;animation-delay:calc(.25s + var(--i,0) * 45ms)}@keyframes pp{from{transform:scale(0);opacity:0}}
+.bars div,.sc{transform-origin:50% 100%;background:linear-gradient(180deg,var(--ac),var(--ac2))}.sc{background:none}
+.rv.in .bars div,.re .bars div,.rv.in .sc,.re .sc{animation:gr .7s var(--sp) both;animation-delay:calc(.1s + var(--i,0) * 38ms)}@keyframes gr{from{transform:scaleY(0)}}
+.ring{width:44px;height:44px;flex:none;transform:rotate(-90deg)}.ring circle{fill:none;stroke-width:4.2;stroke-linecap:round}.ring .tr{stroke:var(--fill)}
+.rv.in .ring .pr,.re .ring .pr{animation:rg 1.1s var(--sp) both;animation-delay:.2s}@keyframes rg{from{stroke-dasharray:0 100}}
+.rcd{display:flex;align-items:center;justify-content:space-between;gap:6px}.rcd .k{white-space:nowrap}
+/* barra in basso: capsula con indicatore scorrevole */
+nav{left:50%;right:auto;bottom:calc(10px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);width:min(92vw,380px);display:grid;grid-template-columns:repeat(3,1fr);gap:0;padding:5px;border-radius:30px;border:.5px solid var(--ln);border-top:.5px solid var(--ln);box-shadow:0 14px 34px -12px rgba(0,0,0,.3)}
+nav button{max-width:none;position:relative;z-index:1;padding:7px 4px 5px;border-radius:25px}
+nav button.on svg{transform:translateY(-1px) scale(1.08)}nav svg{transition:transform .4s var(--sp)}
+nav .pill{position:absolute;top:5px;bottom:5px;left:5px;width:calc((100% - 10px)/3);border-radius:25px;background:var(--tint);transform:translateX(calc(var(--ix,0) * 100%));transition:transform .5s cubic-bezier(.3,1.35,.5,1),opacity .2s}
+nav.nop .pill{opacity:0}
+.toast{transform:translate(-50%,14px) scale(.96);transition:opacity .25s,transform .4s var(--sp);bottom:104px}.toast.on{transform:translate(-50%,0) scale(1)}
+.drawer{animation:sd .42s var(--sp)}.sheet{animation:su .45s var(--sp)}
+.sec.an .sb{animation:acc .38s var(--sp)}@keyframes acc{from{opacity:0;transform:translateY(-8px)}}
+.title span{transition:opacity .2s}
+.spin{display:inline-block;width:18px;height:18px;border-radius:50%;border:2.5px solid var(--fill);border-top-color:var(--ac);animation:sp .7s linear infinite;vertical-align:-4px;margin-right:8px}@keyframes sp{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important;transition-delay:0s!important}.hero::before{animation:none}}
 </style>
 </head>
 <body>
@@ -124,7 +171,13 @@ button:active{opacity:.55}
 const MESI=["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
 const NUM=/-?\d{1,3}(?:\.\d{3})*,\d{2}(?!\d)|-?\d+,\d{2}(?!\d)/g;try{pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"}catch(e){}
 const P=s=>parseFloat(s.replace(/\./g,"").replace(",","."));
-const E=n=>n==null||isNaN(n)?"–":n.toLocaleString("it-IT",{style:"currency",currency:"EUR"});
+let priv=false;try{priv=localStorage.getItem("priv")=="1"}catch(e){}
+const EF=n=>n.toLocaleString("it-IT",{style:"currency",currency:"EUR"});
+const E=n=>n==null||isNaN(n)?"–":priv?"•••• €":EF(n);
+const RM=()=>{try{return matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){return false}};
+function hap(p){try{if(navigator.vibrate)navigator.vibrate(p||8)}catch(e){}}
+function togPriv(){priv=!priv;try{localStorage.setItem("priv",priv?"1":"0")}catch(e){}hap();draw()}
+let ak="",ck=false;const rc=k=>ak==k?" re":"";
 let slips=[],tab="ov",yr=null,sel=null,msg="";
 try{slips=JSON.parse(localStorage.getItem("slips")||"[]")}catch(e){}
 const save=()=>{try{localStorage.setItem("slips",JSON.stringify(slips))}catch(e){}};
@@ -286,8 +339,8 @@ function parseModel(R,name,mod){
   const g=parseG(R,name);return scoreS(g)>=scoreS(z)?[g,"Altri software"]:[z,"Zucchetti"];
 }
 async function upload(files){
-  msg="Lettura in corso…";draw();let ok=0,ko=[];const used={};
-  for(const f of files){try{
+  let ok=0,ko=[],fi=0;const used={},fn=files.length;
+  for(const f of files){fi++;msg=`<span class="spin"></span>Lettura ${fi} di ${fn}…`;draw();try{
     const[s,mn]=parseModel(await readPdf(f),f.name,model);
     if(s.lordo==null&&s.netto==null){ko.push(f.name);continue}
     if(!s.y){s.y=new Date().getFullYear();s.m=0}
@@ -295,7 +348,7 @@ async function upload(files){
   }catch(e){ko.push(f.name+" ("+(e.message||e)+")")}}
   slips.sort((a,b)=>ord(b)-ord(a));save();
   msg=ok+" buste lette"+(ok?" ("+Object.entries(used).map(([k,v])=>k+(v>1?" ×"+v:"")).join(", ")+")":"")+(ko.length?". Non riconosciute (forse scansioni o formato diverso): "+ko.join(", "):"");
-  if(ok){tab="ov";sel=slips[0].id;yr=slips[0].y}draw();
+  if(ok){tab="ov";sel=slips[0].id;yr=slips[0].y;lt=null;hap([10,40,10])}draw();if(ok)toast(ok==1?"1 busta letta":ok+" buste lette");
 }
 const ord=s=>s.y*14+(s.tipo=="13a"?13:s.m);
 const lab=s=>(s.tipo=="13a"?"Tredicesima ":s.m?MESI[s.m-1][0].toUpperCase()+MESI[s.m-1].slice(1)+" ":"")+s.y;
@@ -310,7 +363,8 @@ const MET={netto:["Netto",s=>s.netto],lordo:["Lordo",s=>s.lordo],tratt:["Tratten
 const COL=["#007aff","#ff9500","#34c759","#af52de","#ff2d55"];
 const MN=MESI.map(m=>m[0].toUpperCase()+m.slice(1));
 let met="netto",cA=null,cB=null,cmpOn=false;
-const n2=v=>v==null?"–":v.toLocaleString("it-IT",{minimumFractionDigits:2,maximumFractionDigits:2});
+const N2=v=>v.toLocaleString("it-IT",{minimumFractionDigits:2,maximumFractionDigits:2});
+const n2=v=>v==null?"–":priv?"••••":N2(v);
 const sh=s=>(s.tipo=="13a"?"13ª":(MESI[s.m-1]||"").slice(0,3))+" "+String(s.y).slice(2);
 function chart(ys){
   const f=MET[met][1],W=340,H=180,l=8,b=22,t=10,r=34,pw=W-l-r,ph=H-t-b;
@@ -321,12 +375,12 @@ function chart(ys){
   const mx=Math.max(...all,1),mn=Math.min(0,...all),X=i=>l+pw*i/12,Y=v=>t+ph*(1-(v-mn)/((mx-mn)||1));
   const sm=p=>p.map((q,i)=>{if(!i)return`M${q[0]},${q[1]}`;const a=p[i-2]||p[i-1],b=p[i-1],d=p[i+1]||q,k=.18;return`C${b[0]+(q[0]-a[0])*k},${b[1]+(q[1]-a[1])*k} ${q[0]-(d[0]-b[0])*k},${q[1]-(d[1]-b[1])*k} ${q[0]},${q[1]}`}).join("");
   let g="";
-  [0,.5,1].forEach(k=>{const v=mn+(mx-mn)*k;g+=`<line x1="${l}" x2="${W-r+6}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--ln)" stroke-width=".6"/><text x="${W-r+10}" y="${Y(v)+3}" font-size="9" fill="var(--mu)">${fmt(Math.round(v))}</text>`});
+  [0,.5,1].forEach(k=>{const v=mn+(mx-mn)*k;g+=`<line x1="${l}" x2="${W-r+6}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--ln)" stroke-width=".6"/><text x="${W-r+10}" y="${Y(v)+3}" font-size="9" fill="var(--mu)">${priv&&!hrs?"•••":fmt(Math.round(v))}</text>`});
   g+=["G","F","M","A","M","G","L","A","S","O","N","D","13ª"].map((m,i)=>`<text x="${X(i)}" y="${H-6}" text-anchor="middle" font-size="9" fill="var(--mu)">${m}</text>`).join("");
   ys.forEach((y,k)=>{const c=COL[k%COL.length],p=pts[k],xy=p.map(q=>[X(q[0]),Y(q[1])]),ln=xy.filter((q,i)=>p[i][0]<12);
-    g+=`<defs><linearGradient id="g${k}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:${c};stop-opacity:.2"/><stop offset="1" style="stop-color:${c};stop-opacity:0"/></linearGradient></defs>`;
-    if(ln.length>1)g+=`<path d="${sm(ln)}L${ln[ln.length-1][0]},${Y(mn)}L${ln[0][0]},${Y(mn)}Z" fill="url(#g${k})"/><path d="${sm(ln)}" fill="none" stroke="${c}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>`;
-    g+=xy.map((q,i)=>`<circle cx="${q[0]}" cy="${q[1]}" r="3.8" fill="${c}" stroke="var(--card)" stroke-width="1.6"/><circle cx="${q[0]}" cy="${q[1]}" r="15" fill="transparent" style="cursor:pointer" data-t="${y} · ${p[i][0]==12?"13ª":MN[p[i][0]]} · ${fv(p[i][1])}" onclick="tip(event)"/>`).join("")});
+    g+=`<defs><linearGradient id="g${k}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:${c};stop-opacity:.14"/><stop offset="1" style="stop-color:${c};stop-opacity:0"/></linearGradient></defs>`;
+    if(ln.length>1)g+=`<path class="ar" d="${sm(ln)}L${ln[ln.length-1][0]},${Y(mn)}L${ln[0][0]},${Y(mn)}Z" fill="url(#g${k})"/><path class="ln" pathLength="1" style="--k:${k}" d="${sm(ln)}" fill="none" stroke="${c}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>`;
+    g+=xy.map((q,i)=>`<circle class="dt" style="--i:${i+k*2}" cx="${q[0]}" cy="${q[1]}" r="3.8" fill="${c}" stroke="var(--card)" stroke-width="1.6"/><circle cx="${q[0]}" cy="${q[1]}" r="15" fill="transparent" style="cursor:pointer" data-t="${y} · ${p[i][0]==12?"13ª":MN[p[i][0]]} · ${fv(p[i][1])}" onclick="tip(event)"/>`).join("")});
   return`<svg viewBox="0 0 ${W} ${H}" style="width:100%;display:block">${g}</svg>`;
 }
 function cmp(){
@@ -342,7 +396,13 @@ function cmp(){
   ${R("Lordo",A.lordo,B.lordo,true)}${R("Trattenute",tt(A),tt(B),false)}${R("Netto",A.netto,B.netto,true)}
   ${S("Competenze",A.voci,B.voci,true)}${S("Trattenute",A.tratt,B.tratt,false)}</div>`;
 }
-const hero=(k,v,sub)=>`<div class="hero"><div class="k">${k}</div><div class="big">${v}</div>${sub?`<div class="hs">${sub}</div>`:""}</div>`;
+const EYE=o=>`<svg viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>${o?"":'<path d="M4 4l16 16"/>'}</svg>`;
+const cu=(v,f)=>v==null||isNaN(v)?"":` data-cu="${v}" data-f="${f||"e"}"`;
+const hero=(k,num,sub,extra)=>`<div class="hero"><button class="eye" onclick="togPriv()" aria-label="${priv?"Mostra importi":"Nascondi importi"}">${EYE(!priv)}</button><div class="k">${k}</div><div class="big"${cu(num)}>${E(num)}</div>${sub?`<div class="hs">${sub}</div>`:""}${extra||""}</div>`;
+function spark(vs){vs=vs.filter(v=>v!=null);if(vs.length<3||priv)return"";const W=120,H=40,lo=Math.min(...vs),hi=Math.max(...vs),X=i=>2+(W-4)*i/(vs.length-1),Y=v=>4+(H-8)*(1-(v-lo)/((hi-lo)||1)),p=vs.map((v,i)=>[X(i),Y(v)]);
+  return`<svg class="spk" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><defs><linearGradient id="gsp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:#fff;stop-opacity:.35"/><stop offset="1" style="stop-color:#fff;stop-opacity:0"/></linearGradient></defs><path class="ar" d="${smooth(p)}L${W-2},${H}L2,${H}Z" fill="url(#gsp)"/><path class="ln" pathLength="1" d="${smooth(p)}" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>`}
+const ring=(p,c)=>{p=Math.max(0,Math.min(100,p||0));return`<svg class="ring" viewBox="0 0 36 36"><circle class="tr" cx="18" cy="18" r="15.915"/><circle class="pr" cx="18" cy="18" r="15.915" pathLength="100" stroke="${c}" stroke-dasharray="${p.toFixed(1)} 100"/></svg>`};
+const avail=a=>{if(!a||a.length<3)return null;const tot=a.length>=4?(a[0]||0)+(a[1]||0):a[0];return tot>0?last(a)/tot*100:null};
 const SECS=[["hero","Ultimo netto"],["anni","Confronto anni"],["disp","Ferie e permessi"],["media","Media dall'assunzione"],["crescita","Crescita stipendio"],["tfr","TFR accumulato"],["ot","Calcolo straordinario"],["cmp","Confronto buste"]];
 let pan=[];try{pan=JSON.parse(localStorage.getItem("pan")||"[]")}catch(e){}
 if(!Array.isArray(pan))pan=[];pan=pan.filter(p=>p&&SECS.some(x=>x[0]==p.id));SECS.forEach(x=>{if(!pan.some(p=>p.id==x[0]))pan.push({id:x[0],on:true})});
@@ -352,39 +412,39 @@ const monthly=()=>slips.filter(s=>s.tipo!="13a"&&s.m).slice().reverse();
 const smooth=p=>p.map((q,i)=>{if(!i)return`M${q[0]},${q[1]}`;const a=p[i-2]||p[i-1],b=p[i-1],d=p[i+1]||q,k=.18;return`C${b[0]+(q[0]-a[0])*k},${b[1]+(q[1]-a[1])*k} ${q[0]-(d[0]-b[0])*k},${q[1]-(d[1]-b[1])*k} ${q[0]},${q[1]}`}).join("");
 function hireInfo(){const d=slips.map(s=>s.ass).filter(Boolean).sort()[0];if(d){const p=d.split("-");return{t:MN[+p[1]-1].toLowerCase()+" "+p[0]}}const f=monthly()[0]||slips[slips.length-1];return f?{t:(f.m?MN[f.m-1].toLowerCase()+" ":"")+f.y,est:1}:null}
 function sHero(){const l=slips[0],p=slips[1],d=p&&l.netto!=null&&p.netto!=null?l.netto-p.netto:null;
-  return hero("Ultimo netto",E(l.netto),lab(l)+(d!=null?` · ${d>=0?"+":""}${n2(d)} € rispetto a ${sh(p)}`:""))}
+  return hero("Ultimo netto",l.netto,lab(l)+(d!=null?`<br>${d>=0?"+":""}${n2(d)} € rispetto a ${sh(p)}`:""),spark(monthly().slice(-12).map(x=>x.netto)))}
 function sAnni(){const ys=[...new Set(slips.map(x=>x.y))].sort();
-  return ps("Confronto anni",`<div class="chips">${Object.entries(MET).map(([k,v])=>`<button class="chip ${k==met?"on":""}" onclick="met='${k}';draw()">${v[0]}</button>`).join("")}</div>
-  <div class="card"><div class="cw">${chart(ys)}<div class="tip"></div></div><div class="leg">${ys.map((y,k)=>`<span><i style="background:${COL[k%COL.length]}"></i>${y}</span>`).join("")}</div></div>`)}
+  return ps("Confronto anni",`<div class="chips">${Object.entries(MET).map(([k,v])=>`<button class="chip ${k==met?"on":""}" onclick="met='${k}';ak='anni';draw()">${v[0]}</button>`).join("")}</div>
+  <div class="card${rc("anni")}"><div class="cw">${chart(ys)}<div class="tip"></div></div><div class="leg">${ys.map((y,k)=>`<span><i style="background:${COL[k%COL.length]}"></i>${y}</span>`).join("")}</div></div>`)}
 const permA=s=>s.perm&&s.perm.length?s.perm:s.rol||[];
 const permL=s=>s.perm&&s.perm.length?"Permessi PAR":s.rol&&s.rol.length?"Permessi ROL":"Permessi";
 function sDisp(){const s=slips.find(x=>x.ferie.length||x.perm.length||(x.rol||[]).length)||slips[0];
-  return ps("Disponibili al "+lab(s),`<div class="grid"><div class="card"><div class="k">Ferie</div><div class="v">${fmt(last(s.ferie))}</div><div class="mu">ore${gg(last(s.ferie))}</div></div>
-  <div class="card"><div class="k">${permL(s)}</div><div class="v">${fmt(last(permA(s)))}</div><div class="mu">ore</div></div></div>`)}
+  return ps("Disponibili al "+lab(s),`<div class="grid"><div class="card"><div class="rcd"><div><div class="k">Ferie</div><div class="v"${cu(last(s.ferie),"n")}>${fmt(last(s.ferie))}</div></div>${avail(s.ferie)!=null?ring(avail(s.ferie),"var(--ac)"):""}</div><div class="mu">ore${gg(last(s.ferie))}</div></div>
+  <div class="card"><div class="rcd"><div><div class="k">${permL(s)}</div><div class="v"${cu(last(permA(s)),"n")}>${fmt(last(permA(s)))}</div></div>${avail(permA(s))!=null?ring(avail(permA(s)),"var(--or)"):""}</div><div class="mu">ore${avail(permA(s))!=null?" · "+fmt(Math.round(avail(permA(s))))+"% disponibile":""}</div></div></div>`)}
 function sMedia(){
   const M=monthly().filter(s=>s.netto!=null),T="Media dall'assunzione";
   if(!M.length)return ps(T,`<div class="card mu">Servono buste mensili.</div>`);
   const av=f=>{const a=M.map(f).filter(v=>v!=null);return a.length?a.reduce((t,x)=>t+x,0)/a.length:null},h=hireInfo(),tn=slips.reduce((t,s)=>t+(s.netto||0),0);
-  return ps(T,`<div class="card"><div class="k">Netto medio mensile</div><div class="big sm">${E(av(s=>s.netto))}</div><div class="mu">${M.length} buste mensili${h?" · dal "+h.t+(h.est?" (prima busta caricata)":""):""}</div>
+  return ps(T,`<div class="card"><div class="k">Netto medio mensile</div><div class="big sm"${cu(av(s=>s.netto))}>${E(av(s=>s.netto))}</div><div class="mu">${M.length} buste mensili${h?" · dal "+h.t+(h.est?" (prima busta caricata)":""):""}</div>
   <div style="margin-top:8px"><div class="row"><span>Lordo medio mensile</span><span>${E(av(s=>s.lordo))}</span></div>
   <div class="row"><span>Trattenute medie</span><span>${E(av(s=>s.lordo!=null?s.lordo-s.netto:null))}</span></div>
   <div class="row"><span>Totale netto percepito</span><span>${E(tn)}</span></div></div></div>`)}
 const GM={netto:["Netto",s=>s.netto],lordo:["Lordo",s=>s.lordo],base:["Base",s=>{const r=(s.voci||[]).find(v=>/^retribuzione$|^stipendio base$|^paga base$/i.test(v[0]));return r?r[1]:null}]};let gm="netto";
 function lineSvg(pts){
   const W=340,H=170,l=6,r=38,t=10,b=22,pw=W-l-r,ph=H-t-b,vs=pts.map(p=>p.v),lo=Math.min(...vs),hi=Math.max(...vs),pad=(hi-lo)*.15||hi*.05||1,mn=lo-pad,mx=hi+pad,n=pts.length,X=i=>l+(n>1?pw*i/(n-1):pw/2),Y=v=>t+ph*(1-(v-mn)/(mx-mn)),xy=pts.map((p,i)=>[X(i),Y(p.v)]);
-  let g="";[0,.5,1].forEach(k=>{const v=mn+(mx-mn)*k;g+=`<line x1="${l}" x2="${W-r+6}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--ln)" stroke-width=".6"/><text x="${W-r+10}" y="${Y(v)+3}" font-size="9" fill="var(--mu)">${fmt(Math.round(v))}</text>`});
+  let g="";[0,.5,1].forEach(k=>{const v=mn+(mx-mn)*k;g+=`<line x1="${l}" x2="${W-r+6}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--ln)" stroke-width=".6"/><text x="${W-r+10}" y="${Y(v)+3}" font-size="9" fill="var(--mu)">${priv?"•••":fmt(Math.round(v))}</text>`});
   [...new Set([0,Math.round((n-1)/3),Math.round(2*(n-1)/3),n-1])].forEach(i=>{g+=`<text x="${X(i)}" y="${H-6}" text-anchor="${i==0?"start":i==n-1?"end":"middle"}" font-size="9" fill="var(--mu)">${pts[i].l}</text>`});
   g+=`<defs><linearGradient id="gl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--ac);stop-opacity:.22"/><stop offset="1" style="stop-color:var(--ac);stop-opacity:0"/></linearGradient></defs>`;
-  if(n>1)g+=`<path d="${smooth(xy)}L${xy[n-1][0]},${t+ph}L${xy[0][0]},${t+ph}Z" fill="url(#gl)"/><path d="${smooth(xy)}" fill="none" stroke="var(--ac)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>`;
+  if(n>1)g+=`<path class="ar" d="${smooth(xy)}L${xy[n-1][0]},${t+ph}L${xy[0][0]},${t+ph}Z" fill="url(#gl)"/><path class="ln" pathLength="1" d="${smooth(xy)}" fill="none" stroke="var(--ac)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>`;
   const hr=Math.max(5,Math.min(14,pw/n/2));
-  g+=xy.map((q,i)=>`${n<=18||i==n-1?`<circle cx="${q[0]}" cy="${q[1]}" r="3.6" fill="var(--ac)" stroke="var(--card)" stroke-width="1.6"/>`:""}<circle cx="${q[0]}" cy="${q[1]}" r="${hr}" fill="transparent" style="cursor:pointer" data-t="${pts[i].t}" onclick="tip(event)"/>`).join("");
+  g+=xy.map((q,i)=>`${n<=18||i==n-1?`<circle class="dt" style="--i:${Math.min(i,14)}" cx="${q[0]}" cy="${q[1]}" r="3.6" fill="var(--ac)" stroke="var(--card)" stroke-width="1.6"/>`:""}<circle cx="${q[0]}" cy="${q[1]}" r="${hr}" fill="transparent" style="cursor:pointer" data-t="${pts[i].t}" onclick="tip(event)"/>`).join("");
   return`<svg viewBox="0 0 ${W} ${H}" style="width:100%;display:block">${g}</svg>`}
 function sCrescita(){
-  const T="Crescita stipendio",ch=`<div class="chips">${Object.entries(GM).map(([k,v])=>`<button class="chip ${k==gm?"on":""}" onclick="gm='${k}';draw()">${v[0]}</button>`).join("")}</div>`;
+  const T="Crescita stipendio",ch=`<div class="chips">${Object.entries(GM).map(([k,v])=>`<button class="chip ${k==gm?"on":""}" onclick="gm='${k}';ak='cres';draw()">${v[0]}</button>`).join("")}</div>`;
   const M=monthly().map(s=>({s,v:GM[gm][1](s)})).filter(o=>o.v!=null);
   if(M.length<2)return ps(T,ch+`<div class="card mu">Servono almeno due buste mensili${gm=="base"?" con la voce Retribuzione (ricarica le buste se mancano)":""}.</div>`);
   const a=M[0],b=M[M.length-1],d=b.v-a.v,pc=a.v?d/a.v*100:0,sg=d>=0?"+":"";
-  return ps(T,ch+`<div class="card"><div class="k">Da ${lab(a.s)} a ${lab(b.s)}</div><div class="big sm" style="color:${d>=0?"var(--up)":"var(--dn)"}">${sg}${n2(d)} €</div><div class="mu">${sg}${n2(pc)}% · da ${E(a.v)} a ${E(b.v)}</div>
+  return ps(T,ch+`<div class="card${rc("cres")}"><div class="k">Da ${lab(a.s)} a ${lab(b.s)}</div><div class="big sm" style="color:${d>=0?"var(--up)":"var(--dn)"}"${cu(d,"s")}>${sg}${n2(d)} €</div><div class="mu">${sg}${n2(pc)}% · da ${E(a.v)} a ${E(b.v)}</div>
   <div class="cw" style="margin-top:12px">${lineSvg(M.map(o=>({t:lab(o.s)+" · "+E(o.v),v:o.v,l:sh(o.s)})))}<div class="tip"></div></div>
   <div class="mu" style="margin-top:8px">Il netto cambia anche con straordinari, assenze e premi: la voce Base è la misura più stabile.</div></div>`)}
 function tfrData(){
@@ -398,10 +458,10 @@ function sTfr(){
   const T="TFR accumulato",D=tfrData();
   if(!D.length)return ps(T,`<div class="card mu">Nessun dato TFR. Ricarica le buste dalla scheda Carica: il TFR si legge dal riquadro T.F.R. della busta.</div>`);
   const L=D.slice().reverse().find(o=>o.az!=null)||D[D.length-1],az=L.az||0,co=L.co,mx=Math.max(...D.map(o=>(o.az||0)+o.co),1),st=Math.ceil(D.length/7);
-  return ps(T,`<div class="card"><div class="k">TFR totale accumulato</div><div class="big sm">${E(az+co)}</div><div class="mu">al ${lab(L.s)}</div>
+  return ps(T,`<div class="card"><div class="k">TFR totale accumulato</div><div class="big sm"${cu(az+co)}>${E(az+co)}</div><div class="mu">al ${lab(L.s)}</div>
   <div class="grid" style="margin-top:14px"><div><div class="k"><i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--or);margin-right:6px"></i>In azienda</div><div class="v" style="font-size:20px">${E(az)}</div></div>
   <div><div class="k"><i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--tl);margin-right:6px"></i>Fondo Cometa</div><div class="v" style="font-size:20px">${E(co)}</div></div></div>
-  <div class="cw"><div class="stk">${D.map(o=>`<div class="sc" style="height:${Math.max(3,((o.az||0)+o.co)/mx*100)}%" data-t="${lab(o.s)} · Azienda ${E(o.az||0)} · Cometa ${E(o.co)}" onclick="tip(event)"><i style="flex:${o.co} 1 0;background:var(--tl)"></i><i style="flex:${o.az||0} 1 0;background:var(--or)"></i></div>`).join("")}</div><div class="tip"></div></div>
+  <div class="cw"><div class="stk">${D.map((o,n)=>`<div class="sc" style="--i:${n};height:${Math.max(3,((o.az||0)+o.co)/mx*100)}%" data-t="${lab(o.s)} · Azienda ${E(o.az||0)} · Cometa ${E(o.co)}" onclick="tip(event)"><i style="flex:${o.co} 1 0;background:var(--tl)"></i><i style="flex:${o.az||0} 1 0;background:var(--or)"></i></div>`).join("")}</div><div class="tip"></div></div>
   <div class="lab">${D.map((o,i)=>`<span>${i%st==0?sh(o.s):""}</span>`).join("")}</div>
   <div class="mu" style="margin-top:10px">Calcolato dalle buste caricate: carica tutti gli anni per avere il totale completo. In azienda = fondo al 31/12 + rivalutazione netta + quota dell'anno non versata al fondo.</div></div>`)}
 function sOt(){const os=slips.find(x=>(x.voci||[]).some(r=>/straordin/i.test(r[0])))||slips.find(x=>(x.voci||[]).some(r=>r[2]))||slips[0];return ps("Calcolo straordinario",osec(os))}
@@ -428,10 +488,10 @@ const gs=l=>`<a class="gs" href="https://www.google.com/search?q=${encodeURIComp
 function groups(rows,G){const o=G.map(g=>[g[0],[]]);(rows||[]).forEach(r=>{const i=G.findIndex(g=>g[1].test(r[0]));o[i<0?G.length-1:i][1].push(r)});return o.filter(g=>g[1].length)}
 function sect(t,rows,G){
   const body=groups(rows,G).map(([n,rs])=>`<div class="gh"><span>${n}</span><span>${E(tot(rs))}</span></div>`+rs.map(r=>`<div class="row"><span class="rl">${r[0]} ${gs(r[0])}</span><span>${E(r[1])}</span></div>`).join("")).join("");
-  return`<details class="card sec" ${oS[t]?"open":""} ontoggle="oS['${t}']=this.open"><summary><span>${t}</span><span class="sv">${E(tot(rows))}</span></summary><div class="sb">${body||'<div class="mu" style="padding:8px 0">Nessuna voce</div>'}</div></details>`;
+  return`<details class="card sec" ${oS[t]?"open":""} ontoggle="oS['${t}']=this.open"><summary onclick="this.parentNode.classList.add('an')"><span>${t}</span><span class="sv">${E(tot(rows))}</span></summary><div class="sb">${body||'<div class="mu" style="padding:8px 0">Nessuna voce</div>'}</div></details>`;
 }
 function bsec(t,a){if(!a||!a.length)return"";const L=lbl(a);
-  return`<details class="card sec" ${oS[t]?"open":""} ontoggle="oS['${t}']=this.open"><summary><span>${t}</span><span class="sv">${fmt(last(a))} ore</span></summary><div class="sb">${a.map((x,i)=>`<div class="row"><span>${L[i]}</span><span>${fmt(x)} ore</span></div>`).join("")}</div></details>`}
+  return`<details class="card sec" ${oS[t]?"open":""} ontoggle="oS['${t}']=this.open"><summary onclick="this.parentNode.classList.add('an')"><span>${t}</span><span class="sv">${fmt(last(a))} ore</span></summary><div class="sb">${a.map((x,i)=>`<div class="row"><span>${L[i]}</span><span>${fmt(x)} ore</span></div>`).join("")}</div></details>`}
 let ot=null,otId=null;
 function otInit(s){
   const V=s.voci||[],so=V.filter(r=>/straordin/i.test(r[0])),rb=V.find(r=>/^retribuzione$/i.test(r[0]));
@@ -449,7 +509,7 @@ function osec(s){
   if(otId!=s.id)otInit(s);
   const so=(s.voci||[]).filter(r=>/straordin/i.test(r[0])),r0=otRes(ot);
   const inp=([l,k])=>`<div class="row"><span>${l}</span><input class="f" id="ot-${k}" type="number" inputmode="decimal" step="any" value="${ot[k]}" oninput="otCalc()"></div>`;
-  return`<details class="card sec"><summary><span>Straordinari</span><span class="sv">${so.length?E(tot(so)):"Simulatore"}</span></summary><div class="sb">
+  return`<details class="card sec"><summary onclick="this.parentNode.classList.add('an')"><span>Straordinari</span><span class="sv">${so.length?E(tot(so)):"Simulatore"}</span></summary><div class="sb">
   ${so.length?`<div class="gh"><span>In ${lab(s)}</span><span>${E(tot(so))}</span></div>`+so.map(r=>`<div class="row"><span class="rl">${r[0]} ${gs(r[0])}</span><span>${r[3]?fmt(r[3])+" h · ":""}${E(r[1])}</span></div>`).join(""):""}
   <div class="gh"><span>Simulatore</span><span></span></div>
   ${[["Tariffa oraria base (€)","base"],["Ore al +25%","h25"],["Ore al +50%","h50"],["Ore al +100%","h100"],["Trattenute stimate (%)","pct"]].map(inp).join("")}
@@ -460,7 +520,7 @@ function osec(s){
 }
 const oS={};let an="";
 const cur=()=>slips.find(x=>x.id==sel)||slips[0];
-function setSel(id){const t=slips.find(x=>x.id==id);an=ord(t)>ord(cur())?"fr":"fl";sel=id;draw()}
+function setSel(id){const t=slips.find(x=>x.id==id);an=ord(t)>ord(cur())?"fr":"fl";sel=id;ak="view";ck=true;hap();draw()}
 let pk=false,pkY=null,hT=null,hI=null;
 function go(d,q){const a=slips.slice().reverse(),i=a.findIndex(x=>x.id==cur().id)+d;if(!a[i])return false;if(q){sel=a[i].id;draw()}else setSel(a[i].id);return true}
 function rel(){clearTimeout(hT);clearInterval(hI)}
@@ -477,8 +537,8 @@ function home(){
   if(!slips.length)return`<div class="card mu">Nessuna busta caricata. Vai su Carica per iniziare.</div>`;
   const s=slips.find(x=>x.id==sel)||slips[0];
   return`${pager(s)}
-  ${hero("Netto del mese",E(s.netto),lab(s))}
-  <div class="grid"><div class="card"><div class="k">Lordo</div><div class="v">${E(s.lordo)}</div></div>
+  ${hero("Netto del mese",s.netto,lab(s),s.lordo&&s.netto!=null&&s.lordo>0?`<div class="hb"><i style="width:${Math.max(0,Math.min(100,s.netto/s.lordo*100)).toFixed(1)}%"></i></div><div class="hs">${fmt(Math.round(s.netto/s.lordo*100))}% del lordo resta in busta</div>`:"")}
+  <div class="grid"><div class="card"><div class="k">Lordo</div><div class="v"${cu(s.lordo)}>${E(s.lordo)}</div></div>
   <div class="card"><div class="k">Trattenute</div><div class="v">${s.lordo!=null&&s.netto!=null?E(s.lordo-s.netto):"–"}</div></div></div>
   ${sect("Competenze",s.voci,GC)}${sect("Trattenute",s.tratt,GT)}${bsec("Ferie",s.ferie)}${bsec("Permessi PAR",s.perm)}${bsec("ROL",s.rol)}
   ${s.tfr!=null?`<div class="card"><div class="row"><span>TFR del mese</span><span>${E(s.tfr)}</span></div></div>`:""}
@@ -491,22 +551,22 @@ function home(){
 function ed(id,k,v){const s=slips.find(x=>x.id==id);s[k]=parseFloat(v.replace(",","."))||null;save();draw()}
 function setTipo(id,v){const s=slips.find(x=>x.id==id);s.tipo=v;slips.sort((a,b)=>ord(b)-ord(a));save();draw()}
 function del(id){slips=slips.filter(x=>x.id!=id);sel=null;save();draw()}
-const stats=(l,t)=>`<div class="grid"><div class="card"><div class="k">Lordo</div><div class="v">${E(l)}</div></div><div class="card"><div class="k">Trattenute</div><div class="v">${E(t)}</div></div></div>`;
-const barsC=(t,items)=>{const mx=Math.max(...items.map(i=>i[2]||0),1);return`<div class="card"><div class="k">${t}</div><div class="cw"><div class="bars">${items.map(i=>`<div data-t="${i[3]} · ${E(i[2])}" onclick="tip(event)" style="height:${(i[2]||0)/mx*100}%"></div>`).join("")}</div><div class="tip"></div></div><div class="lab">${items.map(i=>`<span>${i[0]}</span>`).join("")}</div></div>`};
+const stats=(l,t)=>`<div class="grid"><div class="card"><div class="k">Lordo</div><div class="v"${cu(l)}>${E(l)}</div></div><div class="card"><div class="k">Trattenute</div><div class="v"${cu(t)}>${E(t)}</div></div></div>`;
+const barsC=(t,items)=>{const mx=Math.max(...items.map(i=>i[2]||0),1);return`<div class="card"><div class="k">${t}</div><div class="cw"><div class="bars">${items.map((i,n)=>`<div data-t="${i[3]} · ${E(i[2])}" onclick="tip(event)" style="--i:${n};height:${(i[2]||0)/mx*100}%"></div>`).join("")}</div><div class="tip"></div></div><div class="lab">${items.map(i=>`<span>${i[0]}</span>`).join("")}</div></div>`};
 function annual(){
   const ys=[...new Set(slips.map(s=>s.y))].sort((a,b)=>b-a);
   if(!ys.length)return`<div class="card mu">Carica almeno una busta.</div>`;
   if(yr!="all"&&!ys.includes(yr))yr=ys[0];
-  const pick=`<select onchange="yr=this.value=='all'?'all':+this.value;draw()"><option value="all" ${yr=="all"?"selected":""}>Tutti gli anni</option>${ys.map(y=>`<option ${y==yr?"selected":""}>${y}</option>`).join("")}</select>`;
+  const pick=`<select onchange="yr=this.value=='all'?'all':+this.value;ak='view';ck=true;draw()"><option value="all" ${yr=="all"?"selected":""}>Tutti gli anni</option>${ys.map(y=>`<option ${y==yr?"selected":""}>${y}</option>`).join("")}</select>`;
   const sum=(S,k)=>S.reduce((t,s)=>t+(s[k]||0),0);
   if(yr=="all"){
     const Y=ys.slice().sort((a,b)=>a-b).map(y=>{const S=slips.filter(s=>s.y==y);return{y,n:S.length,l:sum(S,"lordo"),net:sum(S,"netto")}});
-    return pick+hero("Netto totale",E(sum(slips,"netto")),`${slips.length} buste · ${ys.length} ${ys.length>1?"anni":"anno"}`)+stats(sum(slips,"lordo"),sum(slips,"lordo")-sum(slips,"netto"))
+    return pick+hero("Netto totale",sum(slips,"netto"),`${slips.length} buste · ${ys.length} ${ys.length>1?"anni":"anno"}`)+stats(sum(slips,"lordo"),sum(slips,"lordo")-sum(slips,"netto"))
     +barsC("Netto per anno",Y.map(o=>[o.y,0,o.net,o.y]))
     +`<div class="card">${Y.slice().reverse().map(o=>`<div class="item" onclick="yr=${o.y};draw()"><span style="font-weight:600">${o.y}</span><span style="text-align:right">${E(o.net)}<br><span class="mu">lordo ${E(o.l)} · ${o.n} buste</span></span></div>`).join("")}</div>`;
   }
   const S=slips.filter(s=>s.y==yr).sort((a,b)=>ord(a)-ord(b));
-  return pick+hero("Netto "+yr,E(sum(S,"netto")),`${S.length} buste su 13 (12 mensili + tredicesima)`)+stats(sum(S,"lordo"),sum(S,"lordo")-sum(S,"netto"))
+  return pick+hero("Netto "+yr,sum(S,"netto"),`${S.length} buste su 13 (12 mensili + tredicesima)`)+stats(sum(S,"lordo"),sum(S,"lordo")-sum(S,"netto"))
   +barsC("Netto per mese",S.map(s=>[s.tipo=="13a"?"13ª":s.m?MESI[s.m-1].slice(0,3):"–",0,s.netto,lab(s)]))
   +`<div class="card">${S.map(s=>`<div class="item" onclick="sel='${s.id}';tab='home';draw()"><span>${lab(s)}</span><span style="text-align:right">${E(s.netto)} <span class="mu">/ ${E(s.lordo)}</span></span></div>`).join("")}</div>`;
 }
@@ -661,8 +721,8 @@ function drawL(){
   <button onclick="lkDel()" aria-label="Cancella"><svg viewBox="0 0 24 24"><path d="M9 6h10a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H9l-6-6z"/><path d="M12.5 9.5l5 5M17.5 9.5l-5 5"/></svg></button></div>
   ${lk.mode=="unlock"?`<button class="lf" onclick="lk.mode='forgot';drawL()">PIN dimenticato?</button>`:`<div class="lf"></div>`}</div>`}
 function lkDel(){if(!lk||lk.busy)return;lk.v=lk.v.slice(0,-1);lk.st="";drawL()}
-function lkKey(d){if(!lk||lk.busy||locked()||lk.v.length>=6)return;lk.v+=d;lk.st="";if(lk.v.length<6){drawL();return}lk.busy=true;drawL();setTimeout(lkDone,140)}
-function lkBad(m){lk.st="bad shk";lk.err=true;lk.msg=m;drawL();setTimeout(()=>{if(!lk)return;lk.v="";lk.st="";lk.busy=false;drawL()},480)}
+function lkKey(d){if(!lk||lk.busy||locked()||lk.v.length>=6)return;hap();lk.v+=d;lk.st="";if(lk.v.length<6){drawL();return}lk.busy=true;drawL();setTimeout(lkDone,140)}
+function lkBad(m){hap([30,50,30]);lk.st="bad shk";lk.err=true;lk.msg=m;drawL();setTimeout(()=>{if(!lk)return;lk.v="";lk.st="";lk.busy=false;drawL()},480)}
 async function lkDone(){
   const v=lk.v;
   if(lk.mode=="set1"){lk.tmp=v;lk.mode="set2";lk.v="";lk.msg="";lk.err=false;lk.busy=false;drawL();return}
@@ -743,11 +803,40 @@ function exitGo(){ex=false;drawX();const A=NAPP();if(A&&A.exitApp){A.exitApp();r
 })();
 if(document.addEventListener){document.addEventListener("pointerup",rel);document.addEventListener("pointercancel",rel)}
 if(document.addEventListener){document.addEventListener("touchstart",e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});document.addEventListener("touchend",e=>{const t=e.changedTouches[0],dx=t.clientX-tx,dy=t.clientY-ty;if(tab=="home"&&Math.abs(dx)>70&&Math.abs(dy)<45&&!(e.target.closest&&e.target.closest(".chips,input")))go(dx<0?1:-1)},{passive:true})}
+const TO=["ov","home","year","up"];let io=null;
+function countUp(el){
+  const v=+el.dataset.cu,f=el.dataset.f;if(!isFinite(v)||priv||RM())return;
+  const F=x=>f=="n"?fmt(Math.round(x*100)/100):f=="s"?(v>=0?"+":"")+N2(x)+" €":EF(x),t0=performance.now(),D=850;
+  const st=t=>{const p=Math.min(1,(t-t0)/D),e=1-Math.pow(1-p,4);el.textContent=F(v*e);if(p<1&&el.isConnected)requestAnimationFrame(st);else el.textContent=F(v)};
+  requestAnimationFrame(st)}
+function reveal(w,dir){
+  try{if(io)io.disconnect()}catch(e){}
+  if(!w||RM()||typeof IntersectionObserver=="undefined")return;
+  const ks=[...w.children];if(!ks.length)return;
+  w.style.setProperty("--dx",dir*26+"px");ks.forEach(k=>k.classList.add("rv"));
+  let n=0,t0=performance.now();
+  io=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target;io.unobserve(el);
+    const now=performance.now();if(now-t0>260){n=0;t0=now}
+    el.style.setProperty("--d",Math.min(n++,7)*70+"ms");el.classList.add("in");
+    el.querySelectorAll("[data-cu]").forEach(countUp)})},{rootMargin:"0px 0px -6% 0px",threshold:.04});
+  ks.forEach(k=>io.observe(k));
+}
+function navTo(k){if(tab==k)return;hap();tab=k;draw()}
 function draw(){
-  document.getElementById("m").innerHTML=`<div class="title"><button class="ham" onclick="menu()" aria-label="Menu"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><span>${TT[tab]}</span>${tab!="up"?`<button class="addb" onclick="tab='up';draw()" aria-label="Carica buste paga"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Carica</button>`:""}</div><div class="${an}">`+(tab=="ov"?overview():tab=="home"?home():tab=="year"?annual():load())+"</div>";an="";
-  document.getElementById("n").innerHTML=NAV.map(([k,t])=>`<button class="${tab==k?"on":""}" onclick="tab='${k}';draw()"><svg viewBox="0 0 24 24">${IC[k]}</svg>${t}</button>`).join("");
+  const ent=lt!==tab,dir=!ent||lt==null?0:TO.indexOf(tab)>TO.indexOf(lt)?1:-1,M=document.getElementById("m");
+  M.innerHTML=`<div class="title"><button class="ham" onclick="menu()" aria-label="Menu"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><span>${TT[tab]}</span>${tab!="up"?`<button class="addb" onclick="navTo('up')" aria-label="Carica buste paga"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Carica</button>`:""}</div><div id="vw" class="${an}${ak=="view"?" re":""}">`+(tab=="ov"?overview():tab=="home"?home():tab=="year"?annual():load())+"</div>";an="";
+  const N=document.getElementById("n"),ix=NAV.findIndex(n=>n[0]==tab);
+  try{
+    if(!N.querySelector(".pill"))N.innerHTML=`<i class="pill"></i>`+NAV.map(([k,t])=>`<button onclick="navTo('${k}')"><svg viewBox="0 0 24 24">${IC[k]}</svg>${t}</button>`).join("");
+    N.style.setProperty("--ix",ix<0?0:ix);N.classList.toggle("nop",ix<0);
+    [...N.querySelectorAll("button")].forEach((b,i)=>b.classList.toggle("on",i==ix));
+  }catch(e){N.innerHTML=NAV.map(([k,t])=>`<button class="${tab==k?"on":""}" onclick="navTo('${k}')"><svg viewBox="0 0 24 24">${IC[k]}</svg>${t}</button>`).join("")}
   drawO();
-  if(lt!=tab){try{scrollTo(0,0)}catch(e){}lt=tab}
+  try{const W=document.getElementById("vw");
+    if(ent){try{scrollTo(0,0)}catch(e){}reveal(W,dir)}
+    else if(ck&&W&&W.querySelectorAll)W.querySelectorAll("[data-cu]").forEach(countUp);
+  }catch(e){}
+  lt=tab;ak="";ck=false;
   try{const st=document.getElementById("strip"),on=st&&st.querySelector(".on");if(on)st.scrollLeft=on.offsetLeft-st.clientWidth/2+on.offsetWidth/2}catch(e){}
 }
 draw();
