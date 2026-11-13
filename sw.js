@@ -1,5 +1,5 @@
 // Cedolino: funzionamento senza connessione. Cambia V per forzare l'aggiornamento della cache.
-const V = "cedolino-v7";
+const V = "cedolino-v8";
 const CORE = ["./", "index.html", "manifest.webmanifest", "icon-180.png", "icon-192.png", "icon-512.png"];
 const CDN = [
   "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js",

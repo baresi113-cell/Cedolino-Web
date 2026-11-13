@@ -184,12 +184,51 @@ nav.nop .pill{opacity:0}
 .bdg{display:inline-flex;align-items:center;gap:4px;font-weight:600;font-size:12.5px;padding:3px 9px;border-radius:99px;margin-right:6px}.bdg.up{background:rgba(48,180,90,.16);color:var(--ok)}.bdg.dn{background:rgba(255,69,58,.14);color:var(--ko)}
 .mdots{display:flex;gap:6px;margin-top:14px}.mdots i{flex:1;max-width:18px;height:6px;border-radius:4px;background:rgba(255,255,255,.28)}.mdots i.on{background:#fff}
 .rv.in .mdots i,.re .mdots i{animation:pp .45s var(--sp) both;animation-delay:calc(.2s + var(--i,0) * 35ms)}
+
+/* ===== Funzioni nuove ===== */
+.hero{background:linear-gradient(145deg,var(--hg1,#0a84ff) 0%,var(--hg2,#5e5ce6) 60%,var(--hg3,#7d4be8) 100%)}
+button.gs{border:0;background:none;font:inherit}
+.seg{display:flex;background:var(--fill);border-radius:11px;padding:2px;gap:2px}.seg button{flex:1;border:0;background:none;color:var(--tx);font:inherit;font-size:14px;font-weight:500;padding:7px 10px;border-radius:9px;white-space:nowrap}.seg button.on{background:var(--card);box-shadow:0 1px 4px rgba(0,0,0,.14);font-weight:600}
+.opc{display:block;padding:13px 0;border-bottom:.5px solid var(--ln)}.opc:last-child{border:0}.opc b{display:block;font-weight:500;font-size:15.5px}.opc small{display:block;color:var(--mu);font-size:12.5px;margin:1px 0 9px}
+.sws{display:flex;gap:12px}.sws button{width:34px;height:34px;border-radius:50%;border:0;position:relative}.sws button.on::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--tx)}
+.vr{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:.5px solid var(--ln)}.vr:last-of-type{border:0}
+.fn{flex:1;min-width:0;font:inherit;font-size:14.5px;background:var(--fill);border:0;border-radius:9px;padding:8px 10px;color:var(--tx)}
+.vr .f,.row .f{background:var(--fill);border-radius:9px;padding:7px 9px;width:96px}
+.sl select{padding:7px 30px 7px 10px;font-size:14.5px}
+.fi{width:100%;font:inherit;font-size:16px;background:var(--fill);border:0;border-radius:12px;padding:12px 14px;color:var(--tx);margin-bottom:10px}
+.chk{display:flex;gap:12px;padding:11px 0;border-bottom:.5px solid var(--ln)}.chk:last-child{border:0;padding-bottom:2px}
+.chk>i{width:26px;height:26px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.chk>i svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.chk.w>i{background:var(--or)}.chk.i>i{background:var(--s1)}.chk.g>i{background:var(--up)}
+.chk b{display:block;font-weight:600;font-size:14.5px}.chk small{display:block;color:var(--mu);font-size:13px;margin-top:1px}
+.bn{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:18px;padding:12px 14px;margin-top:12px;box-shadow:var(--sh)}
+.bn span{flex:1;font-size:13.5px}.bn button{border:0;background:var(--tint);color:var(--ac);font:inherit;font-size:13.5px;font-weight:600;padding:8px 12px;border-radius:99px;white-space:nowrap}.bn button.x{background:none;color:var(--mu);padding:8px 4px}
+.pchip{display:inline-flex;align-items:center;gap:7px;border:0;background:var(--card);color:var(--tx);font:inherit;font-size:13.5px;font-weight:600;padding:7px 12px 7px 8px;border-radius:99px;margin:6px 0 12px;box-shadow:var(--sh)}
+.pchip i{width:22px;height:22px;border-radius:50%;background:linear-gradient(145deg,var(--hg1,#0a84ff),var(--hg2,#5e5ce6));color:#fff;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:11px;font-weight:700}
+.alrt.wd>div{width:min(330px,100%);text-align:left}.alrt.wd b{padding:20px 20px 6px}.alrt.wd p{padding:0 20px 18px;font-size:14.5px;line-height:1.45;color:var(--tx)}.alrt.wd .ab button+button{color:var(--ac)}.alrt.wd .ab a{display:block;text-align:center;font-size:17px;padding:13px;color:var(--ac);font-weight:600;text-decoration:none;border-left:.5px solid var(--ln)}
+#pdfv canvas{width:100%;display:block;border-radius:10px;margin-bottom:10px;background:#fff;box-shadow:var(--sh)}
+.act{display:flex;gap:10px;margin-top:12px}.act .btn{padding:13px;font-size:15px}
+/* tutorial */
+.tut{position:fixed;inset:0;z-index:55;background:var(--bg);display:flex;flex-direction:column;align-items:center;padding:calc(14px + env(safe-area-inset-top,0px)) 26px calc(22px + env(safe-area-inset-bottom,0px));overflow:hidden}
+.tut::before{content:"";position:absolute;inset:-20% -40% auto -40%;height:70%;background:radial-gradient(closest-side,var(--tint),transparent);pointer-events:none}
+.tut .sk{align-self:flex-end;border:0;background:none;color:var(--mu);font:inherit;font-size:15px;padding:8px 0;position:relative}
+.tsl{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;width:100%;max-width:380px;position:relative}
+.tsl.r{animation:tr .5s var(--sp)}.tsl.l{animation:tl .5s var(--sp)}@keyframes tr{from{opacity:0;transform:translateX(46px)}}@keyframes tl{from{opacity:0;transform:translateX(-46px)}}
+.tic{width:124px;height:124px;border-radius:36px;background:linear-gradient(145deg,var(--hg1,#0a84ff),var(--hg2,#5e5ce6) 60%,var(--hg3,#7d4be8));display:flex;align-items:center;justify-content:center;box-shadow:0 24px 44px -20px var(--ac);animation:flo 4s ease-in-out infinite alternate}
+@keyframes flo{from{transform:translateY(-5px) rotate(-2deg)}to{transform:translateY(6px) rotate(2deg)}}
+.tic svg{width:60px;height:60px;fill:none;stroke:#fff;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.tsl h2{font-size:27px;font-weight:700;letter-spacing:-.025em;margin-top:34px}.tsl p{font-size:16px;color:var(--mu);margin-top:10px;line-height:1.45}
+.tul{margin-top:22px;width:100%;text-align:left;background:var(--card);border-radius:20px;padding:6px 16px;box-shadow:var(--sh)}
+.tul div{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:.5px solid var(--ln);font-size:14.5px}.tul div:last-child{border:0}
+.tul i{width:8px;height:8px;border-radius:50%;background:var(--ac);flex:none}
+.tdots{display:flex;gap:7px;margin:10px 0 18px;position:relative}.tdots i{width:7px;height:7px;border-radius:50%;background:var(--fill);transition:width .3s var(--sp),background .3s}.tdots i.on{width:22px;border-radius:5px;background:var(--ac)}
+.tut .btn{max-width:380px;position:relative}
 </style>
 </head>
 <body>
 <main id="m"></main>
 <nav id="n"></nav>
-<div id="o"></div><div id="lk"></div><div id="ex"></div><div id="t" class="toast"></div><input type="file" id="imp" accept=".json,application/json" hidden onchange="doImport(this)">
+<div id="o"></div><div id="lk"></div><div id="tu"></div><div id="ex"></div><div id="t" class="toast"></div><input type="file" id="imp" accept=".json,application/json" hidden onchange="doImport(this)">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
 <script>
@@ -204,8 +243,36 @@ function hap(p){try{if(navigator.vibrate)navigator.vibrate(p||8)}catch(e){}}
 function togPriv(){priv=!priv;try{localStorage.setItem("priv",priv?"1":"0")}catch(e){}hap();draw()}
 let ak="",ck=false;const rc=k=>ak==k?" re":"";
 let slips=[],tab="ov",yr=null,sel=null,msg="";
-try{slips=JSON.parse(localStorage.getItem("slips")||"[]")}catch(e){}
-const save=()=>{try{localStorage.setItem("slips",JSON.stringify(slips))}catch(e){}};
+let cfg={hd:8,mens:13,theme:"auto",acc:0,bkRem:true};try{Object.assign(cfg,JSON.parse(localStorage.getItem("cfg")||"{}"))}catch(e){}
+const saveCfg=()=>{try{localStorage.setItem("cfg",JSON.stringify(cfg))}catch(e){}};
+let profs=[{id:"p0",name:"Principale"}],pid="p0";
+try{const p=JSON.parse(localStorage.getItem("profs")||"null");if(Array.isArray(p)&&p.length&&p.every(x=>x&&x.id&&x.name)){profs=p;if(!profs.some(x=>x.id=="p0"))profs.unshift({id:"p0",name:"Principale"})}const c=localStorage.getItem("pid");if(c&&profs.some(x=>x.id==c))pid=c}catch(e){}
+const SKi=(id,e)=>(e?"slipsE":"slips")+(id=="p0"?"":":"+id);
+const hasE=()=>{try{return localStorage.getItem(SKi(pid,1))!=null}catch(e){return false}};
+/* cifratura dei dati con il PIN */
+let dk=null,dkRaw=null,svQ=Promise.resolve();const BSRV="it.cedolino.app";
+const subtle=()=>{try{return crypto.subtle||null}catch(e){return null}};
+const b64u=u=>{let t="";for(let i=0;i<u.length;i+=0x8000)t+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000));return btoa(t)};
+const unhex=h=>Uint8Array.from(h.match(/../g).map(x=>parseInt(x,16)));
+async function aesEnc(key,bytes){const ivv=rnd(12),c=new Uint8Array(await crypto.subtle.encrypt({name:"AES-GCM",iv:ivv},key,bytes)),o=new Uint8Array(12+c.length);o.set(ivv);o.set(c,12);return o}
+async function aesDec(key,buf){const b=new Uint8Array(buf);return new Uint8Array(await crypto.subtle.decrypt({name:"AES-GCM",iv:b.slice(0,12)},key,b.slice(12)))}
+const encS=async txt=>b64u(await aesEnc(dk,new TextEncoder().encode(txt)));
+const decS=async c=>new TextDecoder().decode(await aesDec(dk,ub64(c)));
+async function kekFrom(pin,saltHex){const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(pin),"PBKDF2",false,["deriveKey"]);return crypto.subtle.deriveKey({name:"PBKDF2",salt:unhex(saltHex),iterations:150000,hash:"SHA-256"},base,{name:"AES-GCM",length:256},false,["encrypt","decrypt"])}
+async function dkSet(raw){dkRaw=new Uint8Array(raw);dk=await crypto.subtle.importKey("raw",dkRaw,"AES-GCM",false,["encrypt","decrypt"])}
+async function encAll(){for(const p of profs){try{const t=localStorage.getItem(SKi(p.id,0));if(t!=null){localStorage.setItem(SKi(p.id,1),await encS(t));localStorage.removeItem(SKi(p.id,0))}}catch(e){}}}
+async function decAll(){let ok=true;for(const p of profs){try{const c=localStorage.getItem(SKi(p.id,1));if(c!=null){localStorage.setItem(SKi(p.id,0),await decS(c));localStorage.removeItem(SKi(p.id,1))}}catch(e){ok=false}}return ok}
+function loadPlain(){try{slips=JSON.parse(localStorage.getItem(SKi(pid,0))||"[]")}catch(e){slips=[]}if(!Array.isArray(slips))slips=[]}
+async function loadCur(){if(hasE()){if(!dk){slips=[];return false}try{slips=JSON.parse(await decS(localStorage.getItem(SKi(pid,1))))}catch(e){slips=[];return false}}else loadPlain();if(!Array.isArray(slips))slips=[];slips.sort((a,b)=>ord(b)-ord(a));return true}
+async function bioStore(){if(!sec||!sec.bio||!dkRaw)return;if(sec.bio.t=="w"){sec.bio.k=b64u(dkRaw);return}const n=nbio();let kc=false;try{if(n&&n.setCredentials){await n.setCredentials({username:"cedolino",password:b64u(dkRaw),server:BSRV});kc=true}}catch(e){}if(kc)sec.bio.kc=true;else sec.bio=null}
+async function pinKeys(pin){
+  if(!subtle())return;
+  if(sec.wk){if(!dk)await dkSet(await aesDec(await kekFrom(pin,sec.ks),ub64(sec.wk)));return}
+  await dkSet(rnd(32));sec.ks=hex(rnd(16));sec.wk=b64u(await aesEnc(await kekFrom(pin,sec.ks),dkRaw));await bioStore();saveSec();await svQ;await encAll();await pdfRecode(null,dk)}
+loadPlain();
+const save=()=>{const id=pid;
+  if(dk){const txt=JSON.stringify(slips);svQ=svQ.then(()=>encS(txt)).then(c=>{try{localStorage.setItem(SKi(id,1),c);localStorage.removeItem(SKi(id,0))}catch(e){}}).catch(()=>{});return}
+  try{if(localStorage.getItem(SKi(id,1))!=null)return;localStorage.setItem(SKi(id,0),JSON.stringify(slips))}catch(e){}};
 
 function mkRows(its){
   its.sort((a,b)=>b.y-a.y||a.x-b.x);const R=[];let row=null;
@@ -248,7 +315,7 @@ function columns(R){
   return{V,T};
 }
 const PERIOD=X=>{let y=null,m=null;const mm=X.match(new RegExp("("+MESI.join("|")+")\\s+(20\\d\\d)","i"));if(mm){m=MESI.indexOf(mm[1].toLowerCase())+1;y=+mm[2]}else{const d=X.match(/\b(0?[1-9]|1[0-2])\s*[\/\-]\s*(20\d\d)\b/);if(d){m=+d[1];y=+d[2]}}return[y,m]};
-const T13=(X,V)=>/tredicesima|13.{0,3}mensilit/i.test(X)&&!V.some(v=>/^retribuzione$|stipendio base|paga base/i.test(v[0]))?"13a":"";
+const T13=(X,V)=>{if(V.some(v=>/^retribuzione$|stipendio base|paga base/i.test(v[0])))return"";const a=/tredicesima|13.{0,3}mensilit/i.test(X),b=/quattordicesima|14.{0,3}mensilit/i.test(X);return b&&!a?"14a":a?"13a":""};
 function tfrBlock(R){
   const i=R.findIndex(r=>r.it.some(x=>/^F\.do/i.test(x.s.trim()))&&r.it.some(x=>/^Quota/i.test(x.s.trim())));
   if(i<0||!R[i+1])return null;
@@ -366,23 +433,25 @@ function parseModel(R,name,mod){
 async function upload(files){
   let ok=0,ko=[],fi=0;const used={},fn=files.length;
   for(const f of files){fi++;msg=`<span class="spin"></span>Lettura ${fi} di ${fn}…`;draw();try{
-    const[s,mn]=parseModel(await readPdf(f),f.name,model);
+    const buf=await f.arrayBuffer(),[s,mn]=parseModel(await readPdf({arrayBuffer:async()=>buf.slice(0)}),f.name,model);
     if(s.lordo==null&&s.netto==null){ko.push(f.name);continue}
     if(!s.y){s.y=new Date().getFullYear();s.m=0}
-    slips=slips.filter(x=>!(x.y==s.y&&x.m==s.m&&(x.tipo||"")==(s.tipo||"")&&s.m));slips.push(s);ok++;used[mn]=(used[mn]||0)+1;
+    const dup=x=>x.y==s.y&&x.m==s.m&&(x.tipo||"")==(s.tipo||"")&&s.m;slips.filter(dup).forEach(x=>pdfDel(x.id));
+    slips=slips.filter(x=>!dup(x));slips.push(s);if(await pdfPut(s.id,buf))s.pdf=true;ok++;used[mn]=(used[mn]||0)+1;
   }catch(e){ko.push(f.name+" ("+(e.message||e)+")")}}
   slips.sort((a,b)=>ord(b)-ord(a));save();
   msg=ok+" buste lette"+(ok?" ("+Object.entries(used).map(([k,v])=>k+(v>1?" ×"+v:"")).join(", ")+")":"")+(ko.length?". Non riconosciute (forse scansioni o formato diverso): "+ko.join(", "):"");
   if(ok){tab="ov";sel=slips[0].id;yr=slips[0].y;lt=null;hap([10,40,10])}draw();if(ok)toast(ok==1?"1 busta letta":ok+" buste lette");
 }
-const ord=s=>s.y*14+(s.tipo=="13a"?13:s.m);
-const lab=s=>(s.tipo=="13a"?"Tredicesima ":s.m?MESI[s.m-1][0].toUpperCase()+MESI[s.m-1].slice(1)+" ":"")+s.y;
+const ord=s=>s.y*16+(s.tipo=="13a"?14:s.tipo=="14a"?6.5:s.m);
+const TL=s=>s.tipo=="13a"?"13ª":s.tipo=="14a"?"14ª":null;
+const lab=s=>(s.tipo=="13a"?"Tredicesima ":s.tipo=="14a"?"Quattordicesima ":s.m?MESI[s.m-1][0].toUpperCase()+MESI[s.m-1].slice(1)+" ":"")+s.y;
 const lbl=a=>a.length==4?["Residuo AP","Maturate","Godute","Saldo"]:a.length==3?["Maturate","Godute","Saldo"]:a.map((_,i)=>"Valore "+(i+1));
 function bal(t,a){return a.length?`<div class="card"><div class="k">${t}</div>${a.map((x,i)=>`<div class="row"><span>${lbl(a)[i]}</span><span>${fmt(x)}</span></div>`).join("")}</div>`:""}
 function list(t,a){return a&&a.length?`<div class="card"><div class="k">${t}</div>${a.map(x=>`<div class="row"><span>${x[0]}</span><span>${E(x[1])}</span></div>`).join("")}</div>`:""}
 const last=a=>a&&a.length?a[a.length-1]:null;
 const fmt=n=>n==null?"–":n.toLocaleString("it-IT",{maximumFractionDigits:2});
-const gg=n=>n==null?"":" · ≈ "+fmt(n/8)+" giorni";
+const gg=n=>n==null?"":" · ≈ "+fmt(Math.round(n/(cfg.hd||8)*10)/10)+" giorni";
 const gd=a=>a&&a.length>=3?a[a.length-2]:null;
 const MET={netto:["Netto",s=>s.netto],lordo:["Lordo",s=>s.lordo],tratt:["Trattenute",s=>s.lordo!=null&&s.netto!=null?s.lordo-s.netto:null],fg:["Ferie godute",s=>gd(s.ferie)],pg:["Permessi goduti",s=>gd(permA(s))]};
 const COL=["var(--s1)","var(--s2)","var(--s3)","var(--s4)","var(--s5)"];
@@ -390,7 +459,7 @@ const MN=MESI.map(m=>m[0].toUpperCase()+m.slice(1));
 let met="netto",cA=null,cB=null,cmpOn=false;
 const N2=v=>v.toLocaleString("it-IT",{minimumFractionDigits:2,maximumFractionDigits:2});
 const n2=v=>v==null?"–":priv?"••••":N2(v);
-const sh=s=>(s.tipo=="13a"?"13ª":(MESI[s.m-1]||"").slice(0,3))+" "+String(s.y).slice(2);
+const sh=s=>(TL(s)||(MESI[s.m-1]||"").slice(0,3))+" "+String(s.y).slice(2);
 const SC={};
 const kf=v=>Math.abs(v)>=10000?fmt(Math.round(v/100)/10)+"k":Math.abs(v)>=1000?fmt(Math.round(v/10)/100)+"k":fmt(Math.round(v*10)/10);
 function lineChart(id,S,o){
@@ -424,9 +493,9 @@ function scrub(e,id){
   tp.style.left=Math.max(hw,Math.min(bb.width-hw,px))+"px";tp.style.top="2px";
 }
 function chart(ys){
-  ys=ys.slice(-5);const f=MET[met][1],hrs=/^(fg|pg)$/.test(met);
-  return lineChart("anni",ys.map((y,k)=>({n:String(y),c:COL[k],area:k==ys.length-1,p:slips.filter(s=>s.y==y&&s.m&&f(s)!=null).map(s=>[s.tipo=="13a"?12:s.m-1,f(s)]).sort((a,b)=>a[0]-b[0])})),
-    {n:13,gap:12,hide:priv&&!hrs,xl:["G","F","M","A","M","G","L","A","S","O","N","D","13ª"].map((m,i)=>[i,m]),fv:v=>hrs?fmt(v)+" ore":E(v),tt:i=>i==12?"Tredicesima":MN[i]});
+  ys=ys.slice(-5);const f=MET[met][1],hrs=/^(fg|pg)$/.test(met),h14=cfg.mens==14||slips.some(s=>s.tipo=="14a"),xl=["G","F","M","A","M","G","L","A","S","O","N","D","13ª"].concat(h14?["14ª"]:[]);
+  return lineChart("anni",ys.map((y,k)=>({n:String(y),c:COL[k],area:k==ys.length-1,p:slips.filter(s=>s.y==y&&s.m&&f(s)!=null).map(s=>[s.tipo=="13a"?12:s.tipo=="14a"?13:s.m-1,f(s)]).sort((a,b)=>a[0]-b[0])})),
+    {n:xl.length,gap:12,hide:priv&&!hrs,xl:xl.map((m,i)=>[i,m]),fv:v=>hrs?fmt(v)+" ore":E(v),tt:i=>i==12?"Tredicesima":i==13?"Quattordicesima":MN[i]});
 }
 function split(lordo,netto,tr){
   if(!lordo||netto==null||lordo<=0)return"";
@@ -455,12 +524,12 @@ function spark(vs){vs=vs.filter(v=>v!=null);if(vs.length<3||priv)return"";const 
   return`<svg class="spk" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><defs><linearGradient id="gsp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:#fff;stop-opacity:.35"/><stop offset="1" style="stop-color:#fff;stop-opacity:0"/></linearGradient></defs><path class="ar" d="${smooth(p)}L${W-2},${H}L2,${H}Z" fill="url(#gsp)"/><path class="ln" pathLength="1" d="${smooth(p)}" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>`}
 const ring=(p,c)=>{p=Math.max(0,Math.min(100,p||0));return`<svg class="ring" viewBox="0 0 36 36"><circle class="tr" cx="18" cy="18" r="15.915"/><circle class="pr" cx="18" cy="18" r="15.915" pathLength="100" stroke="${c}" stroke-dasharray="${p.toFixed(1)} 100"/></svg>`};
 const avail=a=>{if(!a||a.length<3)return null;const tot=a.length>=4?(a[0]||0)+(a[1]||0):a[0];return tot>0?last(a)/tot*100:null};
-const SECS=[["hero","Ultimo netto"],["anni","Confronto anni"],["disp","Ferie e permessi"],["media","Media dall'assunzione"],["crescita","Crescita stipendio"],["tfr","TFR accumulato"],["ot","Calcolo straordinario"],["cmp","Confronto buste"]];
+const SECS=[["hero","Ultimo netto"],["check","Controllo busta"],["anni","Confronto anni"],["disp","Ferie e permessi"],["media","Media dall'assunzione"],["crescita","Crescita stipendio"],["tfr","TFR accumulato"],["prev","Previsioni"],["ot","Calcolo straordinario"],["cmp","Confronto buste"]];
 let pan=[];try{pan=JSON.parse(localStorage.getItem("pan")||"[]")}catch(e){}
 if(!Array.isArray(pan))pan=[];pan=pan.filter(p=>p&&SECS.some(x=>x[0]==p.id));SECS.forEach(x=>{if(!pan.some(p=>p.id==x[0]))pan.push({id:x[0],on:true})});
 const savePan=()=>{try{localStorage.setItem("pan",JSON.stringify(pan))}catch(e){}};
 const ps=(t,b)=>`<div class="ps"><h1>${t}</h1>${b}</div>`;
-const monthly=()=>slips.filter(s=>s.tipo!="13a"&&s.m).slice().reverse();
+const monthly=()=>slips.filter(s=>!s.tipo&&s.m).slice().reverse();
 const smooth=p=>p.map((q,i)=>{if(!i)return`M${q[0]},${q[1]}`;const a=p[i-2]||p[i-1],b=p[i-1],d=p[i+1]||q,k=.18;return`C${b[0]+(q[0]-a[0])*k},${b[1]+(q[1]-a[1])*k} ${q[0]-(d[0]-b[0])*k},${q[1]-(d[1]-b[1])*k} ${q[0]},${q[1]}`}).join("");
 function hireInfo(){const d=slips.map(s=>s.ass).filter(Boolean).sort()[0];if(d){const p=d.split("-");return{t:MN[+p[1]-1].toLowerCase()+" "+p[0]}}const f=monthly()[0]||slips[slips.length-1];return f?{t:(f.m?MN[f.m-1].toLowerCase()+" ":"")+f.y,est:1}:null}
 function sHero(){const l=slips[0],p=slips[1],d=p&&l.netto!=null&&p.netto!=null?l.netto-p.netto:null;
@@ -518,11 +587,11 @@ function sTfr(){
   <div class="mu" style="margin-top:10px">Calcolato dalle buste caricate: carica tutti gli anni per avere il totale completo. In azienda = fondo al 31/12 + rivalutazione netta + quota dell'anno non versata al fondo.</div></div>`)}
 function sOt(){const os=slips.find(x=>(x.voci||[]).some(r=>/straordin/i.test(r[0])))||slips.find(x=>(x.voci||[]).some(r=>r[2]))||slips[0];return ps("Calcolo straordinario",osec(os))}
 function sCmp(){return ps("Confronto buste",cmpOn?cmp()+`<button class="btn s" style="margin-top:12px" onclick="cmpOn=false;draw()">Chiudi confronto</button>`:`<button class="btn s" onclick="cmpOn=true;draw()">Confronta buste</button>`)}
-const SF={hero:sHero,anni:sAnni,disp:sDisp,media:sMedia,crescita:sCrescita,tfr:sTfr,ot:sOt,cmp:sCmp};
+const SF={check:sCheck,prev:sPrev,hero:sHero,anni:sAnni,disp:sDisp,media:sMedia,crescita:sCrescita,tfr:sTfr,ot:sOt,cmp:sCmp};
 function overview(){
   if(!slips.length)return`<div class="card" style="text-align:center;padding:28px 20px"><div style="font-weight:600;font-size:17px">Nessuna busta caricata</div><div class="mu" style="margin-top:6px">Tocca <b style="color:var(--ac)">＋ Carica</b> in alto a destra per aggiungere le tue buste paga.</div></div>`;
   const on=pan.filter(p=>p.on);
-  return(on.length?on.map(p=>SF[p.id]()).join(""):`<div class="card mu">Tutti i riquadri sono nascosti. Apri il menu e scegli Modifica panoramica.</div>`);
+  return bkBanner()+(on.length?on.map(p=>SF[p.id]()).join(""):`<div class="card mu">Tutti i riquadri sono nascosti. Apri il menu e scegli Modifica panoramica.</div>`);
 }
 function editSheet(){
   const eye=o=>`<svg viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>${o?"":'<path d="M4 4l16 16"/>'}</svg>`,ch=d=>`<svg viewBox="0 0 24 24"><path d="${d}"/></svg>`;
@@ -536,7 +605,7 @@ function editOpen(){mo=false;em=true;drawO()}
 const GC=[["Retribuzione",/retribuzione|stipendio|paga base|minimo|contingenza|scatt|superminimo|edr|aumento ccnl/i],["Straordinari",/straordin|maggiorazion|notturn/i],["Assenze retribuite",/permess|ferie|malattia|infortun|maternit|congedo|festivit/i],["Premi e indennità",/./]];
 const GT=[["Contributi e previdenza",/contribut|inps|ivs|previd|cometa|fondo|e\.?b\.?m/i],["Imposte",/irpef|addiz|imposta|ritenut|detraz/i],["Assenze e ritardi",/non lavorat|ritard|assenz|permess/i],["Altre trattenute",/./]];
 const tot=a=>(a||[]).reduce((t,x)=>t+x[1],0);
-const gs=l=>`<a class="gs" href="https://www.google.com/search?q=${encodeURIComponent(l+" busta paga voce")}" target="_blank" rel="noopener" aria-label="Cerca su Google"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></a>`;
+const gs=l=>`<button class="gs" data-l="${esc(l)}" onclick="event.stopPropagation();gloOpen(this.dataset.l)" aria-label="Spiega questa voce"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></button>`;
 function groups(rows,G){const o=G.map(g=>[g[0],[]]);(rows||[]).forEach(r=>{const i=G.findIndex(g=>g[1].test(r[0]));o[i<0?G.length-1:i][1].push(r)});return o.filter(g=>g[1].length)}
 function sect(t,rows,G){
   const body=groups(rows,G).map(([n,rs])=>`<div class="gh"><span>${n}</span><span>${E(tot(rs))}</span></div>`+rs.map(r=>`<div class="row"><span class="rl">${r[0]} ${gs(r[0])}</span><span>${E(r[1])}</span></div>`).join("")).join("");
@@ -578,9 +647,9 @@ function go(d,q){const a=slips.slice().reverse(),i=a.findIndex(x=>x.id==cur().id
 function rel(){clearTimeout(hT);clearInterval(hI)}
 function hold(d){rel();if(!go(d))return;hT=setTimeout(()=>{hI=setInterval(()=>{if(!go(d,1))rel()},110)},380)}
 function picker(s){
-  const ys=[...new Set(slips.map(x=>x.y))].sort(),py=pkY||s.y,f=(m,t)=>slips.find(x=>x.y==py&&x.m==m&&(t?x.tipo=="13a":x.tipo!="13a"));
+  const ys=[...new Set(slips.map(x=>x.y))].sort(),py=pkY||s.y,f=(m,t)=>slips.find(x=>x.y==py&&(t?x.tipo==t:!x.tipo&&x.m==m)),h14=cfg.mens==14||slips.some(x=>x.tipo=="14a");
   const cell=(l,x)=>x?`<button class="mc ${x.id==s.id?"on":""}" onclick="pk=false;setSel('${x.id}')">${l}</button>`:`<button class="mc" disabled>${l}</button>`;
-  return`<div class="card" style="margin:0 0 12px"><div class="yr">${ys.map(y=>`<button class="chip ${y==py?"on":""}" onclick="pkY=${y};draw()">${y}</button>`).join("")}</div><div class="mg">${MESI.map((m,k)=>cell(m[0].toUpperCase()+m.slice(1,3),f(k+1,0))).join("")}${cell("13ª",f(12,1))}</div></div>`}
+  return`<div class="card" style="margin:0 0 12px"><div class="yr">${ys.map(y=>`<button class="chip ${y==py?"on":""}" onclick="pkY=${y};draw()">${y}</button>`).join("")}</div><div class="mg">${MESI.map((m,k)=>cell(m[0].toUpperCase()+m.slice(1,3),f(k+1,0))).join("")}${cell("13ª",f(12,"13a"))}${h14?cell("14ª",f(6,"14a")):""}</div></div>`}
 function pager(s){
   const a=slips.slice().reverse(),i=a.findIndex(x=>x.id==s.id),c=d=>`<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="${d}"/></svg>`;
   return`<div class="pn"><button ${i>0?"":"disabled"} onpointerdown="hold(-1)" aria-label="Busta precedente">${c("M15 5l-7 7 7 7")}</button><div class="pt" onclick="pk=!pk;pkY=null;draw()">${lab(s)}<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--mu)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(${pk?180:0}deg);transition:transform .2s"><path d="M6 9l6 6 6-6"/></svg></div><button ${i<a.length-1?"":"disabled"} onpointerdown="hold(1)" aria-label="Busta successiva">${c("M9 5l7 7-7 7")}</button></div>
@@ -592,18 +661,15 @@ function home(){
   ${hero("Netto del mese",s.netto,lab(s))}
   <div class="grid"><div class="card"><div class="k">Lordo</div><div class="v"${cu(s.lordo)}>${E(s.lordo)}</div></div>
   <div class="card"><div class="k">Trattenute</div><div class="v">${s.lordo!=null&&s.netto!=null?E(s.lordo-s.netto):"–"}</div></div></div>
-  ${split(s.lordo,s.netto,s.tratt)}
+  ${split(s.lordo,s.netto,s.tratt)}${checkCard(s)}
   ${sect("Competenze",s.voci,GC)}${sect("Trattenute",s.tratt,GT)}${bsec("Ferie",s.ferie)}${bsec("Permessi PAR",s.perm)}${bsec("ROL",s.rol)}
   ${s.tfr!=null?`<div class="card"><div class="row"><span>TFR del mese</span><span>${E(s.tfr)}</span></div></div>`:""}
-  <div class="card"><div class="k">Correggi dati</div>
-  <div class="row"><span>Lordo</span><input class="f" value="${s.lordo??""}" onchange="ed('${s.id}','lordo',this.value)"></div>
-  <div class="row"><span>Netto</span><input class="f" value="${s.netto??""}" onchange="ed('${s.id}','netto',this.value)"></div>
-  <div class="row"><span>Tipo busta</span><select onchange="setTipo('${s.id}',this.value)"><option value="" ${s.tipo?"":"selected"}>Mensile</option><option value="13a" ${s.tipo?"selected":""}>Tredicesima</option></select></div></div>
+  <div class="act"><button class="btn s" onclick="ebOpen('${s.id}')">Modifica busta</button>${s.pdf?`<button class="btn s" onclick="pdfOpen('${s.id}')">PDF originale</button>`:""}</div>
   <button class="link" style="margin-top:16px" onclick="del('${s.id}')">Elimina questa busta</button>`;
 }
 function ed(id,k,v){const s=slips.find(x=>x.id==id);s[k]=parseFloat(v.replace(",","."))||null;save();draw()}
 function setTipo(id,v){const s=slips.find(x=>x.id==id);s.tipo=v;slips.sort((a,b)=>ord(b)-ord(a));save();draw()}
-function del(id){slips=slips.filter(x=>x.id!=id);sel=null;save();draw()}
+function del(id){pdfDel(id);slips=slips.filter(x=>x.id!=id);sel=null;save();draw();toast("Busta eliminata")}
 const stats=(l,t)=>`<div class="grid"><div class="card"><div class="k">Lordo</div><div class="v"${cu(l)}>${E(l)}</div></div><div class="card"><div class="k">Trattenute</div><div class="v"${cu(t)}>${E(t)}</div></div></div>`;
 const barsC=(t,items)=>{const mx=Math.max(...items.map(i=>i[2]||0),1),nz=items.filter(i=>i[2]>0),av=nz.length>2?nz.reduce((a,i)=>a+i[2],0)/nz.length:null;return`<div class="card"><div class="k">${t}</div><div class="cw"><div class="bars">${av!=null?`<div class="avg" style="bottom:${av/mx*100}%"><span>media ${E(av)}</span></div>`:""}${items.map((i,n)=>`<div data-t="${i[3]} · ${E(i[2])}" onclick="tip(event)" style="--i:${n};height:${(i[2]||0)/mx*100}%"></div>`).join("")}</div><div class="tip"></div></div><div class="lab">${items.map(i=>`<span>${i[0]}</span>`).join("")}</div></div>`};
 function annual(){
@@ -620,10 +686,10 @@ function annual(){
     +`<div class="card">${Y.slice().reverse().map(o=>`<div class="item" onclick="yr=${o.y};draw()"><span style="font-weight:600">${o.y}</span><span style="text-align:right">${E(o.net)}<br><span class="mu">lordo ${E(o.l)} · ${o.n} buste</span></span></div>`).join("")}</div>`;
   }
   const S=slips.filter(s=>s.y==yr).sort((a,b)=>ord(a)-ord(b));
-  const has=k=>S.some(x=>k==13?x.tipo=="13a":x.tipo!="13a"&&x.m==k);
-  return pick+hero("Netto "+yr,sum(S,"netto"),`${S.length} di 13 buste caricate`,`<div class="mdots">${[1,2,3,4,5,6,7,8,9,10,11,12,13].map((k,i)=>`<i class="${has(k)?"on":""}" style="--i:${i}"></i>`).join("")}</div>`)+stats(sum(S,"lordo"),sum(S,"lordo")-sum(S,"netto"))
+  const NM=cfg.mens==14||S.some(x=>x.tipo=="14a")?14:13,has=k=>S.some(x=>k==13?x.tipo=="13a":k==14?x.tipo=="14a":!x.tipo&&x.m==k);
+  return pick+hero("Netto "+yr,sum(S,"netto"),`${S.length} di ${NM} buste caricate`,`<div class="mdots">${Array.from({length:NM},(_,i)=>i+1).map((k,i)=>`<i class="${has(k)?"on":""}" style="--i:${i}"></i>`).join("")}</div>`)+stats(sum(S,"lordo"),sum(S,"lordo")-sum(S,"netto"))
   +split(sum(S,"lordo"),sum(S,"netto"),S.flatMap(x=>x.tratt||[]))
-  +barsC("Netto per mese",S.map(s=>[s.tipo=="13a"?"13ª":s.m?MESI[s.m-1].slice(0,3):"–",0,s.netto,lab(s)]))
+  +barsC("Netto per mese",S.map(s=>[TL(s)||(s.m?MESI[s.m-1].slice(0,3):"–"),0,s.netto,lab(s)]))
   +`<div class="card">${S.map(s=>`<div class="item" onclick="sel='${s.id}';tab='home';draw()"><span>${lab(s)}</span><span style="text-align:right">${E(s.netto)} <span class="mu">/ ${E(s.lordo)}</span></span></div>`).join("")}</div>`;
 }
 const MODELS=[["auto","Auto-riconoscimento","Riconosce da sola il formato"],["zucchetti","Zucchetti","Testato su cedolini reali"],["generico","Altri software paghe","Formato «Foglio retribuzione» e lettura generica"]];
@@ -644,19 +710,28 @@ let mo=false,dm=false,em=false,bm=false,ss=false,dsel=new Set(),dc=false,tmT=nul
 const MI=(k,t,sb,svg,c)=>`<button class="mi ${c||""}" onclick="${k}"><i><svg viewBox="0 0 24 24">${svg}</svg></i><span><b>${t}</b><small>${sb}</small></span></button>`;
 function toast(t){const e=document.getElementById("t");if(!e)return;e.textContent=t;e.className="toast on";clearTimeout(tmT);tmT=setTimeout(()=>{e.className="toast"},2800)}
 function drawO(){
-  const el=document.getElementById("o");if(!el)return;let h="";
-  if(mo){const n=slips.length,ys=new Set(slips.map(x=>x.y)).size;
-    h+=`<div class="scrim" onclick="closeUI()"></div><aside class="drawer"><div style="font-size:26px;font-weight:700;letter-spacing:-.03em;margin:0 4px">Cedolino</div><div class="mu" style="margin:2px 4px 14px">${n?`${n} ${n==1?"busta":"buste"} · ${ys} ${ys>1?"anni":"anno"}`:"Nessuna busta salvata"}</div>`
+  const el=document.getElementById("o");if(!el)return;let h="",st=0;
+  try{const q=el.querySelector(".sl");if(q&&lastSx==sx)st=q.scrollTop}catch(e){}
+  if(mo){const n=slips.length,ys=new Set(slips.map(x=>x.y)).size,p=curProf();
+    h+=`<div class="scrim" onclick="closeUI()"></div><aside class="drawer"><div style="font-size:26px;font-weight:700;letter-spacing:-.03em;margin:0 4px">Cedolino</div>
+    <button class="pchip" onclick="sxOpen('prof')" aria-label="Cambia profilo"><i>${esc(p.name.slice(0,1).toUpperCase())}</i>${esc(p.name)}<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="var(--mu)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+    <div class="mu" style="margin:-4px 4px 12px">${n?`${n} ${n==1?"busta":"buste"} · ${ys} ${ys>1?"anni":"anno"}`:"Nessuna busta salvata"}</div>`
+    +MI("fq='';fo=null;sxOpen('find')","Cerca voce","Trova una voce in tutte le buste",'<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>')
+    +MI("simOpen()","Simulatore netto","Dal lordo annuo al netto",'<rect x="5" y="3.5" width="14" height="17" rx="2.5"/><path d="M8.5 7.5h7M8.5 12h1M12 12h1M15.5 12h0M8.5 16h1M12 16h1M15.5 16h0"/>')
+    +MI("sxOpen('exp')","Esporta","PDF o tabella per Excel",'<path d="M12 15V4M7.5 8.5 12 4l4.5 4.5"/><path d="M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/>')
     +MI("editOpen()","Modifica panoramica","Mostra, nascondi e riordina",'<rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/>')
     +MI("bkOpen()","Backup","Salva o ripristina i dati",'<path d="M7 18a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 9a4 4 0 0 1-.5 9"/><path d="M12 12v8M9 17l3 3 3-3"/>')
-    +MI("secOpen()","Sicurezza","PIN e accesso biometrico",'<rect x="5" y="10.5" width="14" height="9.5" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/>')
+    +MI("secOpen()","Sicurezza","PIN, cifratura e biometria",'<rect x="5" y="10.5" width="14" height="9.5" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/>')
+    +MI("sxOpen('cfg')","Impostazioni","Tema, mensilità, ore al giorno",'<circle cx="12" cy="12" r="3"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"/>')
     +MI("delOpen()","Elimina buste","Seleziona e cancella",'<path d="M5 7h14M10 7V5h4v2M7 7l1 12h8l1-12M10 11v5M14 11v5"/>',"d")+`</aside>`}
-  if(dm)h+=delSheet();if(em)h+=editSheet();if(bm)h+=bkSheet();if(ss)h+=secSheet();
-  el.innerHTML=h;
-  try{document.body.style.overflow=mo||dm||em||bm||ss||lk?"hidden":""}catch(e){}
+  if(dm)h+=delSheet();if(em)h+=editSheet();if(bm)h+=bkSheet();if(ss)h+=secSheet();if(sx&&SX[sx])h+=SX[sx]();if(gl)h+=gloCard();
+  el.innerHTML=h;lastSx=sx;
+  try{if(st){const q=el.querySelector(".sl");if(q)q.scrollTop=st}}catch(e){}
+  try{document.body.style.overflow=mo||dm||em||bm||ss||sx||lk?"hidden":""}catch(e){}
 }
+const SX={cfg:cfgSheet,prof:profSheet,edit:ebSheet,sim:simSheet,find:findSheet,exp:expSheet,pdf:pdfSheet};
 function menu(){mo=true;drawO()}
-function closeUI(){mo=false;dm=false;em=false;bm=false;ss=false;drawO()}
+function closeUI(){mo=false;dm=false;em=false;bm=false;ss=false;sx=null;gl=null;pdl=null;drawO()}
 function delOpen(){mo=false;dm=true;dsel=new Set();dc=false;drawO()}
 function delSheet(){
   return`<div class="sheet"><div class="sh2"><button onclick="closeUI()">Annulla</button><b>Elimina buste</b><button id="dall" onclick="delAll()">Tutte</button></div>
@@ -671,7 +746,7 @@ function delUI(){
 function delTog(i){dsel.has(i)?dsel.delete(i):dsel.add(i);dc=false;document.getElementById("di-"+i).classList.toggle("on",dsel.has(i));delUI()}
 function delAll(){const all=dsel.size==slips.length;dsel=new Set(all?[]:slips.map((_,i)=>i));dc=false;slips.forEach((_,i)=>document.getElementById("di-"+i).classList.toggle("on",dsel.has(i)));delUI()}
 function delAsk(){if(dsel.size){dc=true;delUI()}}
-function delGo(){const ids=[...dsel].map(i=>slips[i].id),n=ids.length;slips=slips.filter(x=>!ids.includes(x.id));save();dsel=new Set();dc=false;sel=null;mo=false;dm=false;draw();toast(`${n} ${n==1?"busta eliminata":"buste eliminate"}`)}
+function delGo(){const ids=[...dsel].map(i=>slips[i].id),n=ids.length;ids.forEach(pdfDel);slips=slips.filter(x=>!ids.includes(x.id));save();dsel=new Set();dc=false;sel=null;mo=false;dm=false;draw();toast(`${n} ${n==1?"busta eliminata":"buste eliminate"}`)}
 function bkOpen(){mo=false;bm=true;drawO()}
 function bkSheet(){
   let lb=null;try{lb=localStorage.getItem("lastBk")}catch(e){}
@@ -689,20 +764,11 @@ function bkSheet(){
   </div></div>`}
 function pickImport(){document.getElementById("imp").click();bm=false;mo=false;drawO()}
 async function doBackup(){
-  mo=false;bm=false;drawO();const mk=()=>{try{localStorage.setItem("lastBk",new Date().toISOString())}catch(e){}};
+  mo=false;bm=false;drawO();
   if(!slips.length){toast("Nessuna busta da salvare");return}
-  const d=new Date(),p=n=>String(n).padStart(2,"0"),name=`cedolino-backup-${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}.json`,txt=JSON.stringify({app:"cedolino",v:1,date:d.toISOString(),slips},null,1);
-  const C=window.Capacitor,P=C&&C.Plugins,nat=!!(C&&C.isNativePlatform&&C.isNativePlatform()&&P&&P.Filesystem&&P.Share);
-  const dl=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([txt],{type:"application/json"}));a.download=name;document.body.appendChild(a);a.click();a.remove();mk();toast("Backup scaricato")};
-  try{
-    if(nat){const r=await P.Filesystem.writeFile({path:name,data:txt,directory:"CACHE",encoding:"utf8"});await P.Share.share({title:"Backup Cedolino",url:r.uri,dialogTitle:"Salva il backup"});mk();return}
-    const f=new File([txt],name,{type:"application/json"});
-    if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:"Backup Cedolino"});mk();toast("Backup pronto")}else dl();
-  }catch(e){
-    if(/abort|cancel/i.test(String(e&&(e.name+" "+e.message))))return;
-    if(nat){toast("Backup non riuscito");return}
-    try{dl()}catch(x){toast("Backup non riuscito")}
-  }
+  const d=new Date(),p=n=>String(n).padStart(2,"0"),pr=curProf(),name=`cedolino-backup-${pr.id=="p0"?"":pr.name.toLowerCase().replace(/[^a-z0-9]+/g,"-")+"-"}${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}.json`;
+  const txt=JSON.stringify({app:"cedolino",v:2,date:d.toISOString(),profile:pr.name,slips:slips.map(x=>Object.assign({},x,{pdf:false}))},null,1);
+  try{if(await shareFile(name,txt,"application/json","Backup Cedolino")){try{localStorage.setItem("lastBk",d.toISOString())}catch(e){}toast("Backup pronto");draw()}}catch(e){toast("Backup non riuscito")}
 }
 async function doImport(inp){
   const f=inp.files&&inp.files[0];if(!f)return;
@@ -713,7 +779,7 @@ async function doImport(inp){
     if(!ok.length)throw 0;
     let ag=0,su=0;
     ok.forEach(x=>{
-      const n={id:Date.now()+Math.random(),file:x.file||"",y:+x.y,m:+x.m||0,lordo:x.lordo??null,netto:x.netto??null,voci:x.voci||[],tratt:x.tratt||[],tipo:x.tipo=="13a"?"13a":"",ferie:x.ferie||[],perm:x.perm||[],rol:x.rol||[],tfr:x.tfr??null,ass:x.ass||null,tf:x.tf||null};
+      const n={id:Date.now()+Math.random(),file:x.file||"",y:+x.y,m:+x.m||0,lordo:x.lordo??null,netto:x.netto??null,voci:x.voci||[],tratt:x.tratt||[],tipo:x.tipo=="13a"||x.tipo=="14a"?x.tipo:"",ferie:x.ferie||[],perm:x.perm||[],rol:x.rol||[],tfr:x.tfr??null,ass:x.ass||null,tf:x.tf||null};
       const k=n.m?slips.findIndex(s=>s.y==n.y&&s.m==n.m&&(s.tipo||"")==n.tipo):-1;
       if(k>=0){slips[k]=n;su++}else{slips.push(n);ag++}});
     slips.sort((a,b)=>ord(b)-ord(a));save();sel=null;draw();
@@ -744,21 +810,25 @@ async function bioAvail(){
   return null}
 async function bioEnroll(){
   const t=await bioAvail();if(!t)throw new Error("na");
-  if(t=="n"){await nbio().verifyIdentity({reason:"Attiva l'accesso biometrico",title:"Cedolino",subtitle:"Conferma con impronta o volto",negativeButtonText:"Annulla"});return{t}}
+  if(t=="n"){const n=nbio();await n.verifyIdentity({reason:"Attiva l'accesso biometrico",title:"Cedolino",subtitle:"Conferma con impronta o volto",negativeButtonText:"Annulla"});let kc=false;
+    if(dkRaw){try{if(n.setCredentials){await n.setCredentials({username:"cedolino",password:b64u(dkRaw),server:BSRV});kc=true}}catch(e){}if(!kc)throw new Error("na")}
+    return{t,kc}}
   const c=await navigator.credentials.create({publicKey:{challenge:rnd(32),rp:{name:"Cedolino"},user:{id:rnd(16),name:"cedolino",displayName:"Cedolino"},pubKeyCredParams:[{type:"public-key",alg:-7},{type:"public-key",alg:-257}],authenticatorSelection:{authenticatorAttachment:"platform",userVerification:"required",residentKey:"discouraged"},timeout:60000}});
-  return{t,id:b64(c.rawId)}}
+  return{t,id:b64(c.rawId),k:dkRaw?b64u(dkRaw):null}}
 async function bioCheck(){
   if(!sec||!sec.bio)return false;
-  if(sec.bio.t=="n"){const n=nbio();if(!n)return false;await n.verifyIdentity({reason:"Sblocca Cedolino",title:"Cedolino",subtitle:"Accedi con impronta o volto",negativeButtonText:"Usa il PIN"});return true}
-  await navigator.credentials.get({publicKey:{challenge:rnd(32),allowCredentials:[{type:"public-key",id:ub64(sec.bio.id)}],userVerification:"required",timeout:60000}});return true}
+  if(sec.bio.t=="n"){const n=nbio();if(!n)return false;await n.verifyIdentity({reason:"Sblocca Cedolino",title:"Cedolino",subtitle:"Accedi con impronta o volto",negativeButtonText:"Usa il PIN"});
+    if(sec.wk&&!dk){if(!sec.bio.kc||!n.getCredentials)return false;const c=await n.getCredentials({server:BSRV});if(!c||!c.password)return false;await dkSet(ub64(c.password))}return true}
+  await navigator.credentials.get({publicKey:{challenge:rnd(32),allowCredentials:[{type:"public-key",id:ub64(sec.bio.id)}],userVerification:"required",timeout:60000}});
+  if(sec.wk&&!dk){if(!sec.bio.k)return false;await dkSet(ub64(sec.bio.k))}return true}
 const LKT={unlock:["Inserisci il PIN",""],set1:["Crea un PIN","Scegli 6 cifre per proteggere l'app"],set2:["Conferma il PIN","Inserisci di nuovo le 6 cifre"],verify:["Inserisci il PIN attuale",""]};
 function startLock(mode,next,o){lk=Object.assign({mode,v:"",msg:"",err:false,next:next||null,st:""},o||{});drawL();drawO();if(mode=="unlock")setTimeout(tryBio,350)}
-function lockNow(){if(sec&&!lk){mo=false;dm=false;em=false;bm=false;ss=false;drawO();startLock("unlock")}}
+function lockNow(){if(sec&&!lk){mo=false;dm=false;em=false;bm=false;ss=false;sx=null;gl=null;drawO();startLock("unlock")}}
 const locked=()=>Date.now()<fail.until;
 function drawL(){
   const el=document.getElementById("lk");if(!el)return;
   clearTimeout(lkT);
-  if(!lk){el.innerHTML="";try{document.body.style.overflow=mo||dm||em||bm||ss?"hidden":""}catch(e){}return}
+  if(!lk){el.innerHTML="";try{document.body.style.overflow=mo||dm||em||bm||ss||sx?"hidden":""}catch(e){}return}
   try{document.body.style.overflow="hidden"}catch(e){}
   if(lk.mode=="forgot"){
     el.innerHTML=`<div class="lock"><div class="lt"></div><div class="lav"><svg viewBox="0 0 24 24"><path d="M12 8v5M12 16.5v.5"/><circle cx="12" cy="12" r="9"/></svg></div>
@@ -784,11 +854,17 @@ async function lkDone(){
   if(lk.mode=="set1"){lk.tmp=v;lk.mode="set2";lk.v="";lk.msg="";lk.err=false;lk.busy=false;drawL();return}
   if(lk.mode=="set2"){
     if(v!=lk.tmp){lk.mode="set1";lk.tmp=null;lkBad("I PIN non coincidono. Riprova");return}
-    const salt=hex(rnd(16)),h=await hashPin(v,salt),was=!!sec;
-    sec={h,salt,bio:was&&sec.bio?sec.bio:null};saveSec();fail={n:0,until:0};saveFail();
-    lk.st="ok";drawL();setTimeout(()=>{lk=null;drawL();drawO();toast(was?"PIN aggiornato":"PIN attivato")},300);return}
+    const salt=hex(rnd(16)),h=await hashPin(v,salt),was=!!sec,nb=was&&sec.bio?sec.bio:null;let fresh=false;
+    sec={h,salt,bio:nb};
+    if(subtle()){try{if(!dk){await dkSet(rnd(32));fresh=true}const ks=hex(rnd(16)),wk=b64u(await aesEnc(await kekFrom(v,ks),dkRaw));sec.ks=ks;sec.wk=wk;if(fresh)await bioStore()}catch(e){if(fresh){dk=null;dkRaw=null}delete sec.ks;delete sec.wk}}
+    saveSec();fail={n:0,until:0};saveFail();
+    if(fresh&&dk){try{await svQ;await encAll();await pdfRecode(null,dk)}catch(e){}}
+    lk.st="ok";drawL();setTimeout(()=>{lk=null;drawL();drawO();toast(was?"PIN aggiornato":dk?"PIN attivato: i dati sono cifrati":"PIN attivato")},300);return}
   const h=await hashPin(v,sec.salt,sec.h[0]=="f"&&sec.h.length<40);
-  if(h==sec.h){fail={n:0,until:0};saveFail();lk.st="ok";drawL();const nx=lk.next;setTimeout(()=>{lk=null;drawL();drawO();if(nx)nx()},260);return}
+  if(h==sec.h){fail={n:0,until:0};saveFail();let kerr=false;
+    try{await pinKeys(v)}catch(e){kerr=true}
+    if(lk.mode=="unlock"){const ok=await loadCur();if(!ok)kerr=true;sel=null;draw()}
+    lk.st="ok";drawL();const nx=lk.next;setTimeout(()=>{lk=null;drawL();drawO();if(kerr)toast("Non riesco a leggere i dati cifrati");if(nx)nx()},260);return}
   fail.n++;const left=5-fail.n%5;
   if(fail.n%5==0){fail.until=Date.now()+30000*Math.min(8,fail.n/5)}
   saveFail();lkBad(fail.n%5==0?"PIN errato":`PIN errato. ${left} ${left==1?"tentativo rimasto":"tentativi rimasti"}`);
@@ -796,11 +872,13 @@ async function lkDone(){
 function lkCancel(){lk=null;drawL();drawO()}
 async function tryBio(){
   if(!lk||lk.mode!="unlock"||!sec||!sec.bio||locked()||lk.bb)return;lk.bb=true;
-  try{if(await bioCheck()&&lk){fail={n:0,until:0};saveFail();lk.v="••••••";lk.st="ok";drawL();setTimeout(()=>{lk=null;drawL();drawO()},260)}}
+  try{if(await bioCheck()&&lk){fail={n:0,until:0};saveFail();await loadCur();sel=null;draw();lk.v="••••••";lk.st="ok";drawL();setTimeout(()=>{lk=null;drawL();drawO()},260)}else if(lk){lk.msg="Per questa volta serve il PIN";lk.err=false;drawL()}}
   catch(e){if(lk){lk.msg="Tocca l'icona in basso a sinistra per riprovare, o usa il PIN";lk.err=false;drawL()}}
   finally{if(lk)lk.bb=false}
 }
-function forgotGo(){slips=[];save();sec=null;saveSec();fail={n:0,until:0};saveFail();lk=null;sel=null;tab="ov";drawL();draw();toast("Dati cancellati. Crea un nuovo PIN da Sicurezza")}
+function forgotGo(){
+  try{profs.forEach(p=>{localStorage.removeItem(SKi(p.id,0));localStorage.removeItem(SKi(p.id,1))})}catch(e){}
+  pdfClear();dk=null;dkRaw=null;slips=[];profs=[{id:"p0",name:"Principale"}];pid="p0";saveProfs();sec=null;saveSec();fail={n:0,until:0};saveFail();lk=null;sel=null;tab="ov";drawL();draw();toast("Dati cancellati. Crea un nuovo PIN da Sicurezza")}
 function secOpen(){mo=false;ss=true;bioA=null;drawO();bioAvail().then(t=>{bioA=t||"no";if(ss)drawO()})}
 function secSheet(){
   const on=!!sec,bo=!!(sec&&sec.bio),bn=bioA=="no",chev='<span class="chev"></span>';
@@ -813,9 +891,12 @@ function secSheet(){
   <div class="op ${on&&!(bn&&!bo)?"":"na"}" onclick="secBio()"><span><b>Accesso biometrico</b><small>${bsub}</small></span><span class="sw ${bo?"on":""}"></span></div>
   ${on?`<div class="op" onclick="closeUI();setTimeout(lockNow,250)"><span><b>Blocca ora</b><small>L'app si blocca anche dopo 1 minuto in background</small></span>${chev}</div>`:""}
   </div></div>
-  <div class="mu" style="margin:14px 8px">Il PIN impedisce di aprire l'app su questo telefono. I dati delle buste non vengono cifrati: tieni attivo anche il blocco schermo del telefono. Se dimentichi il PIN, l'unico modo per reimpostarlo è cancellare i dati dell'app, quindi fai un backup.</div>
+  <div class="mu" style="margin:14px 8px">${sec&&sec.wk?"Con il PIN attivo le buste salvate su questo telefono sono cifrate: senza PIN non si possono leggere.":"Attivando il PIN le buste salvate su questo telefono vengono cifrate."} I file di backup e quelli esportati restano invece in chiaro: conservali con cura. Se dimentichi il PIN, l'unico modo per reimpostarlo è cancellare i dati dell'app, quindi fai un backup.</div>
   </div></div>`}
-function secPin(){if(!sec)startLock("set1");else startLock("verify",()=>{sec=null;saveSec();drawO();toast("PIN disattivato")})}
+function secPin(){if(!sec){startLock("set1");return}
+  startLock("verify",async()=>{
+    if(dk){await svQ;const old=dk;if(!(await decAll())){await encAll();toast("Non riesco a togliere la cifratura: riprova");return}await pdfRecode(old,null);const n=nbio();try{if(n&&n.deleteCredentials)await n.deleteCredentials({server:BSRV})}catch(e){}}
+    dk=null;dkRaw=null;sec=null;saveSec();drawO();toast("PIN disattivato")})}
 function secChange(){if(sec)startLock("verify",()=>startLock("set1"))}
 async function secBio(){
   if(!sec){toast("Attiva prima il PIN");return}
@@ -829,6 +910,299 @@ if(document.addEventListener){
   document.addEventListener("visibilitychange",()=>{if(document.hidden)hidAt=Date.now();else{if(sec&&!lk&&hidAt&&Date.now()-hidAt>60000)lockNow();hidAt=0}});
   document.addEventListener("keydown",e=>{if(!lk||lk.mode=="forgot")return;if(/^[0-9]$/.test(e.key))lkKey(e.key);else if(e.key=="Backspace")lkDel();else if(e.key=="Escape"&&lk.mode!="unlock")lkCancel()});
 }
+/* ================= Funzioni nuove ================= */
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pn=v=>{v=String(v).trim();if(!v)return null;if(v.includes(","))v=v.replace(/\./g,"").replace(",",".");const n=parseFloat(v);return isFinite(n)?n:null};
+const iv=v=>v==null?"":String(v).replace(".",",");
+const CHEV='<span class="chev"></span>';
+let sx=null,lastSx=null;
+function sxOpen(k){mo=false;sx=k;drawO()}
+/* ---------- condivisione file ---------- */
+async function shareFile(name,data,mime,title){
+  const C=window.Capacitor,P=C&&C.Plugins,nat=!!(C&&C.isNativePlatform&&C.isNativePlatform()&&P&&P.Filesystem&&P.Share);
+  const bytes=typeof data=="string"?new TextEncoder().encode(data):data;
+  const dl=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([bytes],{type:mime}));a.download=name;document.body.appendChild(a);a.click();a.remove()};
+  try{
+    if(nat){const r=await P.Filesystem.writeFile({path:name,data:b64u(bytes),directory:"CACHE"});await P.Share.share({title,url:r.uri,dialogTitle:title});return true}
+    const f=new File([bytes],name,{type:mime});
+    if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title});return true}
+    dl();return true;
+  }catch(e){
+    if(/abort|cancel/i.test(String(e&&(e.name+" "+e.message))))return false;
+    if(nat)throw e;dl();return true;
+  }
+}
+/* ---------- archivio PDF originali ---------- */
+let _db=null;
+const idb=()=>_db||(_db=new Promise((res,rej)=>{try{const r=indexedDB.open("cedolino",1);r.onupgradeneeded=()=>r.result.createObjectStore("pdf");r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}}));
+const idbOp=(mode,fn)=>idb().then(db=>new Promise((res,rej)=>{const t=db.transaction("pdf",mode),rq=fn(t.objectStore("pdf"));t.oncomplete=()=>res(rq&&rq.result);t.onerror=()=>rej(t.error);t.onabort=()=>rej(t.error)}));
+async function pdfPut(id,buf){try{const u=new Uint8Array(buf),d=dk?await aesEnc(dk,u):u;await idbOp("readwrite",s=>s.put({e:!!dk,d},String(id)));return true}catch(e){return false}}
+async function pdfGet(id){try{const r=await idbOp("readonly",s=>s.get(String(id)));if(!r)return null;return r.e?(dk?await aesDec(dk,r.d):null):new Uint8Array(r.d)}catch(e){return null}}
+const pdfDel=id=>idbOp("readwrite",s=>s.delete(String(id))).catch(()=>{});
+async function pdfRecode(oldK,newK){try{const ks=await idbOp("readonly",s=>s.getAllKeys());for(const k of ks||[]){const r=await idbOp("readonly",s=>s.get(k));if(!r)continue;const plain=r.e?(oldK?await aesDec(oldK,r.d):null):new Uint8Array(r.d);if(!plain)continue;const d=newK?await aesEnc(newK,plain):plain;await idbOp("readwrite",s=>s.put({e:!!newK,d},k))}}catch(e){}}
+const pdfClear=()=>idbOp("readwrite",s=>s.clear()).catch(()=>{});
+let pv=null;
+async function pdfOpen(id){
+  const s=slips.find(x=>x.id==id);if(!s)return;pv={id,name:s.file||lab(s)+".pdf",bytes:null};sxOpen("pdf");
+  const bytes=await pdfGet(id),box=document.getElementById("pdfv");if(!box)return;
+  if(!bytes){box.innerHTML='<div class="card mu">PDF non disponibile su questo dispositivo. Ricarica la busta per archiviarlo.</div>';return}
+  pv.bytes=bytes;
+  try{const pdf=await pdfjsLib.getDocument({data:bytes.slice(0)}).promise;box.innerHTML="";
+    for(let p=1;p<=pdf.numPages;p++){const pg=await pdf.getPage(p),w=Math.min(1100,(box.clientWidth||360)*(window.devicePixelRatio||2)),vp0=pg.getViewport({scale:1}),vp=pg.getViewport({scale:w/vp0.width}),cv=document.createElement("canvas");cv.width=vp.width;cv.height=vp.height;box.appendChild(cv);await pg.render({canvasContext:cv.getContext("2d"),viewport:vp}).promise;if(sx!="pdf")return}
+  }catch(e){box.innerHTML='<div class="card mu">Non riesco a mostrare questo PDF.</div>'}
+}
+function pdfSheet(){return`<div class="sheet"><div class="sh2"><button onclick="closeUI()">Chiudi</button><b>PDF originale</b><button onclick="pdfShare()">Condividi</button></div><div class="sl" id="pdfv"><div class="mu" style="padding:30px 0;text-align:center"><span class="spin"></span>Apertura…</div></div></div>`}
+async function pdfShare(){if(!pv||!pv.bytes){toast("PDF non disponibile");return}try{await shareFile(/\.pdf$/i.test(pv.name)?pv.name:pv.name+".pdf",pv.bytes,"application/pdf","Busta paga")}catch(e){toast("Condivisione non riuscita")}}
+/* ---------- impostazioni e tema ---------- */
+const ACCS=[["Blu",null],["Viola","#7d5cf0","#a24be8","#c04bd0"],["Verde","#18a070","#0f9aa0","#0b7fb0"],["Arancione","#f0802a","#f0503c","#e0407a"],["Rosa","#e8508f","#b04be8","#7d5cf0"]];
+function applyTheme(){
+  try{const r=document.documentElement,a=ACCS[cfg.acc]||ACCS[0];
+    if(cfg.theme=="light"||cfg.theme=="dark")r.setAttribute("data-theme",cfg.theme);else if(r.getAttribute("data-theme")&&window.self===window.top)r.removeAttribute("data-theme");
+    const set=(k,v)=>v?r.style.setProperty(k,v):r.style.removeProperty(k);
+    if(a[1]){const h=a[1],n=parseInt(h.slice(1),16);set("--ac",h);set("--ac2",a[2]);set("--tint",`rgba(${n>>16},${n>>8&255},${n&255},.15)`);set("--hg1",a[1]);set("--hg2",a[2]);set("--hg3",a[3])}
+    else["--ac","--ac2","--tint","--hg1","--hg2","--hg3"].forEach(k=>set(k,null));
+  }catch(e){}}
+function setCfg(k,v){cfg[k]=v;saveCfg();if(k=="theme"||k=="acc")applyTheme();hap();lt=null;draw()}
+function cfgSheet(){
+  const seg=(k,opts)=>`<div class="seg">${opts.map(o=>`<button class="${cfg[k]==o[0]?"on":""}" onclick="setCfg('${k}',${typeof o[0]=="string"?"'"+o[0]+"'":o[0]})">${o[1]}</button>`).join("")}</div>`;
+  return`<div class="sheet"><div class="sh2"><button onclick="closeUI()">Chiudi</button><b>Impostazioni</b><span style="min-width:78px"></span></div><div class="sl">
+  <div class="ps"><h1>Buste paga</h1><div class="card" style="padding:4px 18px">
+  <div class="opc"><b>Ore di una giornata</b><small>Serve a convertire ferie e permessi da ore a giorni</small>${seg("hd",[[6,"6"],[7,"7"],[7.5,"7,5"],[8,"8"]])}</div>
+  <div class="opc"><b>Mensilità all'anno</b><small>Con 14 l'app gestisce anche la quattordicesima</small>${seg("mens",[[13,"13"],[14,"14"]])}</div></div></div>
+  <div class="ps"><h1>Aspetto</h1><div class="card" style="padding:4px 18px">
+  <div class="opc"><b>Tema</b><small>Automatico segue le impostazioni del telefono</small>${seg("theme",[["auto","Automatico"],["light","Chiaro"],["dark","Scuro"]])}</div>
+  <div class="opc"><b>Colore</b><small>${ACCS[cfg.acc]?ACCS[cfg.acc][0]:"Blu"}</small><div class="sws">${ACCS.map((a,i)=>`<button class="${cfg.acc==i?"on":""}" style="background:linear-gradient(145deg,${a[1]||"#0a84ff"},${a[2]||"#5e5ce6"})" onclick="setCfg('acc',${i})" aria-label="${a[0]}"></button>`).join("")}</div></div></div></div>
+  <div class="ps"><h1>Altro</h1><div class="card" style="padding:4px 18px">
+  <div class="op" onclick="setCfg('bkRem',!cfg.bkRem)"><span><b>Promemoria backup</b><small>Ti avvisa in Home se non fai un backup da 30 giorni</small></span><span class="sw ${cfg.bkRem?"on":""}"></span></div>
+  <div class="op" onclick="closeUI();tutOpen()"><span><b>Rivedi il tutorial</b><small>Il giro delle funzioni dell'app</small></span>${CHEV}</div></div></div>
+  </div></div>`}
+/* ---------- profili ---------- */
+const curProf=()=>profs.find(p=>p.id==pid)||profs[0];
+const saveProfs=()=>{try{localStorage.setItem("profs",JSON.stringify(profs));localStorage.setItem("pid",pid)}catch(e){}};
+async function profSet(id){if(id==pid){closeUI();return}await svQ;pid=id;saveProfs();await loadCur();sel=null;yr=null;lt=null;otId=null;closeUI();draw();toast("Profilo: "+curProf().name)}
+async function profAdd(){await svQ;const id="p"+Date.now().toString(36);profs.push({id,name:"Profilo "+(profs.length+1)});pid=id;saveProfs();slips=[];save();sel=null;yr=null;lt=null;draw();drawO()}
+function profName(id,v){const p=profs.find(x=>x.id==id);if(p){p.name=v.trim().slice(0,24)||p.name;saveProfs()}}
+let pdl=null;
+async function profDel(id){
+  if(id=="p0"||profs.length<2)return;if(pdl!=id){pdl=id;drawO();return}pdl=null;
+  try{let arr=[];const c=localStorage.getItem(SKi(id,1)),t=localStorage.getItem(SKi(id,0));if(c&&dk)arr=JSON.parse(await decS(c));else if(t)arr=JSON.parse(t);(arr||[]).forEach(x=>pdfDel(x.id))}catch(e){}
+  try{localStorage.removeItem(SKi(id,0));localStorage.removeItem(SKi(id,1))}catch(e){}
+  profs=profs.filter(p=>p.id!=id);if(pid==id){pid="p0";await loadCur();sel=null;yr=null;lt=null;draw()}saveProfs();drawO();toast("Profilo eliminato")}
+function profSheet(){return`<div class="sheet"><div class="sh2"><button onclick="closeUI()">Chiudi</button><b>Profili</b><span style="min-width:78px"></span></div><div class="sl">
+  <div class="mu" style="margin:0 6px 12px">Ogni profilo ha le sue buste, separate dalle altre: utile per due persone o due lavori. Tocca il cerchio per passare a un profilo, scrivi nel campo per rinominarlo.</div>
+  ${profs.map(p=>`<div class="di er ${p.id==pid?"on":""}"><span class="ck" onclick="profSet('${p.id}')"></span><input class="fn" value="${esc(p.name)}" onchange="profName('${p.id}',this.value)" aria-label="Nome del profilo">${p.id!="p0"?`<button class="ib" style="${pdl==p.id?"width:auto;padding:0 12px;border-radius:17px;color:var(--dn);font:inherit;font-size:13px;font-weight:600":"color:var(--dn)"}" onclick="profDel('${p.id}')" aria-label="Elimina profilo">${pdl==p.id?"Conferma":'<svg viewBox="0 0 24 24"><path d="M5 7h14M10 7V5h4v2M7 7l1 12h8l1-12"/></svg>'}</button>`:""}</div>`).join("")}
+  <button class="btn s" style="margin-top:8px" onclick="profAdd()">Aggiungi profilo</button></div></div>`}
+/* ---------- modifica manuale della busta ---------- */
+let eb=null;
+function ebOpen(id){const s=slips.find(x=>x.id==id);if(!s)return;eb=JSON.parse(JSON.stringify(s));eb._id=s.id;
+  const n4=a=>!a||!a.length?[null,null,null,null]:a.length>=4?a.slice(-4):[null].concat(a.slice(-3));
+  eb.fe=n4(s.ferie);eb.pk=s.perm&&s.perm.length?"perm":s.rol&&s.rol.length?"rol":"perm";eb.pe=n4(s[eb.pk]);eb.voci=eb.voci||[];eb.tratt=eb.tratt||[];sxOpen("edit")}
+function ebSheet(){
+  if(!eb)return"";
+  const F=(l,ex,v)=>`<div class="row"><span>${l}</span><input class="f" inputmode="decimal" value="${iv(v)}" oninput="${ex}=pn(this.value)"></div>`;
+  const Q=(k,t)=>`<div class="ps"><h1>${t}</h1><div class="card">${[0,1,2,3].map(i=>F(["Residuo anno prec.","Maturate","Godute","Saldo"][i]+" (ore)",`eb.${k}[${i}]`,eb[k][i])).join("")}</div></div>`;
+  const V=(k,t)=>`<div class="ps"><h1>${t}</h1><div class="card">${eb[k].map((r,i)=>`<div class="vr"><input class="fn" value="${esc(r[0])}" placeholder="Nome della voce" oninput="eb.${k}[${i}][0]=this.value"><input class="f" inputmode="decimal" value="${iv(r[1])}" oninput="eb.${k}[${i}][1]=pn(this.value)||0"><button class="ib" style="color:var(--dn)" onclick="eb.${k}.splice(${i},1);drawO()" aria-label="Elimina voce"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>`).join("")}<button class="btn s" style="margin-top:10px;padding:11px;font-size:14.5px" onclick="eb.${k}.push(['',0,null,null]);drawO()">Aggiungi voce</button></div></div>`;
+  return`<div class="sheet"><div class="sh2"><button onclick="eb=null;closeUI()">Annulla</button><b>Modifica busta</b><button onclick="ebSave()">Salva</button></div><div class="sl">
+  <div class="ps"><h1>Periodo</h1><div class="card">
+  <div class="row"><span>Mese</span><select onchange="eb.m=+this.value">${MN.map((m,i)=>`<option value="${i+1}" ${eb.m==i+1?"selected":""}>${m}</option>`).join("")}</select></div>
+  <div class="row"><span>Anno</span><input class="f" inputmode="numeric" value="${eb.y??""}" oninput="eb.y=parseInt(this.value)||null"></div>
+  <div class="row"><span>Tipo</span><select onchange="eb.tipo=this.value"><option value="" ${eb.tipo?"":"selected"}>Mensile</option><option value="13a" ${eb.tipo=="13a"?"selected":""}>Tredicesima</option><option value="14a" ${eb.tipo=="14a"?"selected":""}>Quattordicesima</option></select></div></div></div>
+  <div class="ps"><h1>Importi</h1><div class="card">${F("Lordo (€)","eb.lordo",eb.lordo)}${F("Netto (€)","eb.netto",eb.netto)}${F("TFR del mese (€)","eb.tfr",eb.tfr)}</div></div>
+  ${Q("fe","Ferie")}${Q("pe",eb.pk=="rol"?"Permessi ROL":"Permessi PAR")}${V("voci","Competenze")}${V("tratt","Trattenute")}
+  <div class="mu" style="margin:14px 8px 30px">Le modifiche valgono solo per questa busta. Se ricarichi il PDF, i dati tornano quelli letti dal file.</div></div></div>`}
+function ebSave(){
+  const s=eb&&slips.find(x=>x.id==eb._id);if(!s){eb=null;closeUI();return}
+  if(!(eb.y>1990&&eb.y<2100)){toast("Anno non valido");return}
+  const a4=a=>a.every(v=>v==null)?[]:a.map(v=>v||0),cl=a=>a.filter(r=>String(r[0]).trim()).map(r=>[String(r[0]).trim().slice(0,46),+r[1]||0,r[2]??null,r[3]??null]);
+  Object.assign(s,{y:+eb.y,m:+eb.m||0,tipo:eb.tipo||"",lordo:eb.lordo,netto:eb.netto,tfr:eb.tfr,voci:cl(eb.voci),tratt:cl(eb.tratt),ferie:a4(eb.fe)});s[eb.pk]=a4(eb.pe);
+  slips.sort((a,b)=>ord(b)-ord(a));save();sel=s.id;eb=null;closeUI();ak="view";ck=true;draw();toast("Busta aggiornata")}
+/* ---------- controllo della busta ---------- */
+const vkey=l=>String(l).replace(/\b20\d\d\b/g,"").replace(/\s+/g," ").trim().toLowerCase();
+const prevOf=s=>slips.find(x=>!x.tipo&&x.m&&ord(x)<ord(s))||null;
+function check(s){
+  const o=[],add=(lv,t,d)=>o.push({lv,t,d});if(!s||s.tipo||!s.m)return{prev:null,items:o,na:true};
+  if(s.lordo!=null&&s.netto!=null&&s.tratt&&s.tratt.length){const df=Math.abs(s.lordo-tot(s.tratt)-s.netto);if(df>1.5)add("w","I conti non tornano di "+E(df),"Lordo meno trattenute lette non dà il netto: può esserci un conguaglio, un arrotondamento o una voce non letta.")}
+  const p=prevOf(s);if(!p)return{prev:null,items:o};const pl=sh(p);
+  if(s.netto!=null&&p.netto){const d=s.netto-p.netto,pc=d/p.netto*100;if(Math.abs(pc)>=8)add(d<0?"w":"g",`Netto ${d<0?"più basso":"più alto"} di ${E(Math.abs(d))}`,`${d<0?"−":"+"}${N2(Math.abs(pc))}% rispetto a ${pl}`)}
+  if(s.lordo>0&&p.lordo>0&&s.netto!=null&&p.netto!=null){const a=(s.lordo-s.netto)/s.lordo*100,b=(p.lordo-p.netto)/p.lordo*100;if(Math.abs(a-b)>=3)add(a>b?"w":"g",`Trattenute ${a>b?"salite":"scese"} al ${fmt(Math.round(a*10)/10)}% del lordo`,`A ${pl} erano il ${fmt(Math.round(b*10)/10)}%`)}
+  const mp=rows=>{const m=new Map();(rows||[]).forEach(r=>{const k=vkey(r[0]),e=m.get(k)||{n:r[0],v:0};e.v+=r[1]||0;m.set(k,e)});return m};
+  const cv=mp(s.voci),pv2=mp(p.voci),ct=mp(s.tratt),pt=mp(p.tratt),BP=/^retribuzione$|stipendio base|paga base/i;
+  pv2.forEach((e,k)=>{if(!cv.has(k)&&Math.abs(e.v)>=15)add("w",`Manca la voce «${e.n}»`,`A ${pl} valeva ${E(e.v)}`)});
+  cv.forEach((e,k)=>{if(!pv2.has(k)&&Math.abs(e.v)>=15)add("i",`Nuova voce «${e.n}»`,`${E(e.v)}, a ${pl} non c'era`)});
+  ct.forEach((e,k)=>{if(!pt.has(k)&&Math.abs(e.v)>=5)add("w",`Nuova trattenuta «${e.n}»`,`${E(e.v)}, a ${pl} non c'era`)});
+  pt.forEach((e,k)=>{if(!ct.has(k)&&Math.abs(e.v)>=5)add("i",`Non c'è più la trattenuta «${e.n}»`,`A ${pl} valeva ${E(e.v)}`)});
+  cv.forEach((e,k)=>{if(BP.test(e.n)&&pv2.has(k)){const d=e.v-pv2.get(k).v;if(Math.abs(d)>=5)add(d>0?"g":"w",`Paga base ${d>0?"aumentata":"diminuita"} di ${E(Math.abs(d))}`,`Da ${E(pv2.get(k).v)} a ${E(e.v)}`)}});
+  const bal=(a,b,nm)=>{if(a&&b&&a.length>=4&&b.length>=4&&s.y==p.y){const ex=b[3]+(a[1]-b[1])-(a[2]-b[2]);if(Math.abs(ex-a[3])>.6)add("w",`Saldo ${nm} diverso dal previsto`,`Atteso ${fmt(Math.round(ex*100)/100)} ore, in busta ${fmt(a[3])} ore`)}};
+  bal(s.ferie,p.ferie,"ferie");bal(permA(s),permA(p),"permessi");
+  return{prev:p,items:o.slice(0,8)}}
+const CKI={w:'<path d="M12 7v6M12 16.5v.5"/>',i:'<path d="M12 11v6M12 7.5v.5"/>',g:'<path d="M6 12.5l4 4 8-9"/>'};
+function checkCard(s,link){
+  const c=check(s);if(c.na)return"";
+  const rows=c.items.map(x=>`<div class="chk ${x.lv}"><i><svg viewBox="0 0 24 24">${CKI[x.lv]}</svg></i><span><b>${esc(x.t)}</b><small>${esc(x.d)}</small></span></div>`).join("");
+  const okRow=!c.prev?`<div class="chk i"><i><svg viewBox="0 0 24 24">${CKI.i}</svg></i><span><b>Nessun confronto possibile</b><small>Carica anche la busta del mese precedente</small></span></div>`:`<div class="chk g"><i><svg viewBox="0 0 24 24">${CKI.g}</svg></i><span><b>Tutto in linea</b><small>Nessuna differenza rilevante rispetto a ${lab(c.prev)}</small></span></div>`;
+  return`<div class="card"${link?` onclick="sel='${s.id}';navTo('home')" style="cursor:pointer"`:""}><div class="k">Controllo busta${link?" · "+lab(s):""}</div>${rows||okRow}</div>`}
+function sCheck(){const s=slips.find(x=>!x.tipo&&x.m);return s?ps("Controllo ultima busta",checkCard(s,true)):""}
+/* ---------- previsioni ---------- */
+function sPrev(){
+  const M=monthly();if(M.length<2)return"";const L=M[M.length-1],Y=L.y,inY=slips.filter(s=>s.y==Y),last=M.filter(s=>s.netto!=null).slice(-6),avg=last.reduce((t,s)=>t+s.netto,0)/(last.length||1);
+  const rem=12-L.m,py=slips.filter(s=>s.y==Y-1),est=t=>{if(inY.some(s=>s.tipo==t))return 0;const o=py.find(s=>s.tipo==t);return o&&o.netto?o.netto:avg};
+  const x13=est("13a"),x14=cfg.mens==14?est("14a"):0,sofar=inY.reduce((t,s)=>t+(s.netto||0),0),end=sofar+avg*rem+x13+x14;
+  const D=tfrData(),tl=D.length?D[D.length-1]:null,tcur=tl?(tl.az||0)+tl.co:null,qs=M.map(s=>s.tf&&s.tf.qm).filter(v=>v>0).slice(-6);let q=qs.length?qs.reduce((a,b)=>a+b,0)/qs.length:null;
+  if(q==null&&D.length>2){const a=D[0],b=D[D.length-1],mm=(b.s.y-a.s.y)*12+(b.s.m-a.s.m);if(mm>0)q=((b.az||0)+b.co-(a.az||0)-a.co)/mm}
+  const fs=slips.find(s=>s.ferie&&s.ferie.length>=4&&!s.tipo&&s.m),fe=fs&&fs.y==Y&&fs.m?fs.ferie[3]+fs.ferie[1]/fs.m*(12-fs.m):null;
+  const R=(l,v)=>`<div class="row"><span>${l}</span><span>${v}</span></div>`;
+  return ps("Previsioni",`<div class="card"><div class="k">Netto previsto a fine ${Y}</div><div class="big sm"${cu(end)}>${E(end)}</div><div class="mu">${E(sofar)} già percepiti${rem>0?` + ${rem} ${rem==1?"mese":"mesi"} alla media di ${E(avg)}`:""}${x13||x14?" + mensilità aggiuntive":""}</div>
+  ${tcur!=null&&q>0||fe!=null?`<div style="margin-top:8px">${tcur!=null&&q>0?R("TFR tra 1 anno",E(tcur+q*12))+R("TFR tra 3 anni",E(tcur+q*36))+R("TFR tra 5 anni",E(tcur+q*60)):""}${fe!=null?R("Ferie a fine anno",fmt(Math.round(fe*10)/10)+" ore"+gg(fe)):""}</div>`:""}
+  <div class="mu" style="margin-top:10px">Stime sulla media delle ultime buste: non tengono conto di aumenti, straordinari futuri o rivalutazione del TFR.</div></div>`)}
+/* ---------- simulatore del netto (regole IRPEF 2026) ---------- */
+let sim=null;
+function netCalc(ral,o){
+  const contr=ral*o.inps/100,imp=Math.max(0,ral-contr);
+  const lorda=Math.min(imp,28000)*.23+Math.max(0,Math.min(imp,50000)-28000)*.33+Math.max(0,imp-50000)*.43;
+  let det=imp<=15000?1955:imp<=28000?1910+1190*(28000-imp)/13000:imp<=50000?1910*(50000-imp)/22000:0;if(imp>25000&&imp<=35000)det+=65;
+  const ult=imp>20000&&imp<=32000?1000:imp>32000&&imp<=40000?1000*(40000-imp)/8000:0;
+  const bonus=imp>0&&imp<=20000?imp*(imp<=8500?.071:imp<=15000?.053:.048):0;
+  const ti=imp>0&&imp<=15000&&lorda>det-75?1200:0;
+  const irpef=Math.max(0,lorda-det-ult),addz=imp*o.add/100,netto=imp-irpef-addz+bonus+ti;
+  return{contr,imp,irpef,addz,bonus:bonus+ti,netto,mese:netto/o.mens}}
+function simOpen(){
+  if(!sim){const M=monthly().filter(s=>s.lordo).slice(-12),av=M.length?M.reduce((t,s)=>t+s.lordo,0)/M.length:0;let inps=9.19,add=2;
+    const s=slips.find(x=>x.tratt&&x.tratt.length&&x.lordo);if(s){const c=s.tratt.find(r=>/ivs|contribut\w*\s+inps/i.test(r[0])&&r[2]&&r[1]);if(c)inps=Math.round(c[1]/c[2]*10000)/100;const a=tot(s.tratt.filter(r=>/addiz/i.test(r[0])));if(a>0)add=Math.round(a/s.lordo*1000)/10}
+    sim={ral:av?Math.round(av*cfg.mens/100)*100:30000,mens:cfg.mens,inps,add,base:av?Math.round(av*cfg.mens/100)*100:null}}
+  sxOpen("sim");simCalc()}
+function simRes(){
+  const r=netCalc(+sim.ral||0,sim),R=(l,v,c)=>`<div class="lg"><i style="background:${c}"></i><span>${l}</span><b>${EF(v)}</b><em>${sim.ral>0?fmt(Math.round(v/sim.ral*1000)/10):0}%</em></div>`;
+  const sg=[["Netto",r.netto,"var(--s1)"],["Contributi",r.contr,"var(--s2)"],["IRPEF",r.irpef,"var(--s7)"],["Addizionali",r.addz,"var(--mu)"]].filter(x=>x[1]>.5);
+  let cmpT="";if(sim.base&&Math.abs(sim.ral-sim.base)>=100){const b=netCalc(sim.base,sim),d=r.mese-b.mese;cmpT=`<div class="mu" style="margin-top:8px"><span class="bdg ${d>=0?"up":"dn"}">${d>=0?"▲ +":"▼ −"}${N2(Math.abs(d))} € al mese</span>rispetto alla tua RAL stimata di ${EF(sim.base)}</div>`}
+  return`<div class="k">Netto mensile stimato</div><div class="big sm">${EF(r.mese)}</div><div class="mu">${EF(r.netto)} all'anno su ${sim.mens} mensilità</div>${cmpT}
+  <div class="sgb">${sg.map(x=>`<i style="flex:${x[1].toFixed(0)} 1 0;background:${x[2]}"></i>`).join("")}</div>${sg.map(x=>R(x[0],x[1],x[2])).join("")}
+  ${r.bonus>0?`<div class="mu" style="margin-top:8px">Il netto include ${EF(r.bonus)} di bonus per il taglio del cuneo fiscale.</div>`:""}`}
+function simCalc(){const e=document.getElementById("simR");if(e)e.innerHTML=simRes()}
+function simSet(k,v){sim[k]=v;simCalc()}
+function simSheet(){
+  const F=(l,k,sm)=>`<div class="row"><span>${l}${sm?`<br><small class="mu">${sm}</small>`:""}</span><input class="f" inputmode="decimal" value="${iv(sim[k])}" oninput="simSet('${k}',pn(this.value)||0)"></div>`;
+  return`<div class="sheet"><div class="sh2"><button onclick="closeUI()">Chiudi</button><b>Simulatore netto</b><span style="min-width:78px"></span></div><div class="sl">
+  <div class="card">${F("Lordo annuo (RAL, €)","ral")}
+  <div class="row"><span>Mensilità</span><div class="seg" style="width:120px">${[13,14].map(n=>`<button class="${sim.mens==n?"on":""}" onclick="sim.mens=${n};drawO();simCalc()">${n}</button>`).join("")}</div></div>
+  ${F("Contributi a tuo carico (%)","inps","di solito 9,19% o 9,49%")}${F("Addizionali regionale e comunale (%)","add","dipende da dove abiti")}</div>
+  <div class="card" id="simR"></div>
+  <div class="mu" style="margin:14px 8px 30px">Stima con le regole IRPEF 2026: aliquote 23%, 33% e 43%, detrazioni per lavoro dipendente e taglio del cuneo fiscale. Non considera familiari a carico, fondo pensione, benefit e altre detrazioni: il netto reale può essere diverso.</div></div></div>`}
+/* ---------- ricerca delle voci ---------- */
+let fq="",fo=null;
+function findIdx(){const m=new Map();slips.forEach(s=>[["voci","Competenza"],["tratt","Trattenuta"]].forEach(([k,t])=>(s[k]||[]).forEach(r=>{const key=k+":"+vkey(r[0]),e=m.get(key)||{key,n:r[0],t,rows:[],sum:0};e.rows.push([s,r[1]||0]);e.sum+=r[1]||0;m.set(key,e)})));return[...m.values()].sort((a,b)=>b.rows.length-a.rows.length||Math.abs(b.sum)-Math.abs(a.sum))}
+function findRes(){
+  const q=fq.trim().toLowerCase(),all=findIdx(),hit=(q?all.filter(e=>e.n.toLowerCase().includes(q)):all).slice(0,40);
+  if(!all.length)return'<div class="card mu">Nessuna busta caricata.</div>';
+  if(!hit.length)return'<div class="card mu">Nessuna voce trovata.</div>';
+  return(q?"":'<div class="mu" style="margin:0 6px 10px">Le voci più frequenti nelle tue buste</div>')+hit.map(e=>`<details class="card sec" ${fo==e.key?"open":""} ontoggle="if(this.open)fo='${esc(e.key).replace(/\\/g,"\\\\")}'"><summary><span style="min-width:0"><span style="display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(e.n)}</span><small class="mu" style="font-weight:400">${e.t} · ${e.rows.length} ${e.rows.length==1?"busta":"buste"}</small></span><span class="sv">${E(e.sum)}</span></summary><div class="sb">${e.rows.map(([s,v])=>`<div class="row" style="cursor:pointer" onclick="sel='${s.id}';closeUI();navTo('home')"><span>${lab(s)}</span><span>${E(v)}</span></div>`).join("")}</div></details>`).join("")}
+function findSheet(){return`<div class="sheet"><div class="sh2"><button onclick="closeUI()">Chiudi</button><b>Cerca voce</b><span style="min-width:78px"></span></div><div class="sl">
+  <input class="fi" type="search" placeholder="Per esempio: premio, straordinario, IRPEF" value="${esc(fq)}" oninput="fq=this.value;fo=null;document.getElementById('findR').innerHTML=findRes()" aria-label="Cerca una voce">
+  <div id="findR">${findRes()}</div></div></div>`}
+/* ---------- glossario delle voci ---------- */
+const GLO=[
+[/^retribuzione$|paga base|stipendio base|minimo/i,"È la paga fissa prevista dal tuo contratto collettivo per il tuo livello. Non comprende straordinari, premi e indennità."],
+[/contingenza/i,"Vecchia indennità legata al costo della vita. Oggi è un importo fisso, spesso unito alla paga base."],
+[/scatt/i,"Aumenti periodici legati agli anni passati nella stessa azienda. Il contratto collettivo stabilisce ogni quanto maturano e quanto valgono."],
+[/superminimo/i,"Importo in più rispetto ai minimi del contratto, concordato con l'azienda. Può essere assorbito dagli aumenti futuri, se così è stato pattuito."],
+[/\bedr\b|elemento distinto/i,"Elemento distinto della retribuzione: una piccola somma fissa mensile prevista da un accordo nazionale del 1992."],
+[/straordin/i,"Ore lavorate oltre l'orario normale, pagate con una maggiorazione (per esempio +25% o +50%) fissata dal contratto."],
+[/turno|notturn|maggiorazion/i,"Compenso aggiuntivo per lavoro a turni, di notte o nei festivi. Si calcola come percentuale della paga oraria."],
+[/festivit/i,"Compenso per le festività: quelle che cadono di domenica o in un giorno non lavorato vengono pagate in più."],
+[/ferie/i,"Riguarda le ferie: possono essere giornate godute nel mese oppure ferie non godute che vengono pagate."],
+[/\bp\.?a\.?r\.?\b|\br\.?o\.?l\.?\b|permess/i,"Permessi retribuiti previsti dal contratto (PAR o ROL): ore di riduzione dell'orario che puoi usare o che, in alcuni casi, vengono pagate."],
+[/malattia/i,"Indennità per i giorni di malattia: una parte la paga l'INPS e una parte la integra l'azienda, secondo il contratto."],
+[/trattamento integrativo|bonus 100|l\.?\s*207|cuneo/i,"Somma o detrazione riconosciuta ai redditi medio-bassi per ridurre le tasse sul lavoro (il cosiddetto taglio del cuneo fiscale)."],
+[/premio|una tantum|bonus/i,"Somma aggiuntiva legata a risultati, presenza o accordi aziendali. Può essere mensile, annuale o occasionale."],
+[/tredicesima|\b13\D{0,3}mens/i,"Mensilità aggiuntiva pagata a dicembre. Matura un dodicesimo per ogni mese lavorato nell'anno."],
+[/quattordicesima|\b14\D{0,3}mens/i,"Seconda mensilità aggiuntiva, prevista solo da alcuni contratti e pagata di solito a giugno o luglio."],
+[/ivs|contribut\w*\s+inps|f\.?p\.?l\.?d/i,"Contributi per la pensione versati all'INPS. La tua quota è di solito il 9,19% dell'imponibile; il resto lo versa l'azienda."],
+[/cigs|c\.i\.g/i,"Contributo per la cassa integrazione straordinaria: lo 0,30% a tuo carico nelle aziende con più di 15 dipendenti."],
+[/cometa|fondo pensione|previdenza compl|fon\.?te|fonchim/i,"Contributo al fondo pensione integrativo. Se aderisci, una quota la versi tu, una l'azienda, e di solito vi confluisce anche il TFR."],
+[/metasalute|e\.?b\.?m|assist\w* sanit|fondo est|sanit/i,"Contributo all'assistenza sanitaria integrativa prevista dal contratto, che rimborsa visite e spese mediche."],
+[/addiz\w*\.?\s*reg/i,"Imposta aggiuntiva all'IRPEF destinata alla tua Regione. Si calcola sul reddito dell'anno precedente e si paga a rate."],
+[/addiz\w*\.?\s*com/i,"Imposta aggiuntiva all'IRPEF destinata al tuo Comune. Ha un acconto e un saldo, pagati a rate in busta."],
+[/irpef|ritenut\w* fiscal/i,"L'imposta sul reddito. L'azienda la trattiene ogni mese in base agli scaglioni e alle detrazioni, e la versa allo Stato per te."],
+[/detraz/i,"Sconto sull'IRPEF: riduce l'imposta da pagare. Le più comuni sono per lavoro dipendente e per familiari a carico."],
+[/t\.?f\.?r/i,"Trattamento di fine rapporto: la liquidazione. Ogni anno matura circa una mensilità, che resta in azienda o va al fondo pensione."],
+[/conguaglio/i,"Ricalcolo di imposte o contributi a fine anno o a fine rapporto: può risultare a tuo credito o a tuo debito."],
+[/arrotond/i,"Piccola differenza usata per arrotondare il netto. Viene compensata nella busta del mese successivo."],
+[/sindac|cisl|cgil|uil/i,"Quota di iscrizione al sindacato, trattenuta in busta perché hai firmato una delega."],
+[/indennit/i,"Compenso aggiuntivo legato a una condizione particolare del tuo lavoro: mansione, disagio, trasferta, reperibilità e simili."],
+[/non lavorat|assenz|ritard/i,"Ore o giorni non lavorati e non retribuiti, sottratti dalla paga del mese."]];
+let gl=null;
+function gloOpen(l){const h=GLO.find(g=>g[0].test(l));gl={l,d:h?h[1]:null};drawO()}
+function gloCard(){return`<div class="alrt wd" onclick="if(event.target==this){gl=null;drawO()}"><div><b>${esc(gl.l)}</b><p>${gl.d?esc(gl.d):"Non ho una spiegazione pronta per questa voce. Puoi cercarla su Google."}</p><div class="ab"><button onclick="gl=null;drawO()">Chiudi</button><a href="https://www.google.com/search?q=${encodeURIComponent(gl.l+" busta paga voce")}" target="_blank" rel="noopener">Cerca su Google</a></div></div></div>`}
+/* ---------- esportazione ---------- */
+let ey="all";
+const MF=n=>{if(n==null||isNaN(n))return"";const[a,b]=Math.abs(n).toFixed(2).split(".");return(n<0?"-":"")+a.replace(/\B(?=(\d{3})+(?!\d))/g,".")+","+b};
+const expRows=()=>slips.filter(s=>ey=="all"||s.y==ey).slice().sort((a,b)=>ord(a)-ord(b));
+const expName=x=>`cedolino-${curProf().id=="p0"?"":curProf().name.toLowerCase().replace(/[^a-z0-9]+/g,"-")+"-"}${ey=="all"?"tutti-gli-anni":ey}.${x}`;
+async function expCsv(){
+  const S=expRows();if(!S.length){toast("Nessuna busta da esportare");return}
+  const q=v=>`"${String(v??"").replace(/"/g,'""')}"`,L=[["Periodo","Tipo","Lordo","Trattenute","Netto","Ferie saldo (ore)","Permessi saldo (ore)","TFR del mese"].map(q).join(";")];
+  S.forEach(s=>L.push([q(lab(s)),q(s.tipo=="13a"?"Tredicesima":s.tipo=="14a"?"Quattordicesima":"Mensile"),MF(s.lordo),s.lordo!=null&&s.netto!=null?MF(s.lordo-s.netto):"",MF(s.netto),MF(last(s.ferie)),MF(last(permA(s))),MF(s.tfr)].join(";")));
+  const sm=k=>S.reduce((t,s)=>t+(s[k]||0),0);L.push([q("Totale"),"",MF(sm("lordo")),MF(sm("lordo")-sm("netto")),MF(sm("netto")),"","",""].join(";"));
+  try{if(await shareFile(expName("csv"),"﻿"+L.join("\r\n"),"text/csv","Buste paga"))toast("Tabella pronta")}catch(e){toast("Esportazione non riuscita")}}
+function pdfDoc(pages){
+  const enc=s=>{let o="";for(const ch of s){const c=ch.charCodeAt(0);o+=ch=="€"?"\x80":ch=="–"||ch=="—"||ch=="−"?"-":ch=="’"?"'":ch=="«"||ch=="»"?'"':c<256?ch:"?"}return o};
+  const objs=[],add=s=>{objs.push(s);return objs.length};add("<< /Type /Catalog /Pages 2 0 R >>");add("");
+  const F=n=>add(`<< /Type /Font /Subtype /Type1 /BaseFont /${n} /Encoding /WinAnsiEncoding >>`),f1=F("Helvetica-Bold"),f2=F("Courier"),f3=F("Courier-Bold"),f4=F("Helvetica"),kids=[];
+  pages.forEach(c=>{const body=enc(c),cs=add(`<< /Length ${body.length} >>\nstream\n${body}\nendstream`);kids.push(add(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 ${f1} 0 R /F2 ${f2} 0 R /F3 ${f3} 0 R /F4 ${f4} 0 R >> >> /Contents ${cs} 0 R >>`))});
+  objs[1]=`<< /Type /Pages /Kids [${kids.map(k=>k+" 0 R").join(" ")}] /Count ${kids.length} >>`;
+  let out="%PDF-1.4\n";const off=[];objs.forEach((o,i)=>{off.push(out.length);out+=`${i+1} 0 obj\n${o}\nendobj\n`});
+  const x=out.length;out+=`xref\n0 ${objs.length+1}\n0000000000 65535 f \n`+off.map(o=>String(o).padStart(10,"0")+" 00000 n \n").join("")+`trailer\n<< /Size ${objs.length+1} /Root 1 0 R >>\nstartxref\n${x}\n%%EOF`;
+  const u=new Uint8Array(out.length);for(let i=0;i<out.length;i++)u[i]=out.charCodeAt(i)&255;return u}
+function expPdfBytes(){
+  const S=expRows(),T=s=>"("+String(s).replace(/[\\()]/g,"\\$&")+")",pages=[];let c="",y=0;
+  const tx=(f,sz,x,t)=>{c+=`BT /${f} ${sz} Tf ${x} ${y} Td ${T(t)} Tj ET\n`},ln=()=>{c+=`0.75 G 0.5 w 40 ${y-4} m 555 ${y-4} l S\n`};
+  const row=(a,b)=>{tx(b?"F3":"F2",9,40,a[0].slice(0,24).padEnd(24)+a.slice(1).map((v,i)=>String(v).padStart(i<3?13:10)).join(""))};
+  const head=()=>{row(["Periodo","Lordo","Trattenute","Netto","Ferie h","Perm. h","TFR"],1);ln();y-=17};
+  const np=first=>{if(c)pages.push(c);c="";y=800;if(first){tx("F1",18,40,"Cedolino - Riepilogo buste paga");y-=20;tx("F4",10.5,40,(ey=="all"?"Tutti gli anni":"Anno "+ey)+(curProf().id!="p0"?" - "+curProf().name:"")+" - creato il "+new Date().toLocaleDateString("it-IT"));y-=30}head()};
+  const sm=(A,k)=>A.reduce((t,s)=>t+(s[k]||0),0);np(true);
+  const ys=[...new Set(S.map(s=>s.y))];
+  ys.forEach(Y=>{const A=S.filter(s=>s.y==Y);
+    A.forEach(s=>{if(y<60)np(false);row([lab(s),MF(s.lordo),s.lordo!=null&&s.netto!=null?MF(s.lordo-s.netto):"",MF(s.netto),MF(last(s.ferie)),MF(last(permA(s))),MF(s.tfr)]);y-=15});
+    if(y<60)np(false);y-=2;row(["Totale "+Y,MF(sm(A,"lordo")),MF(sm(A,"lordo")-sm(A,"netto")),MF(sm(A,"netto")),"","",""],1);ln();y-=24});
+  if(ys.length>1){if(y<60)np(false);row(["Totale generale",MF(sm(S,"lordo")),MF(sm(S,"lordo")-sm(S,"netto")),MF(sm(S,"netto")),"","",""],1);y-=24}
+  if(y<80)np(false);const M=S.filter(s=>!s.tipo&&s.netto!=null);y-=6;tx("F4",10,40,`Buste: ${S.length}   Netto medio mensile: ${M.length?MF(sm(M,"netto")/M.length):"-"} €   Lordo medio mensile: ${M.length?MF(sm(M,"lordo")/M.length):"-"} €`);
+  y-=18;tx("F4",8.5,40,"Dati letti dalle buste paga caricate nell'app Cedolino. Non sostituisce i documenti ufficiali.");
+  pages.push(c);return pdfDoc(pages)}
+async function expPdf(){if(!expRows().length){toast("Nessuna busta da esportare");return}try{if(await shareFile(expName("pdf"),expPdfBytes(),"application/pdf","Riepilogo buste paga"))toast("Riepilogo pronto")}catch(e){toast("Esportazione non riuscita")}}
+function expSheet(){
+  const ys=[...new Set(slips.map(s=>s.y))].sort((a,b)=>b-a),n=expRows().length;
+  return`<div class="sheet"><div class="sh2"><button onclick="closeUI()">Chiudi</button><b>Esporta</b><span style="min-width:78px"></span></div><div class="sl">
+  <div class="ps"><h1>Periodo</h1><div class="chips" style="margin:0">${[["all","Tutti gli anni"]].concat(ys.map(y=>[y,String(y)])).map(o=>`<button class="chip ${ey==o[0]?"on":""}" onclick="ey=${o[0]=="all"?"'all'":o[0]};drawO()">${o[1]}</button>`).join("")}</div>
+  <div class="mu" style="margin:10px 6px 0">${n} ${n==1?"busta":"buste"} nel periodo scelto</div></div>
+  <div class="ps"><h1>Formato</h1><div class="card" style="padding:4px 18px">
+  <div class="op" onclick="expPdf()"><span><b>Riepilogo in PDF</b><small>Una tabella da stampare o inviare, per mutuo, ISEE o commercialista</small></span>${CHEV}</div>
+  <div class="op" onclick="expCsv()"><span><b>Tabella per Excel</b><small>File CSV che si apre con Excel, Fogli Google o Numbers</small></span>${CHEV}</div></div></div>
+  <div class="mu" style="margin:14px 8px">I file contengono gli importi in chiaro, anche se in app li hai nascosti: condividili solo con chi deve vederli.</div></div></div>`}
+/* ---------- promemoria backup ---------- */
+let bkSnz=false;
+function bkBanner(){
+  if(!cfg.bkRem||bkSnz||slips.length<3)return"";let lb=null;try{lb=localStorage.getItem("lastBk")}catch(e){}
+  const d=lb?Math.floor((Date.now()-new Date(lb).getTime())/864e5):null;if(d!=null&&d<30)return"";
+  return`<div class="bn"><span>${d==null?"Non hai ancora fatto un backup delle tue buste.":`Non fai un backup da ${d} giorni.`}</span><button onclick="bkOpen()">Backup</button><button class="x" onclick="bkSnz=true;draw()" aria-label="Più tardi">Più tardi</button></div>`}
+/* ---------- tutorial della prima apertura ---------- */
+const TUT=[
+["Benvenuto in Cedolino","Le tue buste paga, finalmente chiare. Ecco un giro veloce di quello che puoi fare.",'<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/>',[]],
+["Carica le buste","Tocca ＋ Carica in alto a destra e scegli uno o più PDF.",'<path d="M12 15V4M7.5 8.5 12 4l4.5 4.5"/><path d="M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/>',["L'app riconosce da sola il formato della busta","Legge lordo, netto, voci, ferie, permessi e TFR","Il PDF originale resta archiviato e lo riapri quando vuoi"]],
+["Home: tutto a colpo d'occhio","Grafici, ferie e permessi residui, TFR e previsioni di fine anno.",'<path d="M4 19V5M4 19h16"/><path d="M7 15l4-5 3 3 5-7"/>',["Scorri il dito sui grafici per leggere i valori","L'icona dell'occhio nasconde tutti gli importi","Dal menu scegli quali riquadri vedere e in che ordine"]],
+["Dettaglio e controllo","Ogni busta voce per voce, con un controllo automatico rispetto al mese prima.",'<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5M8.5 11l2 2 3.5-4"/>',["Ti avvisa se manca una voce o compare una trattenuta nuova","Tocca la lente accanto a una voce per la spiegazione","Scorri a destra e sinistra per cambiare mese"]],
+["Annuale e strumenti","I totali anno per anno, più gli strumenti nel menu in alto a sinistra.",'<rect x="4" y="5" width="16" height="16" rx="3.5"/><path d="M4 10h16M9 3v4M15 3v4"/>',["Simulatore del netto a partire dal lordo annuo","Ricerca di una voce in tutte le buste","Esportazione in PDF o in tabella per Excel"]],
+["Privati e al sicuro","I dati restano solo sul tuo telefono.",'<rect x="5" y="10.5" width="14" height="9.5" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/>',["Con il PIN i dati vengono cifrati","Sblocco con impronta o volto","Fai un backup ogni tanto: l'app te lo ricorda"]]];
+let tu=null,tud="r";
+function drawT(){const el=document.getElementById("tu");if(!el)return;
+  if(tu==null){el.innerHTML="";return}
+  const s=TUT[tu],lastS=tu==TUT.length-1;
+  el.innerHTML=`<div class="tut"><button class="sk" onclick="tutEnd()">${lastS?"":"Salta"}</button>
+  <div class="tsl ${tud}"><div class="tic"><svg viewBox="0 0 24 24">${s[2]}</svg></div><h2>${s[0]}</h2><p>${s[1]}</p>${s[3].length?`<div class="tul">${s[3].map(x=>`<div><i></i><span>${x}</span></div>`).join("")}</div>`:""}</div>
+  <div class="tdots">${TUT.map((_,i)=>`<i class="${i==tu?"on":""}"></i>`).join("")}</div>
+  <button class="btn" onclick="tutGo(1)">${lastS?(slips.length?"Inizia":"Carica la prima busta"):"Avanti"}</button></div>`}
+function tutOpen(){tu=0;tud="r";drawT()}
+function tutGo(d){if(tu==null)return;const n=tu+d;if(n<0)return;if(n>=TUT.length){tutEnd(true);return}tud=d>0?"r":"l";tu=n;hap();drawT()}
+function tutEnd(done){tu=null;try{localStorage.setItem("tut","1")}catch(e){}drawT();if(done&&!slips.length&&!lk){tab="up";draw()}}
+
 function tip(e){e.stopPropagation();const el=e.currentTarget,w=el.closest(".cw"),d=w.querySelector(".tip"),b=el.getBoundingClientRect(),r=w.getBoundingClientRect();
   document.querySelectorAll(".tip").forEach(x=>x.style.display="none");d.textContent=el.dataset.t;d.style.display="block";
   d.className="tip";d.style.left=Math.max(60,Math.min(r.width-60,b.left+b.width/2-r.left))+"px";d.style.top=(b.top-r.top-6)+"px";
@@ -844,7 +1218,9 @@ function drawX(){const el=document.getElementById("ex");if(!el)return;
 function goBack(){
   if(ex){ex=false;drawX();return}
   if(lk){if(lk.mode=="forgot"){lk.mode="unlock";lk.v="";drawL();return}if(lk.mode!="unlock"){lkCancel();return}ex=true;drawX();return}
-  if(dm||em||bm||ss){dm=false;em=false;bm=false;ss=false;drawO();return}
+  if(gl){gl=null;drawO();return}
+  if(tu!=null){if(tu>0)tutGo(-1);else tutEnd();return}
+  if(dm||em||bm||ss||sx){dm=false;em=false;bm=false;ss=false;sx=null;eb=null;drawO();return}
   if(mo){mo=false;drawO();return}
   if(pk){pk=false;draw();return}
   if(tab!="ov"){tab="ov";draw();return}
@@ -860,7 +1236,7 @@ function exitGo(){ex=false;drawX();const A=NAPP();if(A&&A.exitApp){A.exitApp();r
     window.addEventListener("popstate",()=>{if(!guard)return;goBack();if(guard)try{history.pushState({g:1},"")}catch(e){}})}}catch(e){}
 })();
 if(document.addEventListener){document.addEventListener("pointerup",rel);document.addEventListener("pointercancel",rel)}
-if(document.addEventListener){document.addEventListener("touchstart",e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});document.addEventListener("touchend",e=>{const t=e.changedTouches[0],dx=t.clientX-tx,dy=t.clientY-ty;if(tab=="home"&&Math.abs(dx)>70&&Math.abs(dy)<45&&!(e.target.closest&&e.target.closest(".chips,input")))go(dx<0?1:-1)},{passive:true})}
+if(document.addEventListener){document.addEventListener("touchstart",e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});document.addEventListener("touchend",e=>{const t=e.changedTouches[0],dx=t.clientX-tx,dy=t.clientY-ty;if(tab=="home"&&!sx&&!mo&&!dm&&!em&&!bm&&!ss&&!gl&&!lk&&tu==null&&Math.abs(dx)>70&&Math.abs(dy)<45&&!(e.target.closest&&e.target.closest(".chips,input")))go(dx<0?1:-1)},{passive:true})}
 const TO=["ov","home","year","up"];let io=null;
 function countUp(el){
   const v=+el.dataset.cu,f=el.dataset.f;if(!isFinite(v)||priv||RM())return;
@@ -897,9 +1273,11 @@ function draw(){
   lt=tab;ak="";ck=false;
   try{const st=document.getElementById("strip"),on=st&&st.querySelector(".on");if(on)st.scrollLeft=on.offsetLeft-st.clientWidth/2+on.offsetWidth/2}catch(e){}
 }
+applyTheme();
 draw();
 try{if("serviceWorker" in navigator&&location.protocol=="https:")navigator.serviceWorker.register("sw.js")}catch(e){}
 if(sec)startLock("unlock");
+try{if(!localStorage.getItem("tut"))tutOpen()}catch(e){}
 </script>
 </body>
 </html>
